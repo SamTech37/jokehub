@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const Nav = styled.div`
   background: #fdfd66;
   height: 100px;
@@ -13,9 +13,15 @@ const Nav = styled.div`
 export default function NavBar() {
   return (
     <Nav>
-      <h2>Joke Hub </h2>
-      <h2>Profile </h2>
-      <h2>Post </h2>
+      <h2>
+        <Link to="/">JokeHub</Link>
+      </h2>
+      <h2>
+        <Link to="/profile">Profile</Link>
+      </h2>
+      <h2>
+        <Link to="/post">Post</Link>
+      </h2>
     </Nav>
   );
 }

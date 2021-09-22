@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import icon from "../assets/icon.png";
 
 import { Link, NavLink } from "react-router-dom";
@@ -30,6 +29,9 @@ export default function NavBar() {
       </Link>
       <Link to="/post">
         <button>Post</button>
+      </Link>
+      <Link to="/about">
+        <button>About</button>
       </Link>
     </Nav>
   );

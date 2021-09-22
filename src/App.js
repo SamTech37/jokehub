@@ -1,5 +1,6 @@
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
+import About from "./Components/About";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
           </Route>
           <Route path="/post">
             <Post />
+          </Route>
+          <Route path="/about">
+            <About />
           </Route>
           <Route path="/">
             <List />

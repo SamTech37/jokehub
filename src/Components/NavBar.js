@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import icon from "../assets/icon.png";
+import icon from "../assets/icon.svg";
 
 import { Link, NavLink } from "react-router-dom";
 const Nav = styled.div`
@@ -16,6 +16,9 @@ const Nav = styled.div`
     &:hover {
       color: #0000005c;
     }
+  }
+  img {
+    margin-top: 0.5em;
   }
 `;
 export default function NavBar() {

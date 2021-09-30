@@ -1,15 +1,29 @@
 import React from "react";
+import Post from "./Post";
 
 export default function List() {
+  const initialData = [
+    {
+      title: "What do you call a magic owl?",
+      content: "Hoodini!",
+      id: "0",
+    },
+    {
+      title: "What's the heaviest stuff in my pants?",
+      content: "Your mom",
+      id: "1",
+    },
+  ];
   return (
     <div>
-      <h3>Here are some jokes</h3>
-
-      <ul>
-        <li>joke1</li>
-        <li>joke2</li>
-        <li>joke3</li>
-      </ul>
+      {initialData.map((joke) => {
+        return (
+          <>
+            <h2>{joke.title}</h2>
+            <h3>{joke.content}</h3>
+          </>
+        );
+      })}
     </div>
   );
 }

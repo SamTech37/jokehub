@@ -12,7 +12,7 @@ export default function About() {
   return (
     <Body>
       <h1>What is this site?</h1>
-      <h2>It's a site where you can post jokes and rate others' jokes</h2>
+      <h2>It's a site where you can post jokes and rate others' jokes.</h2>
       <h1>Why?</h1>
       <h2>It's made by a Taiwanese high school student just for fun.</h2>
       <h1>How to use this site?</h1>

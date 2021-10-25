@@ -16,6 +16,7 @@ export default function About() {
       <h1>Why?</h1>
       <h2>It's made by a Taiwanese high school student just for fun.</h2>
       <h1>How to use this site?</h1>
+      <h2>Post whatever joke you like and rate others' jokes. </h2>
     </Body>
   );
 }

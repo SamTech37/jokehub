@@ -40,6 +40,7 @@ export default function List() {
       postId: "2",
     },
   ];
+  // fetch data from DB
   return (
     <div>
       {initialData.map((joke) => {
@@ -48,6 +49,7 @@ export default function List() {
             <NavLink to={joke.postId}>
               <h1>{joke.title}</h1>{" "}
             </NavLink>
+
             <h3>{"rate: " + joke.rate}</h3>
             <h3>{"poster: " + joke.poster}</h3>
           </Item>

@@ -27,14 +27,14 @@ export default function NavBar() {
       <NavLink to="/">
         <img src={icon} alt="wut" height="80" width="300" />
       </NavLink>
+      <Link to="/about">
+        <button>About</button>
+      </Link>
       <Link to="/profile">
         <button>Profile</button>
       </Link>
       <Link to="/post">
         <button>Post</button>
-      </Link>
-      <Link to="/about">
-        <button>About</button>
       </Link>
     </Nav>
   );

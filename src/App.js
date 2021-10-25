@@ -1,6 +1,7 @@
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
 import About from "./Components/About";
+import Post from "./Components/Post";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
@@ -11,12 +12,16 @@ function App() {
           <Route path="/profile">
             <Profile />
           </Route>
+
           <Route path="/post">
-            <Post />
+            <PostingPage />
           </Route>
+
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/:postId" children={<Post />} />
+
           <Route path="/">
             <List />
           </Route>
@@ -30,7 +35,7 @@ function Profile() {
   return <h2>Profile</h2>;
 }
 
-function Post() {
+function PostingPage() {
   return <h2>you're posting something</h2>;
 }
 

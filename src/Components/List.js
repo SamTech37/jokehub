@@ -1,5 +1,12 @@
 import React from "react";
-import Post from "./Post";
+import styled from "styled-components";
+const Item = styled.div`
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 1.5em;
+  margin: 2px;
+  padding: 1em;
+`;
 
 export default function List() {
   const initialData = [
@@ -21,7 +28,13 @@ export default function List() {
   return (
     <div>
       {initialData.map((joke) => {
-        return <Post joke={joke}></Post>;
+        return (
+          <Item>
+            <h1>{joke.title}</h1>
+            <h3>{"rate: " + joke.rate}</h3>
+            <h3>{"poster: " + joke.poster}</h3>
+          </Item>
+        );
       })}
     </div>
   );

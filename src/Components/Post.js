@@ -10,12 +10,5 @@ const Body = styled.div`
 `;
 
 export default function Post({ joke }) {
-  return (
-    <Body>
-      <h1>{joke.title}</h1>
-      <h2>{joke.content}</h2>
-      <h3>{"rate: " + joke.rate}</h3>
-      <h3>{"poster: " + joke.poster}</h3>
-    </Body>
-  );
+  return <Body></Body>;
 }

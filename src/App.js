@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
 
 function App() {
   const firebaseConfig = {
@@ -13,6 +14,7 @@ function App() {
     authDomain: "jokehub6969.firebaseapp.com",
     projectId: "jokehub6969",
     storageBucket: "jokehub6969.appspot.com",
+    databaseURL: "https://jokehub6969-default-rtdb.firebaseio.com/",
     messagingSenderId: "494799104202",
     appId: "1:494799104202:web:7e5a266be800b7ef9c6c33",
     measurementId: "G-3S70Y68DB0",
@@ -20,6 +22,15 @@ function App() {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const DB = getDatabase(app);
+  function postJoke(jokeID, title, content, author) {
+    set(ref(DB, "posts/" + jokeID), {
+      title: title,
+      content: content,
+      author: author,
+    });
+  }
+  function fetchJokes() {}
 
   return (
     <Router>

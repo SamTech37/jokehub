@@ -40,7 +40,7 @@ export default function List() {
       postId: "2",
     },
   ];
-  // fetch data from DB
+  // fetch data here
   return (
     <div>
       {initialData.map((joke) => {

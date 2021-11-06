@@ -6,25 +6,23 @@ import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
 //routing
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+//DB
+import { db } from "./firebaseConfig";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      title: "緯來電",
-      content: "緯來電影台",
-      author: "Sam",
-    },
-  ]);
-  /*async function fetchJokes() {
-    const querySanpshot = await getDocs(collection(db, "posts"));
-    querySanpshot.forEach((doc) => {
-      jokes.push({
-        title: doc.data().title,
-        content: doc.data().content,
-        author: doc.data().author,
-      });
-    });
-  }*/
+  const [posts, setPosts] = useState([]);
+  const postsColletionRef = collection(db, "posts");
+
+  const postJoke = async () => {};
+  useEffect(() => {
+    const getPosts = async () => {
+      const postsData = await getDocs(postsColletionRef);
+      setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPosts();
+  }, []);
+
   return (
     <Router>
       <NavBar />

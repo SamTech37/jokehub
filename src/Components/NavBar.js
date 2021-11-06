@@ -6,6 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 const Nav = styled.div`
   background: #fdfd66;
   height: 100px;
+  width: auto;
   display: flex;
   flex-direction: row;
   button {

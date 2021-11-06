@@ -19,7 +19,7 @@ export default function List({ posts }) {
     <div>
       {posts.map((post) => {
         return (
-          <Item>
+          <Item key={post.id}>
             <h1>{post.title}</h1>
             <h2>{post.content}</h2>
             <h3>{"author: " + post.author}</h3>

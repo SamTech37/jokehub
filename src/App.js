@@ -14,9 +14,17 @@ function App() {
   const [posts, setPosts] = useState([]);
   const postsColletionRef = collection(db, "posts");
 
-  const postJoke = async () => {};
+  const postJoke = async (newTitle, newContent) => {
+    //write data
+    await addDoc(postsColletionRef, {
+      title: newTitle,
+      content: newContent,
+      author: "user",
+    });
+  };
   useEffect(() => {
     const getPosts = async () => {
+      //read data
       const postsData = await getDocs(postsColletionRef);
       setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
@@ -33,7 +41,7 @@ function App() {
           </Route>
 
           <Route path="/post">
-            <PostingPage />
+            <PostingPage postJoke={postJoke} />
           </Route>
 
           <Route path="/about">

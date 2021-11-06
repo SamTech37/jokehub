@@ -22,7 +22,7 @@ export default function List({ posts }) {
           <Item key={post.id}>
             <h1>{post.title}</h1>
             <h2>{post.content}</h2>
-            <h3>{"author: " + post.author}</h3>
+            <h3>{"poster: " + post.author}</h3>
           </Item>
         );
       })}

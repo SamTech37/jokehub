@@ -1,12 +1,15 @@
+import react, { useEffect } from "react";
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
+import PostingPage from "./Components/PostingPage";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 function App() {
   const firebaseConfig = {
@@ -14,7 +17,6 @@ function App() {
     authDomain: "jokehub6969.firebaseapp.com",
     projectId: "jokehub6969",
     storageBucket: "jokehub6969.appspot.com",
-    databaseURL: "https://jokehub6969-default-rtdb.firebaseio.com/",
     messagingSenderId: "494799104202",
     appId: "1:494799104202:web:7e5a266be800b7ef9c6c33",
     measurementId: "G-3S70Y68DB0",
@@ -22,16 +24,23 @@ function App() {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const DB = getDatabase(app);
-  function postJoke(jokeID, title, content, author) {
-    set(ref(DB, "posts/" + jokeID), {
-      title: title,
-      content: content,
-      author: author,
+  const db = getFirestore();
+  const jokes = [];
+
+  async function fetchJokes() {
+    const querySanpshot = await getDocs(collection(db, "posts"));
+    querySanpshot.forEach((doc) => {
+      jokes.push({
+        title: doc.data().title,
+        content: doc.data().content,
+        author: doc.data().author,
+      });
     });
   }
-  function fetchJokes() {}
-
+  useEffect(() => {
+    fetchJokes();
+    console.log(jokes);
+  });
   return (
     <Router>
       <NavBar />
@@ -51,7 +60,7 @@ function App() {
           <Route path="/:postId" children={<Post />} />
 
           <Route path="/">
-            <List />
+            <List jokes={jokes} />
           </Route>
         </Switch>
       </div>
@@ -61,10 +70,6 @@ function App() {
 
 function Profile() {
   return <h2>Profile</h2>;
-}
-
-function PostingPage() {
-  return <h2>you're posting something</h2>;
 }
 
 export default App;

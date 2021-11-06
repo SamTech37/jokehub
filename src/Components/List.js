@@ -5,23 +5,24 @@ import { NavLink } from "react-router-dom";
 
 const Item = styled.div`
   height: 100%;
+  width: 60%;
   border: 2px solid black;
   border-radius: 1.5em;
-  margin: 2px;
+  margin: auto;
   padding: 1em;
 `;
 
-export default function List({ jokes }) {
+export default function List({ posts }) {
   // fetch data here
 
   return (
     <div>
-      {jokes.map((joke) => {
+      {posts.map((post) => {
         return (
           <Item>
-            <h1>{joke.title}</h1>
-            <h2>{joke.content}</h2>
-            <h3>{"author: " + joke.author}</h3>
+            <h1>{post.title}</h1>
+            <h2>{post.content}</h2>
+            <h3>{"author: " + post.author}</h3>
           </Item>
         );
       })}

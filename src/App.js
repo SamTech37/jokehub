@@ -1,33 +1,21 @@
-import react, { useEffect } from "react";
+import react, { useEffect, useState } from "react";
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
-
+//routing
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-
 function App() {
-  const firebaseConfig = {
-    apiKey: "AIzaSyC6pFwwbDsBp3k0JPE0vbGmzI0ehotdAcI",
-    authDomain: "jokehub6969.firebaseapp.com",
-    projectId: "jokehub6969",
-    storageBucket: "jokehub6969.appspot.com",
-    messagingSenderId: "494799104202",
-    appId: "1:494799104202:web:7e5a266be800b7ef9c6c33",
-    measurementId: "G-3S70Y68DB0",
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore();
-  const jokes = [];
-
-  async function fetchJokes() {
+  const [posts, setPosts] = useState([
+    {
+      title: "緯來電",
+      content: "緯來電影台",
+      author: "Sam",
+    },
+  ]);
+  /*async function fetchJokes() {
     const querySanpshot = await getDocs(collection(db, "posts"));
     querySanpshot.forEach((doc) => {
       jokes.push({
@@ -36,11 +24,7 @@ function App() {
         author: doc.data().author,
       });
     });
-  }
-  useEffect(() => {
-    fetchJokes();
-    console.log(jokes);
-  });
+  }*/
   return (
     <Router>
       <NavBar />
@@ -60,7 +44,7 @@ function App() {
           <Route path="/:postId" children={<Post />} />
 
           <Route path="/">
-            <List jokes={jokes} />
+            <List posts={posts} />
           </Route>
         </Switch>
       </div>

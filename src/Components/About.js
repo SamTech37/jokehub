@@ -17,6 +17,8 @@ export default function About() {
       <h2>It's made by a Taiwanese high school student just for fun.</h2>
       <h1>How to use this site?</h1>
       <h2>Post whatever joke you like and rate others' jokes. </h2>
+
+      <h5>© 2021 CK Sam K. and Hank L. All rights reserved.</h5>
     </Body>
   );
 }

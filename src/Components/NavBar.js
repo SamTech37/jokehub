@@ -5,7 +5,7 @@ import icon from "../assets/icon.svg";
 import { Link, NavLink } from "react-router-dom";
 const Nav = styled.div`
   background: #fdfd66;
-  height: 100px;
+  height: auto;
   width: auto;
   display: flex;
   flex-direction: row;
@@ -19,14 +19,15 @@ const Nav = styled.div`
     }
   }
   img {
-    margin-top: 0.5em;
+    margin: 0.5em;
+    height: auto;
   }
 `;
 export default function NavBar() {
   return (
     <Nav>
       <NavLink to="/">
-        <img src={icon} alt="wut" height="80" width="300" />
+        <img src={icon} alt="wut" width="300" />
       </NavLink>
       <Link to="/about">
         <button>About</button>

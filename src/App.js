@@ -34,7 +34,7 @@ function App() {
     await addDoc(postsColletionRef, {
       title: newTitle,
       content: newContent,
-      author: user.displayName,
+      author: "user",
     });
   };
   const editJoke = async (id, editTitle, editContent) => {
@@ -79,7 +79,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar />
+      <NavBar signIn={userSignIn} signOut={userSignOut} />
       <div>
         <Switch>
           <Route path="/profile">

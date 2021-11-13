@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import icon from "../assets/icon.svg";
 
@@ -25,7 +25,7 @@ const Nav = styled.div`
     height: auto;
   }
 `;
-export default function NavBar() {
+export default function NavBar({ signIn, signOut }) {
   return (
     <Nav>
       <NavLink to="/">
@@ -41,7 +41,7 @@ export default function NavBar() {
         <button>Post</button>
       </Link>
       <Link to="/login">
-        <button>Login</button>
+        <button> Login</button>
       </Link>
     </Nav>
   );

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { UserContext } from "../App";
 import styled from "styled-components";
-import { useContext } from "react/cjs/react.development";
 
 const SendButton = styled.button`
   background-color: orange;
@@ -10,8 +8,7 @@ const SendButton = styled.button`
   width: 200px;
   height: 100px;
 `;
-export default function PostingPage({ postJoke }) {
-  const user = useContext(UserContext);
+export default function PostingPage({ postJoke, signed }) {
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
   return (
@@ -33,7 +30,7 @@ export default function PostingPage({ postJoke }) {
       <SendButton onClick={() => postJoke(newTitle, newContent)}>
         Send
       </SendButton>
-      {user == null && <h2>Please Login First!</h2>}
+      {!signed && <h2>Please Login First!</h2>}
     </div>
   );
 }

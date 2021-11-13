@@ -24,7 +24,6 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 
-export const UserContext = react.createContext({});
 function App() {
   //DB
   const [posts, setPosts] = useState([]);
@@ -72,33 +71,30 @@ function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={user}>
-      <Router>
-        <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
-        <div>
-          <Switch>
-            <Route path="/profile">
-              <ProfilePage user={user} />
-            </Route>
+    <Router>
+      <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
+      <div>
+        <Switch>
+          <Route path="/profile">
+            <ProfilePage user={user} />
+          </Route>
 
-            <Route path="/post">
-              <PostingPage postJoke={postJoke} />
-            </Route>
+          <Route path="/post">
+            <PostingPage postJoke={postJoke} signed={signed} />
+          </Route>
 
-            <Route path="/about">
-              <About />
-            </Route>
+          <Route path="/about">
+            <About />
+          </Route>
 
-            <Route path="/:postId" children={<Post />} />
+          <Route path="/:postId" children={<Post />} />
 
-            <Route path="/">
-              <List posts={posts} />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </UserContext.Provider>
+          <Route path="/">
+            <List posts={posts} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
-
 export default App;

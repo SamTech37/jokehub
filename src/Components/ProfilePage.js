@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../App";
 import styled from "styled-components";
-export default function ProfilePage() {
-  const user = useContext(UserContext);
+export default function ProfilePage({ user }) {
   return (
     <div>
       <h1>Profiles!</h1>

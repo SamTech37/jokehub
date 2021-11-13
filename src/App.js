@@ -61,7 +61,7 @@ function App() {
     setUser(currentUser);
     setSigned(user ? true : false);
   });
-  //main
+  //onMount
   useEffect(() => {
     const getPosts = async () => {
       //read data

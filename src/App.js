@@ -60,6 +60,10 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
+
+          <Route path="/login">
+            <h1>login page</h1>
+          </Route>
           <Route path="/:postId" children={<Post />} />
 
           <Route path="/">

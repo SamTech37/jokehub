@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 const Nav = styled.div`
   background: #fdfd66;
   height: auto;
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: row;
   button {
@@ -19,6 +19,8 @@ const Nav = styled.div`
     }
   }
   img {
+    max-width: 250px;
+    min-width: 150px;
     margin: 0.5em;
     height: auto;
   }
@@ -27,7 +29,7 @@ export default function NavBar() {
   return (
     <Nav>
       <NavLink to="/">
-        <img src={icon} alt="wut" width="300" />
+        <img src={icon} alt="wut" />
       </NavLink>
       <Link to="/about">
         <button>About</button>
@@ -37,6 +39,9 @@ export default function NavBar() {
       </Link>
       <Link to="/post">
         <button>Post</button>
+      </Link>
+      <Link to="/login">
+        <button>Login</button>
       </Link>
     </Nav>
   );

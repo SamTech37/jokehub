@@ -4,6 +4,7 @@ import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
+import LoginPage from "./Components/LoginPage";
 //routing
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //DB
@@ -62,7 +63,7 @@ function App() {
           </Route>
 
           <Route path="/login">
-            <h1>login page</h1>
+            <LoginPage />
           </Route>
           <Route path="/:postId" children={<Post />} />
 

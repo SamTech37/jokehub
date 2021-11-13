@@ -46,12 +46,12 @@ function App() {
   const [signed, setSigned] = useState(false);
   const provider = new GoogleAuthProvider();
 
-  const userSignIn = async () => {
-    await signInWithRedirect(auth, provider);
+  const userSignIn = () => {
+    signInWithRedirect(auth, provider);
   };
 
-  const userSignOut = async () => {
-    await signOut(auth);
+  const userSignOut = () => {
+    signOut(auth);
   };
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -69,12 +69,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar
-        signIn={userSignIn}
-        signOut={userSignOut}
-        user={user}
-        signed={signed}
-      />
+      <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
       <div>
         <Switch>
           <Route path="/profile">

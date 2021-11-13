@@ -1,10 +1,10 @@
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useState, useContext } from "react";
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
-import LoginPage from "./Components/LoginPage";
+import ProfilePage from "./ProfilePage";
 //routing
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //DB
@@ -19,7 +19,6 @@ import {
 //auth
 import {
   signInWithRedirect,
-  getRedirectResult,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
@@ -44,21 +43,11 @@ function App() {
   };
   //Auth
   const [user, setUser] = useState({});
+  const [signed, setSigned] = useState(false);
   const provider = new GoogleAuthProvider();
 
   const userSignIn = async () => {
     await signInWithRedirect(auth, provider);
-    await getRedirectResult(auth)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        //const credential = GoogleAuthProvider.credentialFromResult(result);
-        //const token = credential.accessToken;
-        setUser(result.user);
-      })
-      .catch((error) => {
-        const errorCode = error.Code;
-        console.log("error");
-      });
   };
 
   const userSignOut = async () => {
@@ -66,6 +55,7 @@ function App() {
   };
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
+    setSigned(user ? true : false);
   });
   //main
   useEffect(() => {
@@ -79,11 +69,16 @@ function App() {
 
   return (
     <Router>
-      <NavBar signIn={userSignIn} signOut={userSignOut} />
+      <NavBar
+        signIn={userSignIn}
+        signOut={userSignOut}
+        user={user}
+        signed={signed}
+      />
       <div>
         <Switch>
           <Route path="/profile">
-            <Profile />
+            <ProfilePage user={user} />
           </Route>
 
           <Route path="/post">
@@ -94,9 +89,6 @@ function App() {
             <About />
           </Route>
 
-          <Route path="/login">
-            <LoginPage signIn={userSignIn} signOut={userSignOut} user={user} />
-          </Route>
           <Route path="/:postId" children={<Post />} />
 
           <Route path="/">
@@ -106,10 +98,6 @@ function App() {
       </div>
     </Router>
   );
-}
-
-function Profile() {
-  return <h2>Profile</h2>;
 }
 
 export default App;

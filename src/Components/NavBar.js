@@ -25,7 +25,11 @@ const Nav = styled.div`
     height: auto;
   }
 `;
-export default function NavBar({ signIn, signOut }) {
+export default function NavBar({ signIn, signOut, signed }) {
+  const handleClick = () => {
+    if (signed) return signOut();
+    return signIn();
+  };
   return (
     <Nav>
       <NavLink to="/">
@@ -40,9 +44,7 @@ export default function NavBar({ signIn, signOut }) {
       <Link to="/post">
         <button>Post</button>
       </Link>
-      <Link to="/login">
-        <button> Login</button>
-      </Link>
+      <button onClick={handleClick}>{signed ? "Logout" : "Login"}</button>
     </Nav>
   );
 }

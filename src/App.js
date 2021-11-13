@@ -1,10 +1,10 @@
-import react, { useEffect, useState, useContext } from "react";
+import react, { useEffect, useState } from "react";
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./Components/ProfilePage";
 //routing
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //DB
@@ -24,6 +24,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 
+export const UserContext = react.createContext({});
 function App() {
   //DB
   const [posts, setPosts] = useState([]);
@@ -43,6 +44,7 @@ function App() {
   };
   //Auth
   const [user, setUser] = useState({});
+
   const [signed, setSigned] = useState(false);
   const provider = new GoogleAuthProvider();
 
@@ -51,7 +53,9 @@ function App() {
   };
 
   const userSignOut = () => {
-    signOut(auth);
+    signOut(auth).catch((error) => {
+      console.log("error");
+    });
   };
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -68,30 +72,32 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
-      <div>
-        <Switch>
-          <Route path="/profile">
-            <ProfilePage user={user} />
-          </Route>
+    <UserContext.Provider value={user}>
+      <Router>
+        <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
+        <div>
+          <Switch>
+            <Route path="/profile">
+              <ProfilePage user={user} />
+            </Route>
 
-          <Route path="/post">
-            <PostingPage postJoke={postJoke} />
-          </Route>
+            <Route path="/post">
+              <PostingPage postJoke={postJoke} />
+            </Route>
 
-          <Route path="/about">
-            <About />
-          </Route>
+            <Route path="/about">
+              <About />
+            </Route>
 
-          <Route path="/:postId" children={<Post />} />
+            <Route path="/:postId" children={<Post />} />
 
-          <Route path="/">
-            <List posts={posts} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+            <Route path="/">
+              <List posts={posts} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </UserContext.Provider>
   );
 }
 

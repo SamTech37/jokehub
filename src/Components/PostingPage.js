@@ -7,6 +7,7 @@ const SendButton = styled.button`
   color: white;
   width: 200px;
   height: 100px;
+  border-radius: 30px;
 `;
 export default function PostingPage({ postJoke, signed }) {
   const [newTitle, setNewTitle] = useState("");
@@ -27,7 +28,10 @@ export default function PostingPage({ postJoke, signed }) {
           setNewContent(event.target.value);
         }}
       />
-      <SendButton onClick={() => postJoke(newTitle, newContent)}>
+      <SendButton
+        onClick={() => postJoke(newTitle, newContent)}
+        disabled={!signed}
+      >
         Send
       </SendButton>
       {!signed && <h2>Please Login First!</h2>}

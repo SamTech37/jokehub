@@ -15,6 +15,7 @@ import {
   addDoc,
   updateDoc,
   doc,
+  serverTimestamp,
 } from "firebase/firestore";
 //auth
 import {
@@ -33,7 +34,10 @@ function App() {
     await addDoc(postsColletionRef, {
       title: newTitle,
       content: newContent,
-      author: "user",
+      poster: "user",
+      time: serverTimestamp(),
+      rates: Number(0),
+      totalRating: Number(0),
     });
   };
   const editJoke = async (id, editTitle, editContent) => {

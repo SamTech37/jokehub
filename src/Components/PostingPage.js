@@ -20,8 +20,12 @@ const Body = styled.div`
   }
 `;
 export default function PostingPage({ postJoke, signed }) {
-  const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
+
+  const handleClick = () => {
+    postJoke(newContent);
+    setNewContent("");
+  };
   return (
     <Body>
       <textarea
@@ -31,7 +35,7 @@ export default function PostingPage({ postJoke, signed }) {
           setNewContent(event.target.value);
         }}
       ></textarea>
-      <button onClick={() => postJoke(newTitle, newContent)} disabled={!signed}>
+      <button onClick={handleClick} disabled={!signed}>
         Send
       </button>
       {!signed && <h2>Please Login First!</h2>}

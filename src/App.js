@@ -29,7 +29,7 @@ function App() {
   //DB
   const [posts, setPosts] = useState([]);
   const postsColletionRef = collection(db, "posts");
-  const postJoke = async (newTitle, newContent) => {
+  const postJoke = async (newContent) => {
     //write data
     await addDoc(postsColletionRef, {
       content: newContent,
@@ -39,9 +39,9 @@ function App() {
       totalRating: Number(0),
     });
   };
-  const editJoke = async (id, editTitle, editContent) => {
+  const editJoke = async (id, editContent) => {
     const jokeDoc = doc(db, "posts", id);
-    const newFields = { title: editTitle, content: editContent };
+    const newFields = { content: editContent };
     await updateDoc(jokeDoc, newFields);
   };
   //Auth

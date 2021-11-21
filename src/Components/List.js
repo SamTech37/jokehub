@@ -24,6 +24,7 @@ export default function List({ posts }) {
           <Item key={post.id}>
             <h2>{post.content}</h2>
             <h3>{"poster: " + post.poster}</h3>
+
             <Rater type={"range"} />
           </Item>
         );

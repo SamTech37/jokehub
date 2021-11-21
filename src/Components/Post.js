@@ -16,7 +16,6 @@ export default function Post() {
     <Body>
       <h1>postId = {postId}</h1>
 
-      <h1>Joke title</h1>
       <h2>Joke content</h2>
       <h3>Joke rating and N rates</h3>
       <h3>Joke poster</h3>

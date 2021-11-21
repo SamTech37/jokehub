@@ -24,7 +24,6 @@ export default function PostingPage({ postJoke, signed }) {
 
   const handleClick = () => {
     postJoke(newContent);
-    setNewContent("");
   };
   return (
     <Body>

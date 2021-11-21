@@ -32,7 +32,6 @@ function App() {
   const postJoke = async (newTitle, newContent) => {
     //write data
     await addDoc(postsColletionRef, {
-      title: newTitle,
       content: newContent,
       poster: "user",
       time: serverTimestamp(),

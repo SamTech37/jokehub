@@ -11,7 +11,9 @@ const Item = styled.div`
   margin: auto;
   padding: 1em;
 `;
-
+const Rater = styled.input`
+  color: red;
+`;
 export default function List({ posts }) {
   // fetch data here
 
@@ -20,9 +22,9 @@ export default function List({ posts }) {
       {posts.map((post) => {
         return (
           <Item key={post.id}>
-            <h1>{post.title}</h1>
             <h2>{post.content}</h2>
             <h3>{"poster: " + post.poster}</h3>
+            <Rater type={"range"} />
           </Item>
         );
       })}

@@ -16,6 +16,9 @@ import {
   updateDoc,
   doc,
   serverTimestamp,
+  query,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 //auth
 import {
@@ -67,7 +70,8 @@ function App() {
   useEffect(() => {
     const getPosts = async () => {
       //read data
-      const postsData = await getDocs(postsColletionRef);
+      const q = query(postsColletionRef, orderBy("time", "desc"));
+      const postsData = await getDocs(q);
       setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();

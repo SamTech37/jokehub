@@ -22,12 +22,12 @@ const Body = styled.div`
 `;
 export default function PostingPage({ postJoke, signed }) {
   const [newContent, setNewContent] = useState("");
-
+  let navigate = useNavigate();
   const handleClick = () => {
     if (newContent !== "") {
       postJoke(newContent);
-
       alert("Post succeed!");
+      navigate("/");
     } else {
       alert("Can't post nothing!");
     }

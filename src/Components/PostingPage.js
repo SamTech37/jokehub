@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Body = styled.div`
@@ -22,13 +22,12 @@ const Body = styled.div`
 `;
 export default function PostingPage({ postJoke, signed }) {
   const [newContent, setNewContent] = useState("");
-  let history = useHistory();
+
   const handleClick = () => {
     if (newContent !== "") {
       postJoke(newContent);
 
       alert("Post succeed!");
-      history.push("/");
     } else {
       alert("Can't post nothing!");
     }

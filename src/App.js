@@ -6,7 +6,7 @@ import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
 import ProfilePage from "./Components/ProfilePage";
 //routing
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //DB
 import { db, auth } from "./firebaseConfig";
 import {
@@ -77,25 +77,20 @@ function App() {
     <Router>
       <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
       <div>
-        <Switch>
-          <Route path="/profile">
-            <ProfilePage user={user} />
-          </Route>
+        <Routes>
+          <Route path="/profile" element={<ProfilePage user={user} />} />
 
-          <Route path="/post">
-            <PostingPage postJoke={postJoke} signed={signed} />
-          </Route>
+          <Route
+            path="/post"
+            element={<PostingPage postJoke={postJoke} signed={signed} />}
+          />
 
-          <Route path="/about">
-            <About />
-          </Route>
+          <Route path="/about" element={<About />} />
 
-          <Route path="/:postId" children={<Post />} />
+          <Route path="/:postId" element={<Post />} />
 
-          <Route exact path="/">
-            <List posts={posts} />
-          </Route>
-        </Switch>
+          <Route index element={<List posts={posts} />} />
+        </Routes>
       </div>
     </Router>
   );

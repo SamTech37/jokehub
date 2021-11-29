@@ -11,7 +11,7 @@ const Item = styled.div`
   margin: auto;
   padding: 1em;
   h2 {
-    white-space: pre-line;
+    white-space: pre-wrap; //line breaking, mutiple spaces , etc.
   }
 `;
 const Rater = styled.input`

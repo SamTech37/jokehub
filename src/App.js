@@ -92,7 +92,7 @@ function App() {
 
           <Route path="/:postId" children={<Post />} />
 
-          <Route path="/">
+          <Route exact path="/">
             <List posts={posts} />
           </Route>
         </Switch>

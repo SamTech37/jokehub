@@ -20,6 +20,8 @@ import {
   orderBy,
   limit,
   where,
+  arrayUnion,
+  increment,
 } from "firebase/firestore";
 //auth
 import {
@@ -41,6 +43,14 @@ function App() {
       posterUid: user.uid,
       rates: Number(0),
       totalRating: Number(0),
+    });
+  };
+  const rateJoke = async (id, userRate, uid) => {
+    const jokeDoc = doc(db, "posts", id);
+    await updateDoc(jokeDoc, {
+      ratedUsers: arrayUnion(uid),
+      rates: increment(1),
+      totalRating: increment(userRate),
     });
   };
   const getUsersPost = async (uid) => {

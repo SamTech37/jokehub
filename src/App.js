@@ -36,7 +36,6 @@ function App() {
     //write data
     await addDoc(postsColletionRef, {
       content: newContent,
-      poster: "user",
       time: serverTimestamp(),
       rates: Number(0),
       totalRating: Number(0),
@@ -70,7 +69,7 @@ function App() {
   useEffect(() => {
     const getPosts = async () => {
       //read data
-      const q = query(postsColletionRef, orderBy("time", "desc"));
+      const q = query(postsColletionRef, orderBy("time", "desc"), limit(3));
       const postsData = await getDocs(q);
       setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };

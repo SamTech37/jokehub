@@ -26,7 +26,6 @@ export default function List({ posts }) {
         return (
           <Item key={post.id}>
             <h2>{post.content.replace("<br />", "d")}</h2>
-            <h3>{"poster: " + post.poster}</h3>
 
             <Rater type={"range"} />
           </Item>

@@ -19,6 +19,7 @@ import {
   query,
   orderBy,
   limit,
+  where,
 } from "firebase/firestore";
 //auth
 import {
@@ -37,15 +38,34 @@ function App() {
     await addDoc(postsColletionRef, {
       content: newContent,
       time: serverTimestamp(),
+      posterUid: user.uid,
       rates: Number(0),
       totalRating: Number(0),
     });
   };
+  const getUsersPost = async (uid) => {
+    const q = query(
+      postsColletionRef,
+      where("posterUid", "==", uid),
+      orderBy("time", "desc")
+    );
+  };
+
   const editJoke = async (id, editContent) => {
     const jokeDoc = doc(db, "posts", id);
     const newFields = { content: editContent };
     await updateDoc(jokeDoc, newFields);
   };
+  useEffect(() => {
+    const getPosts = async () => {
+      //read data
+      const q = query(postsColletionRef, orderBy("time", "desc"), limit(10));
+      const postsData = await getDocs(q);
+      setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPosts();
+  }, []);
+
   //Auth
   const [user, setUser] = useState({});
 
@@ -61,20 +81,12 @@ function App() {
       console.log("error");
     });
   };
+
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
     setSigned(user ? true : false);
   });
   //onMount
-  useEffect(() => {
-    const getPosts = async () => {
-      //read data
-      const q = query(postsColletionRef, orderBy("time", "desc"), limit(3));
-      const postsData = await getDocs(q);
-      setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getPosts();
-  }, []);
 
   return (
     <Router>

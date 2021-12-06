@@ -25,7 +25,7 @@ import {
 } from "firebase/firestore";
 //auth
 import {
-  signInWithRedirect,
+  signInWithPopup,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
@@ -66,6 +66,7 @@ function App() {
     const newFields = { content: editContent };
     await updateDoc(jokeDoc, newFields);
   };
+  //onMount
   useEffect(() => {
     const getPosts = async () => {
       //read data
@@ -78,32 +79,34 @@ function App() {
 
   //Auth
   const [user, setUser] = useState({});
-
   const [signed, setSigned] = useState(false);
-  const provider = new GoogleAuthProvider();
 
   const userSignIn = () => {
-    signInWithRedirect(auth, provider);
-  };
-
-  const userSignOut = () => {
-    signOut(auth).catch((error) => {
-      console.log("error");
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      console.log(result);
+      setUser(result.user);
     });
   };
 
+  const userSignOut = () => {
+    signOut(auth);
+  };
+
   onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-    setSigned(user ? true : false);
+    if (currentUser) return setSigned(true);
+    setSigned(false);
   });
-  //onMount
 
   return (
     <Router>
       <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
       <div>
         <Routes>
-          <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route
+            path="/profile"
+            element={<ProfilePage user={user} signed={signed} />}
+          />
 
           <Route
             path="/post"
@@ -114,7 +117,7 @@ function App() {
 
           <Route path="/:postId" element={<Post />} />
 
-          <Route index element={<List posts={posts} />} />
+          <Route index element={<List posts={posts} rateJoke={rateJoke} />} />
         </Routes>
       </div>
     </Router>

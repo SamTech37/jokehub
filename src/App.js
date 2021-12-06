@@ -43,12 +43,13 @@ function App() {
       posterUid: user.uid,
       rates: Number(0),
       totalRating: Number(0),
+      ratedUsers: [],
     });
   };
-  const rateJoke = async (id, userRate, uid) => {
+  const rateJoke = async (id, userRate) => {
     const jokeDoc = doc(db, "posts", id);
     await updateDoc(jokeDoc, {
-      ratedUsers: arrayUnion(uid),
+      ratedUsers: arrayUnion(user.uid),
       rates: increment(1),
       totalRating: increment(userRate),
     });
@@ -83,19 +84,16 @@ function App() {
 
   const userSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider).then((result) => {
-      setUser(result.user);
-    });
+    signInWithPopup(auth, provider);
   };
 
   const userSignOut = () => {
     signOut(auth);
-    setUser({});
   };
 
   onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) return setSigned(true);
-    setSigned(false);
+    setUser(currentUser);
+    setSigned(user ? true : false);
   });
 
   return (
@@ -115,9 +113,19 @@ function App() {
 
           <Route path="/about" element={<About />} />
 
-          <Route path="/:postId" element={<Post />} />
+          {/*<Route path="/:postId" element={<Post />} />*/}
 
-          <Route index element={<List posts={posts} rateJoke={rateJoke} />} />
+          <Route
+            index
+            element={
+              <List
+                posts={posts}
+                rateJoke={rateJoke}
+                user={user}
+                signed={signed}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>

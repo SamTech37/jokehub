@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react/cjs/react.development";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Body = styled.div`
@@ -13,34 +12,70 @@ const Body = styled.div`
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
   }
   button {
-    width: 4em;
-    height: 2em;
-    border-radius: 30px;
-    margin-left: 1em;
+    color: #ffab01;
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid #ffab01;
+    border-radius: 3px;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  .slider {
+    max-width: 100%;
+    min-width: 50%;
+    height: 15px;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 5px;
+    background: #eee;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+      background: #333;
+    }
+    &::-moz-range-thumb {
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+      background: #333;
+    }
   }
 `;
-const Rater = styled.input`
-  width: 20em;
-  height: 3em;
-`;
-export default function ListItem({ content, rates, totRating }) {
+export default function ListItem({
+  content,
+  rates,
+  totRating,
+  postId,
+  rateJoke,
+  user,
+  signed,
+}) {
+  const [userRate, setUserRate] = useState(5);
   //if user has rated, the button will be disabled
-
-  const [userRate, SetUserRate] = useState(5);
+  const handleClick = () => {
+    if (signed) {
+      rateJoke(postId, userRate);
+      alert("Rated!");
+    }
+  };
   return (
     <Body>
       <h2>{content}</h2>
       <p>{rates + "  Rates"}</p>
-      <p>{"Average Rating: " + totRating}</p>
-      <Rater
-        onChange={(event) => SetUserRate(parseInt(event.target.value / 10))}
+      <p>{"Total Rating: " + totRating}</p>
+      <input
+        onChange={(event) => setUserRate(parseInt(event.target.value / 10))}
         type={"range"}
-        min="0"
-        max="100"
+        className="slider"
       />
-      <h1>{userRate}</h1>
-
-      <button>Rate</button>
+      <h1>{Number(userRate)}</h1>
+      <button onClick={handleClick}>Rate</button>
     </Body>
   );
 }

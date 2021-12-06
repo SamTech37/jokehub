@@ -84,13 +84,13 @@ function App() {
   const userSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
-      console.log(result);
       setUser(result.user);
     });
   };
 
   const userSignOut = () => {
     signOut(auth);
+    setUser({});
   };
 
   onAuthStateChanged(auth, (currentUser) => {

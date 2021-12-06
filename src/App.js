@@ -12,6 +12,7 @@ import { db, auth } from "./firebaseConfig";
 import {
   collection,
   getDocs,
+  onSnapshot,
   addDoc,
   updateDoc,
   doc,
@@ -67,13 +68,15 @@ function App() {
     const newFields = { content: editContent };
     await updateDoc(jokeDoc, newFields);
   };
-  //onMount
+  //read data onMount
   useEffect(() => {
     const getPosts = async () => {
-      //read data
       const q = query(postsColletionRef, orderBy("time", "desc"), limit(10));
-      const postsData = await getDocs(q);
-      setPosts(postsData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        setPosts(
+          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      });
     };
     getPosts();
   }, []);

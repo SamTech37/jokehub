@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import icon from "../assets/icon.svg";
 
 import { Link, NavLink } from "react-router-dom";
@@ -38,13 +39,12 @@ export default function NavBar({ signIn, signOut, signed }) {
       <Link to="/about">
         <button>About</button>
       </Link>
-      <Link to="/profile">
-        <button>Profile</button>
-      </Link>
       <Link to="/post">
         <button>Post</button>
       </Link>
-      <button onClick={handleClick}>{signed ? "Logout" : "Login"}</button>
+      <button onClick={handleClick}>
+        {signed ? <BiLogOutCircle /> : <BiLogInCircle />}
+      </button>
     </Nav>
   );
 }

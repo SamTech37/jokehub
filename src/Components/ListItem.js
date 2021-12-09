@@ -70,17 +70,21 @@ export default function ListItem({
         <h2>{content}</h2>
         <p>{rates + "  Rates"}</p>
         <p>{"Total Rating: " + totRating}</p>
-        <input
-          onChange={(event) => setUserRate(parseInt(event.target.value / 10))}
-          type={"range"}
-          className="slider"
-        />
-        <h1>{Number(userRate)}</h1>
 
         {ratedUsers.includes(user?.uid) ? (
           <button onClick={() => alert("You have rated this!")}>Rated</button>
         ) : (
-          <button onClick={handleClick}>Rate</button>
+          <div>
+            <input
+              onChange={(event) =>
+                setUserRate(parseInt(event.target.value / 10))
+              }
+              type={"range"}
+              className="slider"
+            />
+            <h1>{Number(userRate)}</h1>
+            <button onClick={handleClick}>Rate</button>
+          </div>
         )}
       </Body>
     );

@@ -4,7 +4,6 @@ import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
-import ProfilePage from "./Components/ProfilePage";
 //routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //DB
@@ -104,11 +103,6 @@ function App() {
       <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
       <div>
         <Routes>
-          <Route
-            path="/profile"
-            element={<ProfilePage user={user} signed={signed} />}
-          />
-
           <Route
             path="/post"
             element={<PostingPage postJoke={postJoke} signed={signed} />}

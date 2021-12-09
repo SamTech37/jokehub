@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Body = styled.div`
-  padding-left: 2em;
+  margin-right: 1em;
+  margin-left: 1em;
   font-family: "Times New Roman", Times, serif;
   h2 {
     padding-left: 1em;

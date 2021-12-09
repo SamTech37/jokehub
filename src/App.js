@@ -38,14 +38,18 @@ function App() {
   const postsColletionRef = collection(db, "posts");
   const postJoke = async (newContent) => {
     //write data
-    await addDoc(postsColletionRef, {
-      content: newContent,
-      time: serverTimestamp(),
-      posterUid: user.uid,
-      rates: Number(0),
-      totalRating: Number(0),
-      ratedUsers: [],
-    });
+    try {
+      await addDoc(postsColletionRef, {
+        content: newContent,
+        time: serverTimestamp(),
+        posterUid: user.uid,
+        rates: Number(0),
+        totalRating: Number(0),
+        ratedUsers: [],
+      });
+    } catch (error) {
+      alert("Post Failed, Please Try Again.");
+    }
   };
   const rateJoke = async (id, userRate) => {
     const jokeDoc = doc(db, "posts", id);
@@ -87,7 +91,9 @@ function App() {
 
   const userSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+    signInWithPopup(auth, provider).catch((error) => {
+      alert("Login Failed, Please Try Again.");
+    });
   };
 
   const userSignOut = () => {

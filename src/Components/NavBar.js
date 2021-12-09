@@ -6,7 +6,7 @@ import icon from "../assets/icon.svg";
 import { Link, NavLink } from "react-router-dom";
 const Nav = styled.div`
   background: #fdfd66;
-  height: auto;
+  height: 20%;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -42,9 +42,7 @@ export default function NavBar({ signIn, signOut, signed }) {
       <Link to="/post">
         <button>Post</button>
       </Link>
-      <button onClick={handleClick}>
-        {signed ? <BiLogOutCircle /> : <BiLogInCircle />}
-      </button>
+      <button onClick={handleClick}>{signed ? "Logout" : "Login"}</button>
     </Nav>
   );
 }

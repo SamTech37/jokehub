@@ -4,6 +4,7 @@ import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
+import styled from "styled-components";
 //routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //DB
@@ -101,7 +102,7 @@ function App() {
   return (
     <Router>
       <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
-      <div>
+      <Body>
         <Routes>
           <Route
             path="/post"
@@ -124,8 +125,13 @@ function App() {
             }
           />
         </Routes>
-      </div>
+      </Body>
     </Router>
   );
 }
+
+const Body = styled.div`
+  height: 100%;
+`;
+
 export default App;

@@ -3,25 +3,40 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Body = styled.div`
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   button {
     background-color: orange;
-    font-size: 2em;
     color: white;
-    width: 200px;
-    height: 100px;
-    border-radius: 30px;
+    font-size: 1.5em;
+
+    max-width: 15em;
+    width: 30%;
+    height: 3em;
+    border-radius: 1.5em;
   }
   textarea {
-    margin-top: 1em;
-    height: 300px;
-    width: 500px;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    padding: 0.5em;
+    border-width: 0.1em;
+    border-radius: 0.5em;
+    height: 24em;
+    max-width: 60em;
+    width: 70%;
+  }
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    max-width: 60em;
+    width: 70%;
   }
 `;
 export default function PostingPage({ postJoke, signed }) {
   const [newContent, setNewContent] = useState("");
+  const maxLen = 1500;
   let navigate = useNavigate();
   const handleClick = () => {
     if (newContent !== "") {
@@ -36,11 +51,13 @@ export default function PostingPage({ postJoke, signed }) {
     <Body>
       <textarea
         type="text"
-        placeholder="Content..."
+        placeholder="Write your joke here..."
+        maxLength={maxLen}
         onChange={(event) => {
           setNewContent(event.target.value);
         }}
-      ></textarea>
+      />
+      <p>{"word count " + newContent.length + "/" + maxLen}</p>
       <button onClick={handleClick} disabled={!signed}>
         Send
       </button>

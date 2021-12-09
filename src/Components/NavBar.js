@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import icon from "../assets/icon.svg";
-
+import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
-const Nav = styled.div`
+const MobileNav = styled.div`
   background: #fdfd66;
-  height: 20%;
+  height: 15%;
   width: 100%;
   display: flex;
   flex-direction: row;
-  button {
-    margin: 1em;
+
+  img {
+    max-width: 12em;
+    min-width: 5em;
+    margin: 0.5em;
+    height: auto;
+    justify-self: center;
+  }
+  .openbtn {
+    margin: auto;
+    height: 2em;
     background: transparent;
     font-size: 1.5em;
     border-width: 0;
@@ -19,30 +27,129 @@ const Nav = styled.div`
       color: #0000005c;
     }
   }
+  .drawerNav {
+    //props should be passed like in react
+    width: 100%;
+    height: ${(props) => (props.open ? "100%" : "0")};
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+    a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 36px;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  .drawerNav-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: white;
+  }
+
+  @media screen and (max-height: 450px) {
+    //resize the drawer responsively
+    .drawerNav a {
+      font-size: 20px;
+    }
+    .closebtn {
+      font-size: 40px;
+      top: 15px;
+      right: 35px;
+    }
+  }
+`;
+const Nav = styled.div`
+  background: #fdfd66;
+  height: 15%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   img {
-    max-width: 250px;
-    min-width: 150px;
-    margin: 0.5em;
+    max-width: 12em;
+    min-width: 5em;
+    margin: 1em;
     height: auto;
+    justify-self: center;
+  }
+  .NavContent {
+    display: flex;
+    flex-direction: row;
+    a {
+      padding: 1em;
+      text-decoration: none;
+      font-size: 36px;
+      color: black;
+      display: block;
+      transition: 0.3s;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
 `;
 export default function NavBar({ signIn, signOut, signed }) {
-  const handleClick = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const handleAuth = () => {
     if (signed) return signOut();
     return signIn();
   };
+
   return (
-    <Nav>
-      <NavLink to="/">
-        <img src={icon} alt="wut" />
-      </NavLink>
-      <Link to="/about">
-        <button>About</button>
-      </Link>
-      <Link to="/post">
-        <button>Post</button>
-      </Link>
-      <button onClick={handleClick}>{signed ? "Logout" : "Login"}</button>
-    </Nav>
+    <div>
+      <BrowserView>
+        <Nav>
+          <NavLink to="/">
+            <img src={icon} alt="wut" />
+          </NavLink>
+          <div className="NavContent">
+            <Link to="/about">About</Link>
+            <Link to="/post">Post</Link>
+            <a onClick={handleAuth}>{signed ? "Logout" : "Login"}</a>
+          </div>
+        </Nav>
+      </BrowserView>
+      <MobileView>
+        <MobileNav open={drawerOpen}>
+          <NavLink to="/">
+            <img src={icon} alt="home" />
+          </NavLink>
+
+          <button className="openbtn" onClick={() => setDrawerOpen(true)}>
+            &#9776;
+          </button>
+
+          <div className="drawerNav">
+            <a className="closebtn" onClick={() => setDrawerOpen(false)}>
+              Close
+            </a>
+            <div className="drawerNav-content">
+              <Link to="/about">About</Link>
+              <Link to="/post">Post</Link>
+              <a onClick={handleAuth}>{signed ? "Logout" : "Login"}</a>
+            </div>
+          </div>
+        </MobileNav>
+      </MobileView>
+    </div>
   );
 }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import icon from "../assets/icon.svg";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
+
 const MobileNav = styled.div`
   background: #fdfd66;
   height: 15%;
@@ -80,15 +81,16 @@ const MobileNav = styled.div`
 `;
 const Nav = styled.div`
   background: #fdfd66;
-  height: 15%;
+  max-height: 15%;
   width: 100%;
   display: flex;
   flex-direction: row;
   img {
     max-width: 12em;
     min-width: 5em;
-    margin: 1em;
-    height: auto;
+    height: 3em;
+    margin-left: 1em;
+    margin-top: 1em;
     justify-self: center;
   }
   .NavContent {
@@ -97,7 +99,7 @@ const Nav = styled.div`
     a {
       padding: 1em;
       text-decoration: none;
-      font-size: 36px;
+      font-size: 1.5em;
       color: black;
       display: block;
       transition: 0.3s;
@@ -122,6 +124,7 @@ export default function NavBar({ signIn, signOut, signed }) {
             <img src={icon} alt="wut" />
           </NavLink>
           <div className="NavContent">
+            <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/post">Post</Link>
             <a onClick={handleAuth}>{signed ? "Logout" : "Login"}</a>
@@ -138,11 +141,10 @@ export default function NavBar({ signIn, signOut, signed }) {
             &#9776;
           </button>
 
-          <div className="drawerNav">
-            <a className="closebtn" onClick={() => setDrawerOpen(false)}>
-              Close
-            </a>
+          <div className="drawerNav" onClick={() => setDrawerOpen(false)}>
+            <a className="closebtn">Close</a>
             <div className="drawerNav-content">
+              <Link to="/">Home</Link>
               <Link to="/about">About</Link>
               <Link to="/post">Post</Link>
               <a onClick={handleAuth}>{signed ? "Logout" : "Login"}</a>

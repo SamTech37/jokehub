@@ -13,9 +13,9 @@ const Body = styled.div`
     font-size: 1.5em;
 
     max-width: 15em;
-    width: 30%;
-    height: 3em;
-    border-radius: 1.5em;
+    width: 35%;
+    height: 2.5em;
+    border-radius: 1em;
   }
   textarea {
     margin-top: 0.5em;
@@ -23,7 +23,7 @@ const Body = styled.div`
     padding: 0.5em;
     border-width: 0.1em;
     border-radius: 0.5em;
-    height: 24em;
+    height: 20em;
     max-width: 60em;
     width: 70%;
   }
@@ -32,6 +32,10 @@ const Body = styled.div`
     margin-bottom: 0.5em;
     max-width: 60em;
     width: 70%;
+  }
+  h2 {
+    margin-top: 0.5em;
+    margin-bottom: 0;
   }
 `;
 export default function PostingPage({ postJoke, signed }) {
@@ -49,6 +53,7 @@ export default function PostingPage({ postJoke, signed }) {
   };
   return (
     <Body>
+      {!signed && <h2>Please Login First!</h2>}
       <textarea
         type="text"
         placeholder="Write your joke here..."
@@ -61,7 +66,6 @@ export default function PostingPage({ postJoke, signed }) {
       <button onClick={handleClick} disabled={!signed}>
         Send
       </button>
-      {!signed && <h2>Please Login First!</h2>}
     </Body>
   );
 }

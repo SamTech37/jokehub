@@ -3,6 +3,7 @@
 JokeHub is a website where you can posts joke and rate jokes, anonymously. 
 ### Why?
 It's made by a Taiwanese high school student just for fun.  
+Powered React js.
 ### How it works?
 You can browse jokes without logging in.  
 Once you've logged in with Google (Facebook perhaps?), you can post and rate jokes.  

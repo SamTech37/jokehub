@@ -27,6 +27,7 @@ import {
 //auth
 import {
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
@@ -95,6 +96,10 @@ function App() {
       alert("Login Failed, Please Try Again.");
     });
   };
+  const mobileUserSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithRedirect(auth, provider);
+  };
 
   const userSignOut = () => {
     signOut(auth);
@@ -107,7 +112,12 @@ function App() {
 
   return (
     <Router>
-      <NavBar signIn={userSignIn} signOut={userSignOut} signed={signed} />
+      <NavBar
+        signIn={userSignIn}
+        signOut={userSignOut}
+        mobileUserSignIn={mobileUserSignIn}
+        signed={signed}
+      />
       <Body>
         <Routes>
           <Route

@@ -115,11 +115,15 @@ const Nav = styled.div`
   }
 `;
 
-export default function NavBar({ signIn, signOut, signed }) {
+export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleAuth = () => {
     if (signed) return signOut();
     return signIn();
+  };
+  const handleAuthMobile = () => {
+    if (signed) return signOut();
+    return mobileUserSignIn();
   };
 
   return (
@@ -153,7 +157,7 @@ export default function NavBar({ signIn, signOut, signed }) {
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>
               <Link to="/post">Post</Link>
-              <a onClick={handleAuth}>{signed ? "Logout" : "Login"}</a>
+              <a onClick={handleAuthMobile}>{signed ? "Logout" : "Login"}</a>
             </div>
           </div>
         </MobileNav>

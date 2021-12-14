@@ -4,7 +4,7 @@ import ListItem from "./ListItem";
 import { ImArrowUp2 } from "react-icons/im";
 
 const BackToTop = styled.button`
-  z-index: 99;
+  z-index: 50;
   border: none;
   outline: none;
   background-color: #ffaa01cc;
@@ -18,6 +18,8 @@ const BackToTop = styled.button`
   bottom: 2em;
   right: 1em;
   font-size: 24px;
+  -webkit-tap-highlight-color: transparent;
+
   @media screen and (max-width: 450px) {
     bottom: 1em;
     right: 0;

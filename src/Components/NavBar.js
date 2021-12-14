@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import icon from "../assets/icon.svg";
+import { ImArrowUp2 } from "react-icons/im";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
 
@@ -19,8 +20,10 @@ const MobileNav = styled.div`
     justify-self: center;
   }
   .openbtn {
-    margin: auto;
-    height: 2em;
+    position: absolute;
+    right: 0.5em;
+    height: 3em;
+    width: 2em;
     background: transparent;
     font-size: 1.5em;
     border-width: 0;
@@ -109,11 +112,41 @@ const Nav = styled.div`
     }
   }
 `;
+const BackToTop = styled.button`
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #ffaa01cc;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1rem;
+  position: fixed;
+  bottom: 2em;
+  right: 1em;
+  font-size: 24px;
+  @media screen and (max-width: 450px) {
+    bottom: 1em;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    border-radius: 14px;
+    font-size: 1rem;
+  }
+`;
 export default function NavBar({ signIn, signOut, signed }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleAuth = () => {
     if (signed) return signOut();
     return signIn();
+  };
+  const backToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -121,7 +154,7 @@ export default function NavBar({ signIn, signOut, signed }) {
       <BrowserView>
         <Nav>
           <NavLink to="/">
-            <img src={icon} alt="wut" />
+            <img src={icon} alt="home" />
           </NavLink>
           <div className="NavContent">
             <Link to="/">Home</Link>
@@ -152,6 +185,9 @@ export default function NavBar({ signIn, signOut, signed }) {
           </div>
         </MobileNav>
       </MobileView>
+      <BackToTop onClick={backToTop}>
+        <ImArrowUp2 />
+      </BackToTop>
     </div>
   );
 }

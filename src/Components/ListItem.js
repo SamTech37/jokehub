@@ -10,7 +10,9 @@ const Body = styled.div`
   padding: 1em;
   h2 {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
+    font-size: 1.5em;
   }
+
   button {
     color: #ffab01;
     font-size: 1em;
@@ -23,8 +25,7 @@ const Body = styled.div`
     }
   }
   .slider {
-    max-width: 100%;
-    min-width: 50%;
+    width: 60%;
     height: 15px;
     -webkit-appearance: none;
     outline: none;
@@ -45,6 +46,19 @@ const Body = styled.div`
       border-radius: 25px;
       background: #333;
     }
+  }
+
+  @media screen and (max-width: 450px) {
+    //responsive width and font size
+    h2 {
+      font-size: 5vw;
+    }
+    .slider {
+      width: 95%;
+    }
+    width: 80%;
+    margin: auto;
+    padding: 4vw;
   }
 `;
 export default function ListItem({

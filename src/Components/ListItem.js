@@ -7,7 +7,7 @@ const Body = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  min-height: 500px;
   padding: 0px 10vw;
 
   h2 {
@@ -18,6 +18,7 @@ const Body = styled.section`
     color: #ffab01;
     font-size: 1em;
     margin: 1em;
+    margin-top: 3em;
     padding: 0.25em 1em;
     border: 2px solid #ffab01;
     border-radius: 3px;
@@ -25,33 +26,6 @@ const Body = styled.section`
       opacity: 0.5;
     }
   }
-
-  .slider {
-    width: 60%;
-    height: 15px;
-    -webkit-appearance: none;
-    outline: none;
-    border-radius: 5px;
-    background: #eee;
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 25px;
-      height: 25px;
-      border-radius: 25px;
-      background: #333;
-    }
-    &::-moz-range-thumb {
-      appearance: none;
-      width: 25px;
-      height: 25px;
-      border-radius: 25px;
-      background: #333;
-    }
-  }
-  .sliderValue {
-  }
-
   .blob {
     display: flex;
     height: 30vh;
@@ -64,15 +38,13 @@ const Body = styled.section`
     background-position: center;
   }
   .ratingSec {
+    margin-top: 2em;
     display: block;
   }
   @media screen and (max-width: 450px) {
     //responsive width and font size
     h2 {
       font-size: 5vw;
-    }
-    .slider {
-      width: 95%;
     }
     .blob {
       height: 20vh;
@@ -93,6 +65,64 @@ const Spacer = styled.div`
     background-image: url(${wave1});
   }
 `;
+
+const Slider = styled.div`
+  width: 60%;
+  height: 60px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0 3vw;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+
+  .field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+  }
+  input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #dddddd88;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    z-index: 100;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffab01;
+      cursor: pointer;
+    }
+    &::-moz-range-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffab01;
+      cursor: pointer;
+    }
+    &::-moz-range-progress {
+      background: #fdfd33;
+    }
+  }
+  span {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    justify-self: center;
+    position: absolute;
+    z-index: 99;
+  }
+  @media screen and (max-width: 450px) {
+    width: 95%;
+  }
+`;
+
 export default function ListItem({
   content,
   rates,
@@ -104,6 +134,7 @@ export default function ListItem({
   signed,
 }) {
   const [userRate, setUserRate] = useState(5);
+
   //if user has rated, the button will be disabled
   const handleClick = () => {
     if (signed) {
@@ -119,21 +150,27 @@ export default function ListItem({
             <h2>{content}</h2>
 
             <div className="ratingSec">
-              <div className="blob">
-                <h1>
-                  {rates !== 0
-                    ? Math.round((totRating / rates) * 10) / 10
-                    : "None"}
-                </h1>
+              <div className="g">
+                <div className="blob">
+                  <h1>
+                    {rates !== 0
+                      ? Math.round((totRating / rates) * 10) / 10
+                      : "None"}
+                  </h1>
+                </div>
               </div>
-              <input
-                onChange={(event) =>
-                  setUserRate(parseInt(event.target.value / 10))
-                }
-                type={"range"}
-                className="slider"
-              />
-
+              <p>{`out of ${rates} rates`}</p>
+              <Slider>
+                <div className="field">
+                  <input
+                    onInput={(event) =>
+                      setUserRate(parseInt(event.target.value / 10))
+                    }
+                    type={"range"}
+                  />
+                  <span>{userRate}</span>
+                </div>
+              </Slider>
               {ratedUsers.includes(user?.uid) ? (
                 <button onClick={() => alert("You've Rated This!")}>
                   Rated
@@ -151,8 +188,11 @@ export default function ListItem({
       <div>
         <Spacer />
         <Body>
-          <div>
-            <h2>{content}</h2>
+          <h2>{content}</h2>
+          <div className="blob">
+            <h1>
+              {rates !== 0 ? Math.round((totRating / rates) * 10) / 10 : "None"}
+            </h1>
           </div>
         </Body>
       </div>

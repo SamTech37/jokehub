@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import wave1 from "../assets/wave1.svg";
+import wave2 from "../assets/wave2.svg";
 
 const Body = styled.section`
   position: relative;
@@ -59,12 +60,17 @@ const Body = styled.section`
   }
 `;
 const Spacer = styled.div`
-  aspect-ratio: 900/300;
+  aspect-ratio: 1000/200;
+  background-image: url(${wave2});
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: url(${wave1});
+
+  @media screen and (max-width: 450px) {
+    aspect-ratio: 900/300;
+    background-image: url(${wave1});
+  }
 `;
 export default function ListItem({
   content,
@@ -86,6 +92,7 @@ export default function ListItem({
   if (signed) {
     return (
       <div>
+        <Spacer />
         <Body>
           <div>
             <h2>{content}</h2>
@@ -110,7 +117,6 @@ export default function ListItem({
           </div>
           <p>{rates + "  Rates"}</p>
         </Body>
-        <Spacer />
       </div>
     );
   } else {

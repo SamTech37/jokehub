@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import wave1 from "../assets/wave1.svg";
 import wave2 from "../assets/wave2.svg";
-
+import blob from "../assets/blob.svg";
 const Body = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 400px;
   padding: 0px 10vw;
+
   h2 {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
     font-size: 1.5em;
   }
-
   button {
     color: #ffab01;
     font-size: 1em;
@@ -25,6 +25,7 @@ const Body = styled.section`
       opacity: 0.5;
     }
   }
+
   .slider {
     width: 60%;
     height: 15px;
@@ -48,7 +49,23 @@ const Body = styled.section`
       background: #333;
     }
   }
+  .sliderValue {
+  }
 
+  .blob {
+    display: flex;
+    height: 30vh;
+    width: 30vw;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background-image: url(${blob});
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .ratingSec {
+    display: block;
+  }
   @media screen and (max-width: 450px) {
     //responsive width and font size
     h2 {
@@ -56,6 +73,10 @@ const Body = styled.section`
     }
     .slider {
       width: 95%;
+    }
+    .blob {
+      height: 20vh;
+      width: 60%;
     }
   }
 `;
@@ -97,37 +118,44 @@ export default function ListItem({
           <div>
             <h2>{content}</h2>
 
-            {ratedUsers.includes(user?.uid) ? (
-              <button onClick={() => alert("You have rated this!")}>
-                Rated
-              </button>
-            ) : (
-              <div>
-                <input
-                  onChange={(event) =>
-                    setUserRate(parseInt(event.target.value / 10))
-                  }
-                  type={"range"}
-                  className="slider"
-                />
-                <h1>{Number(userRate)}</h1>
-                <button onClick={handleClick}>Rate</button>
+            <div className="ratingSec">
+              <div className="blob">
+                <h1>
+                  {rates !== 0
+                    ? Math.round((totRating / rates) * 10) / 10
+                    : "None"}
+                </h1>
               </div>
-            )}
+              <input
+                onChange={(event) =>
+                  setUserRate(parseInt(event.target.value / 10))
+                }
+                type={"range"}
+                className="slider"
+              />
+
+              {ratedUsers.includes(user?.uid) ? (
+                <button onClick={() => alert("You've Rated This!")}>
+                  Rated
+                </button>
+              ) : (
+                <button onClick={handleClick}>Rate</button>
+              )}
+            </div>
           </div>
-          <p>{rates + "  Rates"}</p>
         </Body>
       </div>
     );
   } else {
     return (
-      <Body>
-        <div>
-          <h2>{content}</h2>
-        </div>
-
-        <p>{rates + "  Rates"}</p>
-      </Body>
+      <div>
+        <Spacer />
+        <Body>
+          <div>
+            <h2>{content}</h2>
+          </div>
+        </Body>
+      </div>
     );
   }
 }

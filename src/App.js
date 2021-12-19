@@ -148,6 +148,7 @@ function App() {
 
 const Body = styled.div`
   height: 100%;
+  background: #fff;
 `;
 
 export default App;

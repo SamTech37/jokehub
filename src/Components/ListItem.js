@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import wave1 from "../assets/wave1.svg";
 
-const Body = styled.div`
-  height: 100%;
-  width: 60%;
-  border: 2px solid black;
-  border-radius: 1.5em;
-  margin: auto;
-  padding: 1em;
+const Body = styled.section`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  padding: 0px 10vw;
   h2 {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
     font-size: 1.5em;
@@ -56,37 +56,15 @@ const Body = styled.div`
     .slider {
       width: 95%;
     }
-    width: 80%;
-    margin: auto;
-    padding: 4vw;
   }
 `;
-const AvgRatingJar = styled.div`
-  display: flex;
-  align-self: center;
-  justify-self: center;
-  p {
-    color: #ffab01;
-  }
-  .circle {
-    border: solid blue 5px;
-    height: 5em;
-    width: 5em;
-    border-radius: 40%;
-    box-shadow: 0 0 0 5px #4973ff88;
-    animation: spin 5s linear infinite;
-    color: black;
-    text-align: center;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+const Spacer = styled.div`
+  aspect-ratio: 900/300;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url(${wave1});
 `;
 export default function ListItem({
   content,
@@ -107,34 +85,33 @@ export default function ListItem({
   };
   if (signed) {
     return (
-      <Body>
-        <div>
-          <h2>{content}</h2>
+      <div>
+        <Body>
+          <div>
+            <h2>{content}</h2>
 
-          {ratedUsers.includes(user?.uid) ? (
-            <button onClick={() => alert("You have rated this!")}>Rated</button>
-          ) : (
-            <div>
-              <input
-                onChange={(event) =>
-                  setUserRate(parseInt(event.target.value / 10))
-                }
-                type={"range"}
-                className="slider"
-              />
-              <h1>{Number(userRate)}</h1>
-              <button onClick={handleClick}>Rate</button>
-            </div>
-          )}
-        </div>
-        {/*
-        <AvgRatingJar>
-          <div className="circle">
-            <p>{"Avg"}</p>
+            {ratedUsers.includes(user?.uid) ? (
+              <button onClick={() => alert("You have rated this!")}>
+                Rated
+              </button>
+            ) : (
+              <div>
+                <input
+                  onChange={(event) =>
+                    setUserRate(parseInt(event.target.value / 10))
+                  }
+                  type={"range"}
+                  className="slider"
+                />
+                <h1>{Number(userRate)}</h1>
+                <button onClick={handleClick}>Rate</button>
+              </div>
+            )}
           </div>
-        </AvgRatingJar>*/}
-        <p>{rates + "  Rates"}</p>
-      </Body>
+          <p>{rates + "  Rates"}</p>
+        </Body>
+        <Spacer />
+      </div>
     );
   } else {
     return (

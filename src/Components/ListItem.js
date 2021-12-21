@@ -160,7 +160,7 @@ export default function ListItem({
                 </div>
               </div>
               <p
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: 500 }}
               >{`average out of ${rates} rates`}</p>
               <Slider>
                 <div className="field">

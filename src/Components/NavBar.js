@@ -11,6 +11,7 @@ const MobileNav = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  font-weight: 500;
   a {
     -webkit-tap-highlight-color: #fdfd6688;
   }
@@ -38,7 +39,7 @@ const MobileNav = styled.div`
     width: 100%;
     height: ${(props) => (props.open ? "100%" : "0")};
     position: fixed;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.9);
@@ -90,6 +91,7 @@ const Nav = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  font-weight: 500;
   img {
     max-width: 12em;
     min-width: 5em;

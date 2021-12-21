@@ -112,13 +112,14 @@ function App() {
 
   return (
     <Router>
-      <NavBar
-        signIn={userSignIn}
-        signOut={userSignOut}
-        mobileUserSignIn={mobileUserSignIn}
-        signed={signed}
-      />
-      <Body>
+      <Container>
+        <NavBar
+          signIn={userSignIn}
+          signOut={userSignOut}
+          mobileUserSignIn={mobileUserSignIn}
+          signed={signed}
+        />
+
         <Routes>
           <Route
             path="/post"
@@ -141,14 +142,15 @@ function App() {
             }
           />
         </Routes>
-      </Body>
+      </Container>
     </Router>
   );
 }
 
-const Body = styled.div`
+const Container = styled.div`
   height: 100%;
   background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 `;
 
 export default App;

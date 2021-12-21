@@ -147,7 +147,7 @@ export default function ListItem({
         <Spacer />
         <Body>
           <div>
-            <h2>{content}</h2>
+            <h2 style={{ fontWeight: 500 }}>{content}</h2>
 
             <div className="ratingSec">
               <div className="g">
@@ -159,7 +159,9 @@ export default function ListItem({
                   </h1>
                 </div>
               </div>
-              <p>{`out of ${rates} rates`}</p>
+              <p
+                style={{ fontWeight: "bold" }}
+              >{`average out of ${rates} rates`}</p>
               <Slider>
                 <div className="field">
                   <input

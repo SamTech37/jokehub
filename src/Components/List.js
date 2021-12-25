@@ -29,8 +29,38 @@ const BackToTop = styled.button`
     font-size: 1rem;
   }
 `;
+const FetchArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
-export default function List({ posts, rateJoke, NextBatch, user, signed }) {
+  border-top: 1px solid #999;
+  margin-left: 1em;
+  margin-right: 1em;
+  button {
+    background-color: #ffab01;
+    border: 2px solid #ffab01;
+    color: #fff;
+    font-size: 2em;
+    margin: 1em;
+    padding: 0.25em 1em;
+
+    border-radius: 1em;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+`;
+export default function List({
+  posts,
+  rateJoke,
+  nextBatch,
+  getPosts,
+  batchSize,
+  user,
+  signed,
+}) {
   const backToTop = () => {
     window.scrollTo({
       top: 0,
@@ -39,7 +69,11 @@ export default function List({ posts, rateJoke, NextBatch, user, signed }) {
   };
   const handleNext = () => {
     backToTop();
-    NextBatch();
+    nextBatch();
+  };
+  const handleLast = () => {
+    backToTop();
+    getPosts();
   };
 
   return (
@@ -62,10 +96,13 @@ export default function List({ posts, rateJoke, NextBatch, user, signed }) {
           />
         );
       })}
-      <div>
-        {posts.length < 3 && <h1>We're out of jokes!</h1>}
-        <button onClick={handleNext}>Next</button>
-      </div>
+      <FetchArea>
+        {posts.length == batchSize ? (
+          <button onClick={handleNext}>Next</button>
+        ) : (
+          <button onClick={handleLast}>What's new!</button>
+        )}
+      </FetchArea>
     </div>
   );
 }

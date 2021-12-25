@@ -37,6 +37,7 @@ function App() {
   //DB
   const [posts, setPosts] = useState([]);
   const [lastDoc, setLastDoc] = useState();
+  const batchSize = 5;
   const postsColletionRef = collection(db, "posts");
   const postJoke = async (newContent) => {
     //write data
@@ -75,25 +76,26 @@ function App() {
     const newFields = { content: editContent };
     await updateDoc(jokeDoc, newFields);
   };
-  //read data onMount
-  useEffect(() => {
-    const getPosts = async () => {
-      const q = query(postsColletionRef, orderBy("time", "desc"), limit(3));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        setPosts(
-          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        );
-        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
-      });
-    };
-    getPosts();
-  }, []);
-  const NextBatch = async () => {
+
+  const getPosts = async () => {
+    const q = query(
+      postsColletionRef,
+      orderBy("time", "desc"),
+      limit(batchSize)
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      setPosts(
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+      setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
+    });
+  };
+  const nextBatch = async () => {
     const next = query(
       postsColletionRef,
       orderBy("time", "desc"),
       startAfter(lastDoc),
-      limit(3)
+      limit(batchSize)
     );
     const unsubscribe = onSnapshot(next, (querySnapshot) => {
       setPosts(
@@ -102,6 +104,10 @@ function App() {
       setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
     });
   };
+  //read data onMount
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   //Auth
   const [user, setUser] = useState({});
@@ -153,9 +159,11 @@ function App() {
               <List
                 posts={posts}
                 rateJoke={rateJoke}
-                NextBatch={NextBatch}
+                nextBatch={nextBatch}
+                getPosts={getPosts}
                 user={user}
                 signed={signed}
+                batchSize={batchSize}
               />
             }
           />

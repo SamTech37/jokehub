@@ -11,7 +11,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { db, auth } from "./firebaseConfig";
 import {
   collection,
-  getDocs,
   onSnapshot,
   addDoc,
   updateDoc,
@@ -23,6 +22,7 @@ import {
   where,
   arrayUnion,
   increment,
+  startAfter,
 } from "firebase/firestore";
 //auth
 import {
@@ -36,6 +36,7 @@ import {
 function App() {
   //DB
   const [posts, setPosts] = useState([]);
+  const [lastDoc, setLastDoc] = useState();
   const postsColletionRef = collection(db, "posts");
   const postJoke = async (newContent) => {
     //write data
@@ -60,6 +61,7 @@ function App() {
       totalRating: increment(userRate),
     });
   };
+
   const getUsersPost = async (uid) => {
     const q = query(
       postsColletionRef,
@@ -76,15 +78,30 @@ function App() {
   //read data onMount
   useEffect(() => {
     const getPosts = async () => {
-      const q = query(postsColletionRef, orderBy("time", "desc"), limit(10));
+      const q = query(postsColletionRef, orderBy("time", "desc"), limit(3));
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         setPosts(
           querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
       });
     };
     getPosts();
   }, []);
+  const NextBatch = async () => {
+    const next = query(
+      postsColletionRef,
+      orderBy("time", "desc"),
+      startAfter(lastDoc),
+      limit(3)
+    );
+    const unsubscribe = onSnapshot(next, (querySnapshot) => {
+      setPosts(
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+      setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
+    });
+  };
 
   //Auth
   const [user, setUser] = useState({});
@@ -136,6 +153,7 @@ function App() {
               <List
                 posts={posts}
                 rateJoke={rateJoke}
+                NextBatch={NextBatch}
                 user={user}
                 signed={signed}
               />

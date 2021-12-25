@@ -30,13 +30,18 @@ const BackToTop = styled.button`
   }
 `;
 
-export default function List({ posts, rateJoke, user, signed }) {
+export default function List({ posts, rateJoke, NextBatch, user, signed }) {
   const backToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+  const handleNext = () => {
+    backToTop();
+    NextBatch();
+  };
+
   return (
     <div>
       <BackToTop onClick={backToTop}>
@@ -57,6 +62,10 @@ export default function List({ posts, rateJoke, user, signed }) {
           />
         );
       })}
+      <div>
+        {posts.length < 3 && <h1>We're out of jokes!</h1>}
+        <button onClick={handleNext}>Next</button>
+      </div>
     </div>
   );
 }

@@ -23,6 +23,7 @@ import {
   arrayUnion,
   increment,
   startAfter,
+  getDoc,
 } from "firebase/firestore";
 //auth
 import {
@@ -104,6 +105,11 @@ function App() {
       setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
     });
   };
+  const inPost = async (id) => {
+    const docRef = doc(db, "posts", id);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  };
   //read data onMount
   useEffect(() => {
     getPosts();
@@ -145,15 +151,6 @@ function App() {
 
         <Routes>
           <Route
-            path="/post"
-            element={<PostingPage postJoke={postJoke} signed={signed} />}
-          />
-
-          <Route path="/about" element={<About />} />
-
-          {/*<Route path="/:postId" element={<Post />} />*/}
-
-          <Route
             index
             element={
               <List
@@ -167,6 +164,14 @@ function App() {
               />
             }
           />
+          <Route
+            path="/post"
+            element={<PostingPage postJoke={postJoke} signed={signed} />}
+          />
+
+          <Route path="/about" element={<About />} />
+
+          <Route path="/p/:postId" element={<Post inPost={inPost} />} />
         </Routes>
       </Container>
     </Router>

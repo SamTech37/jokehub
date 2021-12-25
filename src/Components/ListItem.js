@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import wave1 from "../assets/wave1.svg";
-import wave2 from "../assets/wave2.svg";
+import Spacer from "./Spacer";
 import blob from "../assets/blob.svg";
 const Body = styled.section`
   position: relative;
@@ -50,19 +49,10 @@ const Body = styled.section`
       height: 20vh;
       width: 60%;
     }
-  }
-`;
-const Spacer = styled.div`
-  aspect-ratio: 1000/200;
-  background-image: url(${wave2});
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  @media screen and (max-width: 450px) {
-    aspect-ratio: 900/300;
-    background-image: url(${wave1});
+    .btnGroup {
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
 
@@ -141,6 +131,11 @@ export default function ListItem({
       rateJoke(postId, userRate);
     }
   };
+  const handleCopy = () => {
+    let text = "https://jokehub6969.web.app/p/" + postId;
+    navigator.clipboard.writeText(text);
+    alert("URL copied!");
+  };
   if (signed) {
     return (
       <div>
@@ -150,14 +145,12 @@ export default function ListItem({
             <h2 style={{ fontWeight: 500 }}>{content}</h2>
 
             <div className="ratingSec">
-              <div className="g">
-                <div className="blob">
-                  <h1>
-                    {rates !== 0
-                      ? Math.round((totRating / rates) * 10) / 10
-                      : "None"}
-                  </h1>
-                </div>
+              <div className="blob">
+                <h1>
+                  {rates !== 0
+                    ? Math.round((totRating / rates) * 10) / 10
+                    : "None"}
+                </h1>
               </div>
               <p
                 style={{ fontWeight: 500 }}
@@ -173,13 +166,17 @@ export default function ListItem({
                   <span>{userRate}</span>
                 </div>
               </Slider>
-              {ratedUsers.includes(user?.uid) ? (
-                <button onClick={() => alert("You've Rated This!")}>
-                  Rated
-                </button>
-              ) : (
-                <button onClick={handleClick}>Rate</button>
-              )}
+              <div className="btnGroup">
+                {ratedUsers.includes(user?.uid) ? (
+                  <button onClick={() => alert("You've Rated This!")}>
+                    Rated
+                  </button>
+                ) : (
+                  <button onClick={handleClick}>Rate</button>
+                )}
+
+                <button onClick={handleCopy}>Share</button>
+              </div>
             </div>
           </div>
         </Body>

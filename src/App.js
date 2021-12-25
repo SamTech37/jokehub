@@ -171,7 +171,17 @@ function App() {
 
           <Route path="/about" element={<About />} />
 
-          <Route path="/p/:postId" element={<Post inPost={inPost} />} />
+          <Route
+            path="/p/:postId"
+            element={
+              <Post
+                inPost={inPost}
+                rateJoke={rateJoke}
+                user={user}
+                signed={signed}
+              />
+            }
+          />
         </Routes>
       </Container>
     </Router>

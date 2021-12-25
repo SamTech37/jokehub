@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Spacer from "./Spacer";
-import blob from "../assets/blob.svg";
+import Blob from "./Blob";
 const Body = styled.section`
   position: relative;
   display: flex;
@@ -12,6 +12,7 @@ const Body = styled.section`
   h2 {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
     font-size: 1.5em;
+    font-weight: 500;
   }
   button {
     color: #ffab01;
@@ -25,17 +26,6 @@ const Body = styled.section`
       opacity: 0.5;
     }
   }
-  .blob {
-    display: flex;
-    height: 30vh;
-    width: 30vw;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    background-image: url(${blob});
-    background-repeat: no-repeat;
-    background-position: center;
-  }
   .ratingSec {
     margin-top: 2em;
     display: block;
@@ -45,10 +35,7 @@ const Body = styled.section`
     h2 {
       font-size: 5vw;
     }
-    .blob {
-      height: 20vh;
-      width: 60%;
-    }
+
     .btnGroup {
       display: flex;
       justify-content: center;
@@ -125,7 +112,7 @@ export default function ListItem({
 }) {
   const [userRate, setUserRate] = useState(5);
 
-  //if user has rated, the button will be disabled
+  //if user has rated, the button can't send rate
   const handleClick = () => {
     if (signed) {
       rateJoke(postId, userRate);
@@ -142,16 +129,16 @@ export default function ListItem({
         <Spacer />
         <Body>
           <div>
-            <h2 style={{ fontWeight: 500 }}>{content}</h2>
+            <h2>{content}</h2>
 
             <div className="ratingSec">
-              <div className="blob">
+              <Blob>
                 <h1>
                   {rates !== 0
                     ? Math.round((totRating / rates) * 10) / 10
                     : "None"}
                 </h1>
-              </div>
+              </Blob>
               <p
                 style={{ fontWeight: 500 }}
               >{`average out of ${rates} rates`}</p>
@@ -188,11 +175,11 @@ export default function ListItem({
         <Spacer />
         <Body>
           <h2>{content}</h2>
-          <div className="blob">
+          <Blob>
             <h1>
               {rates !== 0 ? Math.round((totRating / rates) * 10) / 10 : "None"}
             </h1>
-          </div>
+          </Blob>
         </Body>
       </div>
     );

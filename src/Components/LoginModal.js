@@ -86,9 +86,6 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
     signInGoogle();
     setModalOpen(false);
   };
-  const handleFacebookAuth = () => {
-    setModalOpen(false);
-  };
   return (
     <Body open={modalOpen}>
       <div className="modal">

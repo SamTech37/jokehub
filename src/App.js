@@ -126,7 +126,6 @@ function App() {
       alert("Login Failed, Please Try Again.");
     });
   };
-  const userSignInFacebook = () => {};
   const mobileSignInGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
@@ -146,7 +145,6 @@ function App() {
       <Container>
         <NavBar
           signInGoogle={signInGoogle}
-          signInFacebook={userSignInFacebook}
           signOut={userSignOut}
           mobileSignInGoogle={mobileSignInGoogle}
           signed={signed}

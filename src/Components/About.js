@@ -28,8 +28,8 @@ export default function About() {
       <h1>Privacy Policy</h1>
       <h2>
         Authentication is used to identify users in order to prevent duplicated
-        rates and other issues. Posting and rating is anonymous and we won't
-        collect any of your personal information.
+        rates and other issues. Posting and rating is anonymous and we won't use
+        any of your personal information.
       </h2>
 
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved.</h5>

@@ -26,17 +26,19 @@ const MobileNav = styled.div`
     margin: 8px;
     justify-self: center;
   }
-
+  .headerRight {
+    display: flex;
+    align-items: center;
+  }
   .signinBtn {
     border: none;
     color: white;
     background-color: #aa8b66;
     border-radius: 3px;
     padding: 7px 14px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-right: 8px;
     font-size: 24px;
+    box-shadow: 2px 1px 5px #000000;
   }
   .openbtn {
     background: transparent;
@@ -44,6 +46,7 @@ const MobileNav = styled.div`
     font-size: 1.5em;
     color: #504538;
     padding: 10px;
+
     &:hover {
       opacity: 0.5;
     }
@@ -140,7 +143,7 @@ export default function NavBar({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   useEffect(() => {
-    setTimeout(() => setModalOpen(!signed), 5000);
+    setTimeout(() => setModalOpen(!signed), 3000);
   }, []); //a login hint when first open
   const handleClick = () => {
     if (signed) return signOut();
@@ -177,12 +180,14 @@ export default function NavBar({
           <NavLink to="/">
             <img src={icon} alt="home" className="icon" />
           </NavLink>
-          <button className="signinBtn" onClick={handleAuthMobile}>
-            {signed ? "Sign out" : "Sign in"}
-          </button>
-          <button className="openbtn" onClick={() => setDrawerOpen(true)}>
-            <GiHamburgerMenu />
-          </button>
+          <div className="headerRight">
+            <button className="signinBtn" onClick={handleAuthMobile}>
+              {signed ? "Sign out" : "Sign in"}
+            </button>
+            <button className="openbtn" onClick={() => setDrawerOpen(true)}>
+              <GiHamburgerMenu />
+            </button>
+          </div>
 
           <div className="drawerNav" onClick={() => setDrawerOpen(false)}>
             <a className="closebtn">Close</a>

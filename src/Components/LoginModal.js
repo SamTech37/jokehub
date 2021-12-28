@@ -102,8 +102,8 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
           <p className="caveats">
             Authentication is used to identify users and prevent other issues.
             Posting and rating is anonymous and
-            <span style={{ color: "tomato" }}> we won't collect</span> any of
-            your personal information.
+            <span style={{ color: "tomato" }}> we won't use</span> any of your
+            personal information.
           </p>
         </div>
       </div>

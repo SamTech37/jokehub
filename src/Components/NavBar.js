@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import icon from "../assets/icon.svg";
-
+import LoginModal from "./LoginModal";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
 
@@ -119,9 +119,10 @@ const Nav = styled.div`
 
 export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const handleAuth = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleClick = () => {
     if (signed) return signOut();
-    return signIn();
+    return setModalOpen(true);
   };
   const handleAuthMobile = () => {
     if (signed) return signOut();
@@ -139,8 +140,14 @@ export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/post">Post</Link>
-            <a onClick={handleAuth}>{signed ? "Logout" : "Login"}</a>
+            <a onClick={handleClick}>{signed ? "Logout" : "Login"}</a>
           </div>
+
+          <LoginModal
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            signIn={signIn}
+          ></LoginModal>
         </Nav>
       </BrowserView>
       <MobileView>

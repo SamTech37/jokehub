@@ -81,9 +81,12 @@ const Body = styled.div`
     line-height: 1.462;
   }
 `;
-export default function LoginModal({ modalOpen, setModalOpen, signIn }) {
+export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
   const handleGoogleAuth = () => {
-    signIn();
+    signInGoogle();
+    setModalOpen(false);
+  };
+  const handleFacebookAuth = () => {
     setModalOpen(false);
   };
   return (

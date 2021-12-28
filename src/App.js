@@ -117,16 +117,17 @@ function App() {
   }, []);
 
   //Auth
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [signed, setSigned] = useState(false);
 
-  const userSignIn = () => {
+  const signInGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).catch((error) => {
       alert("Login Failed, Please Try Again.");
     });
   };
-  const mobileUserSignIn = () => {
+  const userSignInFacebook = () => {};
+  const mobileSignInGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
   };
@@ -144,9 +145,10 @@ function App() {
     <Router>
       <Container>
         <NavBar
-          signIn={userSignIn}
+          signInGoogle={signInGoogle}
+          signInFacebook={userSignInFacebook}
           signOut={userSignOut}
-          mobileUserSignIn={mobileUserSignIn}
+          mobileSignInGoogle={mobileSignInGoogle}
           signed={signed}
         />
 

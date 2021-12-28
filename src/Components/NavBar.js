@@ -117,7 +117,12 @@ const Nav = styled.div`
   }
 `;
 
-export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
+export default function NavBar({
+  signInGoogle,
+  signOut,
+  mobileSignInGoogle,
+  signed,
+}) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const handleClick = () => {
@@ -126,7 +131,7 @@ export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
   };
   const handleAuthMobile = () => {
     if (signed) return signOut();
-    return mobileUserSignIn();
+    return mobileSignInGoogle();
   };
 
   return (
@@ -140,13 +145,13 @@ export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/post">Post</Link>
-            <a onClick={handleClick}>{signed ? "Logout" : "Login"}</a>
+            <a onClick={handleClick}>{signed ? "Sign out" : "Sign in"}</a>
           </div>
 
           <LoginModal
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
-            signIn={signIn}
+            signInGoogle={signInGoogle}
           ></LoginModal>
         </Nav>
       </BrowserView>
@@ -166,7 +171,9 @@ export default function NavBar({ signIn, signOut, mobileUserSignIn, signed }) {
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>
               <Link to="/post">Post</Link>
-              <a onClick={handleAuthMobile}>{signed ? "Logout" : "Login"}</a>
+              <a onClick={handleAuthMobile}>
+                {signed ? "Sign out" : "Sign in"}
+              </a>
             </div>
           </div>
         </MobileNav>

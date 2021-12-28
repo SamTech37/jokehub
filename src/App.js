@@ -38,6 +38,7 @@ function App() {
   //DB
   const [posts, setPosts] = useState([]);
   const [lastDoc, setLastDoc] = useState();
+  const [sortBy, setSortBy] = useState("time"); //rates,totalRating
   const batchSize = 5;
   const postsColletionRef = collection(db, "posts");
   const postJoke = async (newContent) => {
@@ -77,7 +78,11 @@ function App() {
     const newFields = { content: editContent };
     await updateDoc(jokeDoc, newFields);
   };
-
+  const inPost = async (id) => {
+    const docRef = doc(db, "posts", id);
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  };
   const getPosts = async () => {
     const q = query(
       postsColletionRef,
@@ -105,11 +110,7 @@ function App() {
       setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
     });
   };
-  const inPost = async (id) => {
-    const docRef = doc(db, "posts", id);
-    const docSnap = await getDoc(docRef);
-    return docSnap.data();
-  };
+
   //read data onMount
   useEffect(() => {
     getPosts();

@@ -21,8 +21,10 @@ export default function About() {
       <h2>It's made by a Taiwanese high school student just for fun.</h2>
       <h1>How to use this site?</h1>
       <h2>
-        Login with Google and post whatever joke you like and rate others'
-        jokes.
+        Once you've signed in, you can post and rate jokes. The authentication
+        is used to identify users in order to prevent duplicated rates and other
+        issues. Posting and rating is anonymous and we won't collect any of your
+        personal information.
       </h2>
 
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved.</h5>

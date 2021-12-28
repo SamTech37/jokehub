@@ -145,8 +145,8 @@ function App() {
       <Container>
         <NavBar
           signInGoogle={signInGoogle}
-          signOut={userSignOut}
           mobileSignInGoogle={mobileSignInGoogle}
+          signOut={userSignOut}
           signed={signed}
         />
 

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import icon from "../assets/icon.svg";
 import LoginModal from "./LoginModal";
+import { FcGoogle } from "react-icons/fc";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
 
@@ -116,7 +117,73 @@ const Nav = styled.div`
     }
   }
 `;
+const MobileModal = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  width: 100%;
+  height: ${(props) => (props.open ? "100%" : "0")};
+  position: fixed;
+  z-index: 500;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  background: #f2f2f2e6;
+  overflow-y: hidden;
+  transition: 0.5s;
+  .signin-btn {
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 60%;
+    height: 80px;
+    padding: 12px 16px 12px 16px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
 
+    font-size: 30px;
+    font-weight: 500;
+    color: #757575;
+    background-color: #f2f2f2;
+    &:hover {
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
+        0 0 0 3px #c8dafc;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    position: relative;
+    background-color: white;
+    border-radius: 1em;
+    padding: 20px;
+  }
+  .caveats {
+    font-size: 12px;
+    display: block; /* or inline-block */
+    width: 70%;
+    line-height: 1.142;
+  }
+  .dismissBtn {
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 1em;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  h2 {
+    font-weight: bold;
+    font-size: 24px;
+  }
+`;
 export default function NavBar({
   signInGoogle,
   signOut,
@@ -125,6 +192,9 @@ export default function NavBar({
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setModalOpen(true), 3000);
+  }, []); //a login hint when first open
   const handleClick = () => {
     if (signed) return signOut();
     return setModalOpen(true);
@@ -171,11 +241,32 @@ export default function NavBar({
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>
               <Link to="/post">Post</Link>
-              <a onClick={handleAuthMobile}>
+              <a onClick={() => setModalOpen(true)}>
                 {signed ? "Sign out" : "Sign in"}
               </a>
             </div>
           </div>
+          <MobileModal open={modalOpen}>
+            <div className="content">
+              <h2>Sign In To Enjoy Full Features</h2>
+              <button className="signin-btn">
+                <FcGoogle />
+                Sign in
+              </button>
+              <p className="caveats">
+                Authentication is used to identify users and prevent other
+                issues. Posting and rating is anonymous and
+                <span style={{ color: "tomato" }}> we won't collect</span> any
+                of your personal information.
+              </p>
+              <button
+                className="dismissBtn"
+                onClick={() => setModalOpen(false)}
+              >
+                Dismiss
+              </button>
+            </div>
+          </MobileModal>
         </MobileNav>
       </MobileView>
     </div>

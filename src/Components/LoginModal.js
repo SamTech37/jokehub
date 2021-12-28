@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 const Body = styled.div`
   .modal {
@@ -49,7 +48,7 @@ const Body = styled.div`
   .signin-btn {
     transition: background-color 0.3s, box-shadow 0.3s;
     width: 60%;
-    height: 60px;
+    height: 80px;
     padding: 12px 16px 12px 16px;
     margin-bottom: 15px;
     border: none;
@@ -58,7 +57,7 @@ const Body = styled.div`
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
     color: #757575;
     background-color: white;
@@ -95,9 +94,6 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
           </button>
           <h2>Sign in to Share and Rate jokes</h2>
 
-          <button className="signin-btn">
-            <FaFacebook style={{ color: "#3b5998" }} /> Sign in with Facebook
-          </button>
           <button className="signin-btn" onClick={handleGoogleAuth}>
             <FcGoogle />
             Sign in with Google

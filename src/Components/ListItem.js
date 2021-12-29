@@ -3,17 +3,24 @@ import styled from "styled-components";
 import Slider from "./Slider";
 import Spacer from "./Spacer";
 import Blob from "./Blob";
+import LinesEllipsis from "react-lines-ellipsis";
+import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
+const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 const Body = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 500px;
   padding: 0px 10vw;
-
-  h2 {
+  overflow: hidden;
+  p {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
-    font-size: 1.5em;
     font-weight: 500;
+  }
+  .content {
+    font-weight: 500;
+    white-space: pre-wrap;
+    font-size: 1.5em;
+    line-height: 1.5;
   }
   button {
     color: #ffab01;
@@ -21,11 +28,20 @@ const Body = styled.section`
     margin: 1em;
     margin-top: 3em;
     padding: 0.25em 1em;
+    box-shadow: 0 0 5px #dfe0df;
     border: 2px solid #ffab01;
     border-radius: 3px;
+    cursor: pointer;
     &:hover {
       opacity: 0.5;
     }
+  }
+  .toggler {
+    color: #099726;
+    border-radius: 1em;
+    font-size: 1.5rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .ratingSec {
     margin-top: 2em;
@@ -33,7 +49,7 @@ const Body = styled.section`
   }
   //responsive width and font size
   @media screen and (max-width: 450px) {
-    h2 {
+    .content {
       font-size: 5vw;
     }
     .btnGroup {
@@ -54,7 +70,7 @@ export default function ListItem({
   signed,
 }) {
   const [userRate, setUserRate] = useState(5);
-
+  const [folded, setFolded] = useState(true);
   //if user has rated, the button can't send rate
   const handleClick = () => {
     if (signed) {
@@ -66,25 +82,42 @@ export default function ListItem({
     navigator.clipboard.writeText(text);
     alert("URL copied!");
   };
-  if (signed) {
-    return (
-      <div>
-        <Spacer />
-        <Body>
-          <div>
-            <h2>{content}</h2>
 
+  return (
+    <div>
+      <Spacer />
+      <Body>
+        <div>
+          {folded ? (
+            <ResponsiveEllipsis
+              className="content"
+              text={content}
+              maxLine="10"
+              ellipsis={
+                <div className="toggler" onClick={() => setFolded(false)}>
+                  Read more
+                </div>
+              }
+              basedOn="words"
+            />
+          ) : (
+            <div>
+              <p className="content">{content}</p>
+              <div className="toggler" onClick={() => setFolded(true)}>
+                Read less
+              </div>
+            </div>
+          )}
+
+          <Blob>
+            <h1>
+              {rates !== 0 ? Math.round((totRating / rates) * 10) / 10 : "None"}
+            </h1>
+          </Blob>
+          <p>{`average out of ${rates} rates`}</p>
+
+          {signed && (
             <div className="ratingSec">
-              <Blob>
-                <h1>
-                  {rates !== 0
-                    ? Math.round((totRating / rates) * 10) / 10
-                    : "None"}
-                </h1>
-              </Blob>
-              <p
-                style={{ fontWeight: 500 }}
-              >{`average out of ${rates} rates`}</p>
               <Slider userRate={userRate} setUserRate={setUserRate} />
               <div className="btnGroup">
                 {ratedUsers.includes(user?.uid) ? (
@@ -97,23 +130,9 @@ export default function ListItem({
                 <button onClick={handleCopy}>Share</button>
               </div>
             </div>
-          </div>
-        </Body>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <Spacer />
-        <Body>
-          <h2>{content}</h2>
-          <Blob>
-            <h1>
-              {rates !== 0 ? Math.round((totRating / rates) * 10) / 10 : "None"}
-            </h1>
-          </Blob>
-        </Body>
-      </div>
-    );
-  }
+          )}
+        </div>
+      </Body>
+    </div>
+  );
 }

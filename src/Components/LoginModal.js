@@ -87,8 +87,11 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
   };
   return (
     <Body open={modalOpen}>
-      <div className="modal">
-        <div className="modal-content">
+      <div className="modal" onClick={() => setModalOpen(false)}>
+        <div
+          className="modal-content"
+          onClick={(event) => event.stopPropagation()}
+        >
           <button className="closebtn" onClick={() => setModalOpen(false)}>
             <IoMdClose />
           </button>

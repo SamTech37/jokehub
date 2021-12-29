@@ -8,14 +8,13 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   button {
-    background-color: orange;
     color: white;
-    font-size: 1.5em;
-
-    max-width: 15em;
-    width: 35%;
-    height: 2.5em;
-    border-radius: 1em;
+    background-color: orange;
+    border: 1px orange solid;
+    border-radius: 0.5rem;
+    padding: 10px 20px;
+    font-size: 2rem;
+    box-shadow: 0px 0px 5px #000000;
   }
   textarea {
     margin-top: 0.5em;

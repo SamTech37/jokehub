@@ -30,15 +30,16 @@ const MobileNav = styled.div`
     display: flex;
     align-items: center;
   }
-  .signinBtn {
+  .headerBtn {
     border: none;
     color: white;
     background-color: #aa8b66;
     border-radius: 3px;
     padding: 7px 14px;
     margin-right: 8px;
-    font-size: 24px;
+    font-size: 20px;
     box-shadow: 2px 1px 5px #000000;
+    text-decoration: none;
   }
   .openbtn {
     background: transparent;
@@ -100,6 +101,11 @@ const MobileNav = styled.div`
       font-size: 40px;
       top: 15px;
       right: 35px;
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .headerBtn {
+      font-size: 15px;
     }
   }
 `;
@@ -181,9 +187,12 @@ export default function NavBar({
             <img src={icon} alt="home" className="icon" />
           </NavLink>
           <div className="headerRight">
-            <button className="signinBtn" onClick={handleAuthMobile}>
-              {signed ? "Sign out" : "Sign in"}
+            <button className="headerBtn" onClick={handleAuthMobile}>
+              {signed ? "SignOut" : "SignIn"}
             </button>
+            <Link className="headerBtn" to="/post">
+              Post
+            </Link>
             <button className="openbtn" onClick={() => setDrawerOpen(true)}>
               <GiHamburgerMenu />
             </button>

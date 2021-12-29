@@ -25,6 +25,7 @@ export default function Post({ inPost, rateJoke, user, signed }) {
         user={user}
         signed={signed}
         rateJoke={rateJoke}
+        isList={false}
       ></ListItem>
     );
   } else {

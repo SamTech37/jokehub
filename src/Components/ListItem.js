@@ -11,6 +11,7 @@ const Body = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0px 10vw;
+  min-height: 500px;
   overflow: hidden;
   p {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
@@ -20,7 +21,7 @@ const Body = styled.section`
     font-weight: 500;
     white-space: pre-wrap;
     font-size: 1.5em;
-    line-height: 1.5;
+    line-height: 1.4;
   }
   button {
     color: #ffab01;
@@ -49,6 +50,9 @@ const Body = styled.section`
   }
   //responsive width and font size
   @media screen and (max-width: 450px) {
+    p {
+      font-size: 5vw;
+    }
     .content {
       font-size: 5vw;
     }
@@ -68,6 +72,7 @@ export default function ListItem({
   ratedUsers,
   user,
   signed,
+  isList,
 }) {
   const [userRate, setUserRate] = useState(5);
   const [folded, setFolded] = useState(true);
@@ -88,7 +93,7 @@ export default function ListItem({
       <Spacer />
       <Body>
         <div>
-          {folded ? (
+          {folded && isList ? ( //don't show ellipsis when inside a post
             <ResponsiveEllipsis
               className="content"
               text={content}
@@ -103,9 +108,11 @@ export default function ListItem({
           ) : (
             <div>
               <p className="content">{content}</p>
-              <div className="toggler" onClick={() => setFolded(true)}>
-                Read less
-              </div>
+              {isList && (
+                <div className="toggler" onClick={() => setFolded(true)}>
+                  Read less
+                </div>
+              )}
             </div>
           )}
 

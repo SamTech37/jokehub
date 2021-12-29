@@ -38,7 +38,7 @@ const Body = styled.section`
     }
   }
   .toggler {
-    color: #099726;
+    color: #ffab01;
     border-radius: 1em;
     font-size: 1.5rem;
     cursor: pointer;

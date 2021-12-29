@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 import blob from "../assets/blob.svg";
+import blob1 from "../assets/blob1.svg";
+import blob2 from "../assets/blob2.svg";
+import blob3 from "../assets/blob3.svg";
 const Body = styled.div`
   display: flex;
   height: 30vh;
@@ -9,7 +12,7 @@ const Body = styled.div`
   margin: 0;
   justify-content: center;
   align-items: center;
-  background-image: url(${blob});
+  background-image: url(${(props) => props.pat});
   background-repeat: no-repeat;
   background-position: center;
   @media screen and (max-width: 450px) {
@@ -18,5 +21,10 @@ const Body = styled.div`
   }
 `;
 export default function Blob(props) {
-  return <Body>{props.children}</Body>;
+  const patterns = [blob, blob1, blob2, blob3];
+  return (
+    <Body pat={patterns[Math.floor(Math.random() * patterns.length)]}>
+      {props.children}
+    </Body>
+  );
 }

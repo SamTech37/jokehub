@@ -93,6 +93,7 @@ export default function List({
             user={user}
             signed={signed}
             rateJoke={rateJoke}
+            isList={true}
           />
         );
       })}

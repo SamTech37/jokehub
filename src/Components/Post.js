@@ -25,7 +25,7 @@ export default function Post({ inPost, rateJoke, user, signed }) {
         user={user}
         signed={signed}
         rateJoke={rateJoke}
-        isList={false}
+        isList={false} //don't show the read more in here
       ></ListItem>
     );
   } else {

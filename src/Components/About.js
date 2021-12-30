@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const Body = styled.div`
   margin-right: 1em;
   margin-left: 1em;
@@ -31,7 +31,7 @@ export default function About() {
         rates and other issues. Posting and rating is anonymous and we won't use
         any of your personal information.
       </h2>
-
+      <Link to="/about/terms">Terms</Link>
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved.</h5>
     </Body>
   );

@@ -4,6 +4,8 @@ import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
+import UsersPosts from "./Components/UsersPosts";
+import Terms from "./Terms";
 import styled from "styled-components";
 //routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -169,9 +171,15 @@ function App() {
             path="/post"
             element={<PostingPage postJoke={postJoke} signed={signed} />}
           />
+          <Route path="/about/terms" element={<Terms />} />
+          <Route exact path="/about" element={<About />} />
 
-          <Route path="/about" element={<About />} />
-
+          <Route
+            path="yours"
+            element={
+              <UsersPosts getUsersPost={getUsersPost} editJoke={editJoke} />
+            }
+          />
           <Route
             path="/p/:postId"
             element={

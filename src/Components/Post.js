@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import ListItem from "./ListItem";
 import { useParams } from "react-router-dom";
 
@@ -7,12 +6,15 @@ export default function Post({ inPost, rateJoke, user, signed, deleteJoke }) {
   //fetch the joke by its ID here
   let { postId } = useParams();
   const [joke, setJoke] = useState();
-  useEffect(async () => {
-    try {
-      setJoke(await inPost(postId));
-    } catch (error) {
-      console.log("e");
+  useEffect(() => {
+    async function fetchPost() {
+      try {
+        setJoke(await inPost(postId));
+      } catch (error) {
+        alert("Loading faild, Please try again.");
+      }
     }
+    fetchPost();
   }, []);
   if (joke) {
     return (

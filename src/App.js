@@ -70,7 +70,7 @@ function App() {
   const deleteJoke = async (id) => {
     if (signed) {
       await deleteDoc(doc(db, "posts", id)).catch((error) =>
-        alert("Error deleting, Please Try Again.")
+        console.log(error)
       );
     } else {
       alert("Illegal Modification!");
@@ -110,9 +110,7 @@ function App() {
   };
 
   //read data onMount
-  useEffect(() => {
-    getPosts();
-  }, []);
+  useEffect(() => getPosts(), []);
 
   //Auth
   const [user, setUser] = useState();

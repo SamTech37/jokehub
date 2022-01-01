@@ -101,7 +101,7 @@ export default function List({
         );
       })}
       <FetchArea>
-        {posts.length == batchSize ? (
+        {posts.length === batchSize ? (
           <button onClick={handleNext}>Next</button>
         ) : (
           <button onClick={handleLast}>What's new!</button>

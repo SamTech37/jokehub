@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { BiTrash } from "react-icons/bi";
 import Slider from "./Slider";
 import Spacer from "./Spacer";
 import Blob from "./Blob";
+//ellispsis
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
 const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
+
 const Body = styled.section`
   position: relative;
   display: flex;
@@ -46,7 +49,15 @@ const Body = styled.section`
   }
   .ratingSec {
     margin-top: 2em;
-    display: block;
+  }
+
+  .modifyBtn {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 5vw;
+    font-size: 30px;
+    -webkit-tap-highlight-color: #ff6347bb;
   }
   //responsive width and font size
   @media screen and (max-width: 450px) {
@@ -68,7 +79,9 @@ export default function ListItem({
   rates,
   totRating,
   postId,
+  posterUid,
   rateJoke,
+  deleteJoke,
   ratedUsers,
   user,
   signed,
@@ -86,6 +99,10 @@ export default function ListItem({
     let text = "https://jokehub6969.web.app/p/" + postId;
     navigator.clipboard.writeText(text);
     alert("URL copied!");
+  };
+  const handleDelete = () => {
+    const flag = prompt("You sure? Type 'Yes' if you want to delete.", "bruh");
+    if (flag === "Yes") deleteJoke(postId);
   };
 
   return (
@@ -136,6 +153,11 @@ export default function ListItem({
                 )}
                 <button onClick={handleCopy}>Share</button>
               </div>
+              {user.uid === posterUid && (
+                <div className="modifyBtn">
+                  <BiTrash onClick={handleDelete} color="red" />
+                </div>
+              )}
             </div>
           )}
         </div>

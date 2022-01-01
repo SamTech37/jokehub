@@ -106,12 +106,73 @@ export default function ListItem({
     const flag = prompt("You sure? Type 'Yes' if you want to delete.", "bruh");
     if (flag === "Yes") deleteJoke(postId);
   };
+  if (signed) {
+    return (
+      <div>
+        <Spacer className="spacer" />
+        <Body>
+          <div>
+            {folded && isList ? ( //don't show ellipsis when inside a post
+              <ResponsiveEllipsis
+                className="content"
+                text={content}
+                maxLine="10"
+                ellipsis={
+                  <div className="toggler" onClick={() => setFolded(false)}>
+                    Read more
+                  </div>
+                }
+                basedOn="words"
+              />
+            ) : (
+              <div>
+                <p className="content">{content}</p>
+                {isList && (
+                  <div className="toggler" onClick={() => setFolded(true)}>
+                    Read less
+                  </div>
+                )}
+              </div>
+            )}
 
-  return (
-    <div>
-      <Spacer className="spacer" />
-      <Body>
-        <div>
+            <Blob>
+              <h1>
+                {rates !== 0
+                  ? Math.round((totRating / rates) * 10) / 10
+                  : "None"}
+              </h1>
+            </Blob>
+            <p>{`average out of ${rates} rates`}</p>
+
+            {signed && (
+              <div className="ratingSec">
+                <Slider userRate={userRate} setUserRate={setUserRate} />
+                <div className="btnGroup">
+                  {ratedUsers.includes(user?.uid) ? (
+                    <button onClick={() => alert("You've Rated This!")}>
+                      Rated
+                    </button>
+                  ) : (
+                    <button onClick={handleClick}>Rate</button>
+                  )}
+                  <button onClick={handleCopy}>Share</button>
+                </div>
+                {user.uid === posterUid && (
+                  <div className="modifyBtn">
+                    <BiTrash onClick={handleDelete} color="red" />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </Body>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Spacer className="spacer" />
+        <Body>
           {folded && isList ? ( //don't show ellipsis when inside a post
             <ResponsiveEllipsis
               className="content"
@@ -141,29 +202,8 @@ export default function ListItem({
             </h1>
           </Blob>
           <p>{`average out of ${rates} rates`}</p>
-
-          {signed && (
-            <div className="ratingSec">
-              <Slider userRate={userRate} setUserRate={setUserRate} />
-              <div className="btnGroup">
-                {ratedUsers.includes(user?.uid) ? (
-                  <button onClick={() => alert("You've Rated This!")}>
-                    Rated
-                  </button>
-                ) : (
-                  <button onClick={handleClick}>Rate</button>
-                )}
-                <button onClick={handleCopy}>Share</button>
-              </div>
-              {user.uid === posterUid && (
-                <div className="modifyBtn">
-                  <BiTrash onClick={handleDelete} color="red" />
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </Body>
-    </div>
-  );
+        </Body>
+      </div>
+    );
+  }
 }

@@ -71,7 +71,7 @@ function App() {
   const deleteJoke = async (id) => {
     if (signed) {
       await deleteDoc(doc(db, "posts", id)).catch((error) =>
-        console.log(error)
+        alert("Failed deleting, please try again.")
       );
     } else {
       alert("Illegal Modification!");
@@ -166,8 +166,8 @@ function App() {
   };
 
   onAuthStateChanged(auth, (currentUser) => {
+    setSigned(currentUser ? true : false);
     setUser(currentUser);
-    setSigned(user ? true : false);
   });
 
   return (

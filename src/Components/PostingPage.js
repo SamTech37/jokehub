@@ -87,7 +87,12 @@ export default function PostingPage({ postJoke, signed }) {
           }}
         />
         <p>{"word count " + newKeyword.length + "/20"}</p>
-        <input type="submit" value="Submit" className="submit" />
+        <input
+          type="submit"
+          value="Submit"
+          className="submit"
+          disabled={!signed}
+        />
       </form>
     </Body>
   );

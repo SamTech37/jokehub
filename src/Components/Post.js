@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
+import NoMatch from "./NoMatch";
 import { useParams } from "react-router-dom";
 
 export default function Post({ inPost, rateJoke, user, signed, deleteJoke }) {
@@ -16,7 +17,8 @@ export default function Post({ inPost, rateJoke, user, signed, deleteJoke }) {
     }
     fetchPost();
   }, []);
-  if (joke) {
+  if (joke === "empty") return <NoMatch />;
+  else if (joke) {
     return (
       <ListItem
         postId={joke.id}

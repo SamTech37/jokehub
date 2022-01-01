@@ -4,6 +4,7 @@ import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
+import NoMatch from "./Components/NoMatch";
 import Terms from "./Terms";
 import styled from "styled-components";
 //routing
@@ -77,9 +78,13 @@ function App() {
     }
   };
   const inPost = async (id) => {
-    const docRef = doc(db, "posts", id); //fetch only the post
+    const docRef = doc(db, "posts", id); //fetch only the post // deal with not existing doc
     const docSnap = await getDoc(docRef);
-    return docSnap.data();
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return "empty";
+    }
   };
   const getPosts = async () => {
     const q = query(
@@ -181,6 +186,7 @@ function App() {
               />
             }
           />
+          <Route path="*" element={<NoMatch />} />
         </Routes>
       </Container>
     </Router>
@@ -188,7 +194,7 @@ function App() {
 }
 
 const Container = styled.div`
-  height: 100%;
+  height: 100vh;
   background: #fff;
   font-family: Arial, Helvetica, sans-serif;
 `;

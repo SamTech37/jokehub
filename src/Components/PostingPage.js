@@ -57,11 +57,13 @@ export default function PostingPage({ postJoke, signed }) {
         type="text"
         placeholder="Write your joke here..."
         maxLength={maxLen}
+        autoFocus
         onChange={(event) => {
           setNewContent(event.target.value);
         }}
       />
       <p>{"word count " + newContent.length + "/" + maxLen}</p>
+      {/*<input type="text" placeholder="a keyword..." />*/}
       <button onClick={handleClick} disabled={!signed}>
         Send
       </button>

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import blob from "../assets/blob.svg";
-import blob1 from "../assets/blob1.svg";
 import blob2 from "../assets/blob2.svg";
 import blob3 from "../assets/blob3.svg";
 const Body = styled.div`
@@ -21,7 +20,7 @@ const Body = styled.div`
   }
 `;
 export default function Blob(props) {
-  const patterns = [blob, blob1, blob2, blob3];
+  const patterns = [blob, blob2, blob3];
   return (
     <Body pat={patterns[Math.floor(Math.random() * patterns.length)]}>
       {props.children}

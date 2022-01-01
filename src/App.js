@@ -5,7 +5,7 @@ import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
 import NoMatch from "./Components/NoMatch";
-import Terms from "./Terms";
+import Terms from "./Components/Terms";
 import styled from "styled-components";
 //routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

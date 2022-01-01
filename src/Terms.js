@@ -37,7 +37,6 @@ export default function Terms() {
         the course of usage of our resources. We reserve the rights to change
         prices and revise the resources usage policy in any moment.
       </p>
-
       <h1>License</h1>
       <p>
         JokeHub grants you a revocable, non-exclusive, non- transferable,
@@ -48,7 +47,6 @@ export default function Terms() {
         download, install and use the website strictly in accordance with the
         terms of this Agreement.
       </p>
-
       <h1>Definitions and key terms</h1>
       <p>For this Terms and Conditions: </p>
       <ul type="disc">
@@ -112,15 +110,14 @@ export default function Terms() {
         </li>
         <li>
           <strong>Website: </strong>
-          JokeHub’s site, which can be accessed via this URL: https:
-          //jokehub6969.web.app/.
+          JokeHub’s site, which can be accessed via this URL:
+          {" https://jokehub6969.web.app/"}.
         </li>
         <li>
           <strong>You: </strong>a person or entity that is registered with
           JokeHub to use the Services.
         </li>
       </ul>
-
       <h1>Restrictions</h1>
       <p>You agree not to, and you will not permit others to: </p>
       <ul type="disc">
@@ -139,21 +136,22 @@ export default function Terms() {
           or the licensors of the service.
         </li>
       </ul>
-
       <h1>User-Generated Contents</h1>
       <p>
         By submitting your joke to our website, you hereby represent and warrant
         that
-        <ul>
-          <li>
-            You own all rights including intellectual property rights in and to
-            your User Content,
-          </li>
-          <li>
-            You have permission from any person(s) appearing in your User
-            Content to grant the rights herein.
-          </li>
-        </ul>
+      </p>
+      <ul>
+        <li>
+          You own all rights including intellectual property rights in and to
+          your User Content,
+        </li>
+        <li>
+          You have permission from any person(s) appearing in your User Content
+          to grant the rights herein.
+        </li>
+      </ul>
+      <p>
         Thus JokeHub is not responsible for any kinds of violations that users
         may cause.
       </p>
@@ -167,7 +165,6 @@ export default function Terms() {
         any purpose and in any way without any credit or any compensation to
         you.
       </p>
-
       <h1>Your Consent</h1>
       <p>
         We've updated our Terms and Conditions to provide you with complete
@@ -175,7 +172,6 @@ export default function Terms() {
         being used. By using our service, registering an account, or making a
         purchase, you hereby consent to our Terms and Conditions.
       </p>
-
       <h1>Links to Other Websites</h1>
       <p>
         Our service may contain links to other websites that are not operated by
@@ -185,7 +181,6 @@ export default function Terms() {
         no responsibility for the content, Terms and Conditions or practices of
         any third party sites or services.
       </p>
-
       <h1>Cookies</h1>
       <p>
         We use "Cookies" to identify the areas of our website that you have
@@ -200,7 +195,6 @@ export default function Terms() {
         may not be able to access functionality on our website correctly or at
         all. We never place Personally Identifiable Information in Cookies.
       </p>
-
       <h1>Changes To Our Terms and Conditions</h1>
       <p>
         You acknowledge and agree that we may stop (permanently or temporarily)
@@ -214,14 +208,12 @@ export default function Terms() {
         Terms and Conditions, we will post those changes on this page, and/or
         update the Terms and Conditions modification date below.
       </p>
-
       <h1>Modifications to Our service</h1>
       <p>
         We reserve the right to modify, suspend or discontinue, temporarily or
         permanently, the service or any service to which it connects, with or
         without notice and without liability to you.
       </p>
-
       <h1>Updates to Our service</h1>
       <p>
         We may from time to time provide enhancements or improvements to the
@@ -234,7 +226,6 @@ export default function Terms() {
         Updates will be (i) deemed to constitute an integral part of the
         service, and (ii) subject to the terms and conditions of this Agreement.
       </p>
-
       <h1>Third-Party Services</h1>
       <p>
         We may display, include or make available third-party content (including
@@ -250,7 +241,6 @@ export default function Terms() {
         entirely at your own risk and subject to such third parties' terms and
         conditions.
       </p>
-
       <h1>Term and Termination</h1>
       <p>
         This Agreement shall remain in effect until terminated by you or us. We
@@ -266,7 +256,6 @@ export default function Terms() {
         you (during the term of this Agreement) of any of your obligations under
         the present Agreement.
       </p>
-
       <h1>Copyright Infringement Notice</h1>
       <p>
         If you are a copyright owner or such owner’s agent and believe any
@@ -281,7 +270,6 @@ export default function Terms() {
         notification is accurate, and, under penalty of perjury you are
         authorized to act on behalf of the owner.
       </p>
-
       <h1>Indemnification</h1>
       <p>
         You agree to indemnify and hold us and our parents, subsidiaries,
@@ -291,7 +279,6 @@ export default function Terms() {
         this Agreement or any law or regulation; or (c) violation of any right
         of a third party.
       </p>
-
       <h1>No Warranties</h1>
       <p>
         The service is provided to you "AS IS" and "AS AVAILABLE" and with all
@@ -325,7 +312,6 @@ export default function Terms() {
         of a consumer, so some or all of the above exclusions and limitations
         may not apply to you.
       </p>
-
       <h1>Limitation of Liability</h1>
       <p>
         Notwithstanding any damages that you might incur, the entire liability
@@ -345,7 +331,6 @@ export default function Terms() {
         not allow the exclusion or limitation of incidental or consequential
         damages, so the above limitation or exclusion may not apply to you.
       </p>
-
       <h1>Severability</h1>
       <p>
         If any provision of this Agreement is held to be unenforceable or
@@ -369,7 +354,6 @@ export default function Terms() {
         SERVICES MUST COMMENCE WITHIN ONE (1) YEAR AFTER THE CAUSE OF ACTION
         ACCRUES. OTHERWISE, SUCH CAUSE OF ACTION IS PERMANENTLY BARRED.
       </p>
-
       <h1>Waiver</h1>
       <p>
         Except as provided herein, the failure to exercise a right or to require
@@ -387,7 +371,6 @@ export default function Terms() {
         conflict between this Agreement and any applicable purchase or other
         terms, the terms of this Agreement shall govern.
       </p>
-
       <h1>Amendments to this Agreement</h1>
       <p>
         We reserve the right, at its sole discretion, to modify or replace this
@@ -398,7 +381,6 @@ export default function Terms() {
         effective, you agree to be bound by the revised terms. If you do not
         agree to the new terms, you are no longer authorized to use our service.
       </p>
-
       <h1>Entire Agreement</h1>
       <p>
         The Agreement constitutes the entire agreement between you and us
@@ -408,7 +390,6 @@ export default function Terms() {
         purchase other services from us, which we will provide to you at the
         time of such use or purchase.
       </p>
-
       <h1>Updates to Our Terms</h1>
       <p>
         We may change our Service and policies, and we may need to make changes
@@ -420,7 +401,6 @@ export default function Terms() {
         you do not want to agree to these or any updated Terms, you can delete
         your account.
       </p>
-
       <h1>Intellectual Property</h1>
       <p>
         Our platform and its entire contents, features and functionality
@@ -435,7 +415,6 @@ export default function Terms() {
         is expressly provided in these Terms and Conditions. Any unauthorized
         use of the material is prohibited.
       </p>
-
       <h1>Agreement to Arbitrate</h1>
       <p>
         This section applies to any dispute EXCEPT IT DOESN’T INCLUDE A DISPUTE
@@ -447,7 +426,6 @@ export default function Terms() {
         legal or equitable basis. “Dispute” will be given the broadest possible
         meaning allowable under law.
       </p>
-
       <h1>Notice of Dispute</h1>
       <p>
         In the event of a dispute, you or us must give the other a Notice of
@@ -460,7 +438,6 @@ export default function Terms() {
         negotiation within sixty (60) days from the date the Notice of Dispute
         is sent. After sixty (60) days, you or us may commence arbitration.
       </p>
-
       <h1>Binding Arbitration</h1>
       <p>
         If you and us don’t resolve any dispute by informal negotiation, any
@@ -476,7 +453,6 @@ export default function Terms() {
         and other costs, fees, and expenses incurred by the prevailing party
         shall be borne by the non-prevailing party.
       </p>
-
       <h1>Submissions and Privacy</h1>
       <p>
         In the event that you submit or post any ideas, creative suggestions,
@@ -491,7 +467,6 @@ export default function Terms() {
         medium in perpetuity, including, but not limited to, developing,
         manufacturing, and marketing products and services using such ideas.
       </p>
-
       <h1>Promotions</h1>
       <p>
         We may, from time to time, include contests, promotions, sweepstakes, or
@@ -506,7 +481,6 @@ export default function Terms() {
         through the Services, which terms and conditions are made a part of this
         Agreement by this reference.
       </p>
-
       <h1>Typographical Errors</h1>
       <p>
         In the event a product and/or service is listed at an incorrect price or
@@ -519,7 +493,6 @@ export default function Terms() {
         a credit to your credit card account or other payment account in the
         amount of the charge.
       </p>
-
       <h1>Miscellaneous</h1>
       <p>
         If for any reason a court of competent jurisdiction finds any provision
@@ -543,7 +516,6 @@ export default function Terms() {
         headings used in this Agreement are for convenience only and will not be
         given any legal import.
       </p>
-
       <h1>Disclaimer</h1>
       <p>
         We are not responsible for any content, code or any other imprecision.
@@ -576,7 +548,6 @@ export default function Terms() {
         that our Service will be uninterrupted, uncorrupted, timely, or
         error-free.
       </p>
-
       <h1>Contact Us</h1>
       <p>Don't hesitate to contact us if you have any questions.</p>
       <p>Via Email: samkondori@gmail.com</p>

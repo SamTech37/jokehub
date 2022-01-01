@@ -51,9 +51,9 @@ export default function PostingPage({ postJoke, signed }) {
   const maxLen = 1500;
   let navigate = useNavigate();
   const handleClick = () => {
-    if (newContent == "") {
+    if (newContent === "") {
       alert("Can't post nothing!");
-    } else if (newKeyword == "") {
+    } else if (newKeyword === "") {
       alert("Please fill in a keyword!");
     } else {
       postJoke(newContent, newKeyword);

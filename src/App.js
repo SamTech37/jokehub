@@ -4,7 +4,6 @@ import List from "./Components/List";
 import About from "./Components/About";
 import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
-import UsersPosts from "./Components/UsersPosts";
 import Terms from "./Terms";
 import styled from "styled-components";
 //routing
@@ -26,6 +25,7 @@ import {
   increment,
   startAfter,
   getDoc,
+  deleteDoc,
 } from "firebase/firestore";
 //auth
 import {
@@ -67,21 +67,17 @@ function App() {
     });
   };
 
-  const getUsersPost = async (uid) => {
-    const q = query(
-      postsColletionRef,
-      where("posterUid", "==", uid),
-      orderBy("time", "desc")
-    );
-  };
-
-  const editJoke = async (id, editContent) => {
-    const jokeDoc = doc(db, "posts", id);
-    const newFields = { content: editContent };
-    await updateDoc(jokeDoc, newFields);
+  const deleteJoke = async (id) => {
+    if (signed) {
+      await deleteDoc(doc(db, "posts", id)).catch((error) =>
+        alert("Error deleting, Please Try Again.")
+      );
+    } else {
+      alert("Illegal Modification!");
+    }
   };
   const inPost = async (id) => {
-    const docRef = doc(db, "posts", id);
+    const docRef = doc(db, "posts", id); //fetch only the post
     const docSnap = await getDoc(docRef);
     return docSnap.data();
   };
@@ -159,6 +155,7 @@ function App() {
               <List
                 posts={posts}
                 rateJoke={rateJoke}
+                deleteJoke={deleteJoke}
                 nextBatch={nextBatch}
                 getPosts={getPosts}
                 user={user}
@@ -175,15 +172,10 @@ function App() {
           <Route exact path="/about" element={<About />} />
 
           <Route
-            path="yours"
-            element={
-              <UsersPosts getUsersPost={getUsersPost} editJoke={editJoke} />
-            }
-          />
-          <Route
             path="/p/:postId"
             element={
               <Post
+                deleteJoke={deleteJoke}
                 inPost={inPost}
                 rateJoke={rateJoke}
                 user={user}

@@ -60,6 +60,7 @@ export default function List({
   batchSize,
   user,
   signed,
+  deleteJoke,
 }) {
   const backToTop = () => {
     window.scrollTo({
@@ -86,6 +87,7 @@ export default function List({
           <ListItem
             key={post.id}
             postId={post.id}
+            posterUid={post.posterUid}
             content={post.content}
             rates={post.rates}
             totRating={post.totalRating}
@@ -93,6 +95,7 @@ export default function List({
             user={user}
             signed={signed}
             rateJoke={rateJoke}
+            deleteJoke={deleteJoke}
             isList={true}
           />
         );

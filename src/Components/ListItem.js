@@ -13,7 +13,7 @@ const Body = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0px 10vw;
+  padding: 0 10vw;
   min-height: 500px;
   overflow: hidden;
   p {
@@ -50,12 +50,11 @@ const Body = styled.section`
   .ratingSec {
     margin-top: 2em;
   }
-
   .modifyBtn {
     cursor: pointer;
     position: absolute;
     top: 0;
-    right: 5vw;
+    right: 2.5vw;
     font-size: 30px;
     -webkit-tap-highlight-color: #ff6347bb;
   }
@@ -70,6 +69,9 @@ const Body = styled.section`
     .btnGroup {
       display: flex;
       justify-content: center;
+    }
+    .modifyBtn {
+      font-size: 20px;
     }
   }
 `;
@@ -107,7 +109,7 @@ export default function ListItem({
 
   return (
     <div>
-      <Spacer />
+      <Spacer className="spacer" />
       <Body>
         <div>
           {folded && isList ? ( //don't show ellipsis when inside a post

@@ -20,9 +20,7 @@ const MobileNav = styled.div`
     -webkit-tap-highlight-color: #fdfd6688;
   }
   img {
-    width: 30vw;
-    min-width: 80px;
-
+    width: 100px;
     margin: 8px;
     justify-self: center;
   }
@@ -56,8 +54,10 @@ const MobileNav = styled.div`
     position: absolute;
     top: 20px;
     right: 45px;
-    font-size: 60px;
+    font-size: 30px;
     color: white;
+    background-color: transparent;
+    border: none;
   }
 
   .drawerNav {
@@ -117,9 +117,8 @@ const Nav = styled.div`
   flex-direction: row;
   font-weight: 500;
   img {
-    max-width: 12em;
-    min-width: 5em;
-    height: 3em;
+    width: 200px;
+    height: 60px;
     margin-left: 1em;
     margin-top: 1em;
     justify-self: center;
@@ -199,7 +198,7 @@ export default function NavBar({
           </div>
 
           <div className="drawerNav" onClick={() => setDrawerOpen(false)}>
-            <a className="closebtn">Close</a>
+            <button className="closebtn">Close</button>
             <div className="drawerNav-content">
               <Link to="/">Home</Link>
               <Link to="/about">About</Link>

@@ -41,14 +41,14 @@ function App() {
   //DB
   const [posts, setPosts] = useState([]);
   const [lastDoc, setLastDoc] = useState();
-  const [sortBy, setSortBy] = useState("time"); //rates,totalRating
   const batchSize = 5;
   const postsColletionRef = collection(db, "posts");
-  const postJoke = async (newContent) => {
+  const postJoke = async (newContent, newKeyword) => {
     //write data
     try {
       await addDoc(postsColletionRef, {
         content: newContent,
+        keyword: newKeyword,
         time: serverTimestamp(),
         posterUid: user.uid,
         rates: Number(0),

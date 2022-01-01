@@ -8,6 +8,7 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   button {
+    margin-top: 0.5em;
     color: white;
     background-color: orange;
     border: 1px orange solid;
@@ -22,15 +23,22 @@ const Body = styled.div`
     padding: 0.5em;
     border-width: 0.1em;
     border-radius: 0.5em;
-    height: 20em;
-    max-width: 60em;
+    height: 60vh;
+    width: 70vw;
+  }
+  input {
+    font-size: 1em;
+    padding: 0.5em;
+    border-width: 0.1em;
+    border-radius: 0.5em;
+
     width: 70%;
   }
   p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    max-width: 60em;
     width: 70%;
+    font-size: 16px;
   }
   h2 {
     margin-top: 0.5em;
@@ -39,20 +47,23 @@ const Body = styled.div`
 `;
 export default function PostingPage({ postJoke, signed }) {
   const [newContent, setNewContent] = useState("");
+  const [newKeyword, setNewKeyword] = useState("");
   const maxLen = 1500;
   let navigate = useNavigate();
   const handleClick = () => {
-    if (newContent !== "") {
-      postJoke(newContent);
+    if (newContent == "") {
+      alert("Can't post nothing!");
+    } else if (newKeyword == "") {
+      alert("Please fill in a keyword!");
+    } else {
+      postJoke(newContent, newKeyword);
       alert("Post succeed!");
       navigate("/");
-    } else {
-      alert("Can't post nothing!");
     }
   };
   return (
     <Body>
-      {!signed && <h2>Please Login First!</h2>}
+      {!signed && <h2>Please Login with Google First!</h2>}
       <textarea
         type="text"
         placeholder="Write your joke here..."
@@ -63,7 +74,16 @@ export default function PostingPage({ postJoke, signed }) {
         }}
       />
       <p>{"word count " + newContent.length + "/" + maxLen}</p>
-      {/*<input type="text" placeholder="a keyword..." />*/}
+      <input
+        type="text"
+        placeholder="a keyword, genre, whatsoever..."
+        maxLength="20"
+        onChange={(event) => {
+          setNewKeyword(event.target.value);
+        }}
+      />
+      <p>{"word count " + newKeyword.length + "/20"}</p>
+
       <button onClick={handleClick} disabled={!signed}>
         Send
       </button>

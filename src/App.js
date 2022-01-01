@@ -86,36 +86,65 @@ function App() {
       return "empty";
     }
   };
-  const getPosts = async () => {
-    const q = query(
-      postsColletionRef,
-      orderBy("time", "desc"),
-      limit(batchSize)
-    );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setPosts(
-        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+  const getPosts = async (keyword) => {
+    if (keyword) {
+      //keyword is lowercased for sake of convenience
+      const q = query(
+        postsColletionRef,
+        where("keyword", "==", keyword), // where clause first
+        orderBy("time", "desc"),
+        limit(batchSize)
       );
-      setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
-    });
-  };
-  const nextBatch = async () => {
-    const next = query(
-      postsColletionRef,
-      orderBy("time", "desc"),
-      startAfter(lastDoc),
-      limit(batchSize)
-    );
-    const unsubscribe = onSnapshot(next, (querySnapshot) => {
-      setPosts(
-        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        setPosts(
+          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
+      });
+    } else {
+      const q = query(
+        postsColletionRef,
+        orderBy("time", "desc"),
+        limit(batchSize)
       );
-      setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
-    });
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        setPosts(
+          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
+      });
+    }
   };
-
-  //read data onMount
-  useEffect(() => getPosts(), []);
+  const nextBatch = async (keyword) => {
+    if (keyword) {
+      const next = query(
+        postsColletionRef,
+        where("keyword", "==", keyword), // where clause first
+        orderBy("time", "desc"),
+        startAfter(lastDoc),
+        limit(batchSize)
+      );
+      const unsubscribe = onSnapshot(next, (querySnapshot) => {
+        setPosts(
+          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
+      });
+    } else {
+      const next = query(
+        postsColletionRef,
+        orderBy("time", "desc"),
+        startAfter(lastDoc),
+        limit(batchSize)
+      );
+      const unsubscribe = onSnapshot(next, (querySnapshot) => {
+        setPosts(
+          querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]); // last doc
+      });
+    }
+  };
 
   //Auth
   const [user, setUser] = useState();

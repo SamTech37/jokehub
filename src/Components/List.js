@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ListItem from "./ListItem";
 import { ImArrowUp2 } from "react-icons/im";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const BackToTop = styled.button`
   z-index: 50;
@@ -52,6 +53,31 @@ const FetchArea = styled.div`
     }
   }
 `;
+const Search = styled.form`
+  display: flex;
+  input {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196f3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+    &:hover {
+      background: #0b7dda;
+    }
+  }
+`;
 export default function List({
   posts,
   rateJoke,
@@ -75,10 +101,24 @@ export default function List({
   const handleLast = () => {
     backToTop();
     getPosts();
+    navigate("/");
   };
-
+  let navigate = useNavigate();
+  let [params, setParams] = useSearchParams();
+  let keyword = params.get("keyword");
+  //read data onMount
+  useEffect(() => getPosts(keyword.toLocaleLowerCase()), []);
   return (
     <div>
+      <Search>
+        <input
+          type="text"
+          placeholder="Search keyword..."
+          name="keyword"
+          required
+        />
+        <button type="submit">🔍</button>
+      </Search>
       <BackToTop onClick={backToTop}>
         <ImArrowUp2 />
       </BackToTop>

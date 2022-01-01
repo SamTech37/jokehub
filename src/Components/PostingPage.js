@@ -56,7 +56,7 @@ export default function PostingPage({ postJoke, signed }) {
     } else if (newKeyword === "") {
       alert("Please fill in a keyword!");
     } else {
-      postJoke(newContent, newKeyword);
+      postJoke(newContent, newKeyword.toLowerCase());
       alert("Post succeed!");
       navigate("/");
     }

@@ -19,13 +19,20 @@ const Body = styled.div`
   }
   .submit {
     margin-top: 0.5em;
+    margin-bottom: 1em;
     color: white;
-    background-color: orange;
+    background-color: #ffab01;
     border: 1px orange solid;
     border-radius: 0.5rem;
     padding: 10px 20px;
     font-size: 2rem;
     box-shadow: 0px 0px 5px #000000;
+    cursor: pointer;
+    transition: 400ms, ease-in;
+    &:hover {
+      background-color: #c58300;
+      box-shadow: 0 0 5px #c58300, 0 0 25px #c58300;
+    }
   }
   .keyword {
     font-size: 1em;

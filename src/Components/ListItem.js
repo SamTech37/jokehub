@@ -14,11 +14,15 @@ const Body = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0 10vw;
-  min-height: 500px;
+  min-height: 550px;
   overflow: hidden;
   p {
     white-space: pre-wrap; //line breaking, mutiple spaces , etc.
     font-weight: 500;
+  }
+  .keywordAnc {
+    text-decoration: none;
+    color: #00dd93;
   }
   .content {
     font-weight: 500;
@@ -63,6 +67,9 @@ const Body = styled.section`
     p {
       font-size: 5vw;
     }
+    .keywordAnc {
+      font-size: 5vw;
+    }
     .content {
       font-size: 5vw;
     }
@@ -82,6 +89,7 @@ export default function ListItem({
   totRating,
   postId,
   posterUid,
+  keyword,
   rateJoke,
   deleteJoke,
   ratedUsers,
@@ -111,6 +119,9 @@ export default function ListItem({
       <div>
         <Spacer className="spacer" />
         <Body>
+          <a href={`/?keyword=${keyword}`} className="keywordAnc">
+            {"#" + keyword}
+          </a>
           <div>
             {folded && isList ? ( //don't show ellipsis when inside a post
               <ResponsiveEllipsis

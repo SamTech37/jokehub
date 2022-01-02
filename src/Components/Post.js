@@ -27,6 +27,7 @@ export default function Post({ inPost, rateJoke, user, signed, deleteJoke }) {
         rates={joke.rates}
         totRating={joke.totalRating}
         ratedUsers={joke.ratedUsers}
+        keyword={joke.keyword}
         user={user}
         signed={signed}
         rateJoke={rateJoke}

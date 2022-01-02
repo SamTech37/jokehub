@@ -135,6 +135,7 @@ export default function List({
             rates={post.rates}
             totRating={post.totalRating}
             ratedUsers={post.ratedUsers}
+            keyword={post.keyword}
             user={user}
             signed={signed}
             rateJoke={rateJoke}

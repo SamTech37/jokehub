@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Body = styled.div`
-  min-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +32,10 @@ const Body = styled.div`
       background-color: #c58300;
       box-shadow: 0 0 5px #c58300, 0 0 25px #c58300;
     }
+    &:disabled {
+      background-color: #757575;
+      cursor: unset;
+    }
   }
   .keyword {
     font-size: 1em;
@@ -43,12 +46,13 @@ const Body = styled.div`
     width: 70vw;
   }
   form {
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
   }
   p {
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     width: 70%;
     font-size: 16px;
   }
@@ -60,10 +64,15 @@ const Body = styled.div`
 export default function PostingPage({ postJoke, signed }) {
   const [newContent, setNewContent] = useState("");
   const [newKeyword, setNewKeyword] = useState("");
+  const [newLanguage, setNewLanguage] = useState("English");
   const maxLen = 1500;
   let navigate = useNavigate();
   const handleSubmit = () => {
-    postJoke(newContent, newKeyword.toLowerCase());
+    postJoke(
+      newContent,
+      newKeyword.toLowerCase().replaceAll(" ", ""), //remove blanks, lowercased for better search
+      newLanguage
+    );
     alert("Post succeed!");
     navigate("/");
   };
@@ -81,6 +90,7 @@ export default function PostingPage({ postJoke, signed }) {
           onChange={(event) => {
             setNewContent(event.target.value);
           }}
+          value={newContent}
         />
         <p>{"word count " + newContent.length + "/" + maxLen}</p>
         <input
@@ -92,8 +102,21 @@ export default function PostingPage({ postJoke, signed }) {
           onChange={(event) => {
             setNewKeyword(event.target.value);
           }}
+          value={newKeyword}
         />
         <p>{"word count " + newKeyword.length + "/20"}</p>
+        <label>{"Language of the joke"}</label>
+        <select
+          name="language"
+          required
+          value={newLanguage}
+          onChange={(event) => {
+            setNewLanguage(event.target.value);
+          }}
+        >
+          <option>English</option>
+          <option>中文</option>
+        </select>
         <input
           type="submit"
           value="Submit"

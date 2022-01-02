@@ -107,7 +107,10 @@ export default function List({
   let [params, setParams] = useSearchParams();
   let keyword = params.get("keyword");
   //read data onMount
-  useEffect(() => getPosts(keyword?.toLocaleLowerCase()), []); //aware of null
+  useEffect(
+    () => getPosts(keyword?.toLocaleLowerCase().replaceAll(" ", "")),
+    []
+  ); //aware of null //remove blanks, lowercased for better search
   return (
     <div>
       <Search>

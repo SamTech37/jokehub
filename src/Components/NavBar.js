@@ -147,9 +147,7 @@ export default function NavBar({
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  useEffect(() => {
-    setTimeout(() => setModalOpen(!signed), 3000);
-  }, []); //a login hint when first open
+
   const handleClick = () => {
     if (signed) return signOut();
     return setModalOpen(true);

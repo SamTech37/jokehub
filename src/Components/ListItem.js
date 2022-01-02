@@ -155,7 +155,7 @@ export default function ListItem({
             </Blob>
             <p>{`average out of ${rates} rates`}</p>
 
-            {signed && (
+            {user && (
               <div className="ratingSec">
                 <Slider userRate={userRate} setUserRate={setUserRate} />
                 <div className="btnGroup">
@@ -184,6 +184,9 @@ export default function ListItem({
       <div>
         <Spacer className="spacer" />
         <Body>
+          <a href={`/?keyword=${keyword}`} className="keywordAnc">
+            {"#" + keyword}
+          </a>
           {folded && isList ? ( //don't show ellipsis when inside a post
             <ResponsiveEllipsis
               className="content"

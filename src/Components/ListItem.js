@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { BiTrash } from "react-icons/bi";
 import Slider from "./Slider";
 import Spacer from "./Spacer";
-import Blob from "./Blob";
+
+import blob from "../assets/blob.svg";
+import blob2 from "../assets/blob2.svg";
+import blob3 from "../assets/blob3.svg";
 //ellispsis
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
@@ -82,7 +85,21 @@ const Body = styled.section`
     }
   }
 `;
-
+const Blob = styled.div`
+  display: flex;
+  height: 30vh;
+  width: 30vw;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${(props) => props.pat});
+  background-repeat: no-repeat;
+  background-position: center;
+  @media screen and (max-width: 450px) {
+    height: 20vh;
+    width: 60%;
+  }
+`;
 export default function ListItem({
   content,
   rates,
@@ -99,7 +116,13 @@ export default function ListItem({
 }) {
   const [userRate, setUserRate] = useState(5);
   const [folded, setFolded] = useState(true);
+
   //if user has rated, the button can't send rate
+
+  const patterns = [blob, blob2, blob3];
+  const [pattern, setPattern] = useState(
+    patterns[Math.floor(Math.random() * patterns.length)]
+  );
   const handleClick = () => {
     if (signed) {
       rateJoke(postId, userRate);
@@ -146,7 +169,7 @@ export default function ListItem({
               </div>
             )}
 
-            <Blob>
+            <Blob pat={pattern}>
               <h1>
                 {rates !== 0
                   ? Math.round((totRating / rates) * 10) / 10
@@ -210,7 +233,7 @@ export default function ListItem({
             </div>
           )}
 
-          <Blob>
+          <Blob pat={pattern}>
             <h1>
               {rates !== 0 ? Math.round((totRating / rates) * 10) / 10 : "None"}
             </h1>

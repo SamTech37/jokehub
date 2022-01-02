@@ -20,7 +20,6 @@ const MobileNav = styled.div`
     -webkit-tap-highlight-color: #fdfd6688;
   }
   img {
-    width: 100px;
     margin: 8px;
     justify-self: center;
   }
@@ -117,8 +116,6 @@ const Nav = styled.div`
   flex-direction: row;
   font-weight: 500;
   img {
-    width: 200px;
-    height: 60px;
     margin-left: 1em;
     margin-top: 1em;
     justify-self: center;
@@ -162,7 +159,7 @@ export default function NavBar({
       <BrowserView>
         <Nav>
           <NavLink to="/">
-            <img src={icon} alt="home" />
+            <img src={icon} alt="home" width={"200px"} height={" 60px"} />
           </NavLink>
           <div className="NavContent">
             <Link to="/">Home</Link>
@@ -181,7 +178,13 @@ export default function NavBar({
       <MobileView>
         <MobileNav open={drawerOpen}>
           <NavLink to="/">
-            <img src={icon} alt="home" className="icon" />
+            <img
+              src={icon}
+              alt="home"
+              className="icon"
+              width={"100px"}
+              height={"30px"}
+            />
           </NavLink>
           <div className="headerRight">
             <button className="headerBtn" onClick={handleAuthMobile}>
@@ -190,7 +193,11 @@ export default function NavBar({
             <Link className="headerBtn" to="/post">
               Post
             </Link>
-            <button className="openbtn" onClick={() => setDrawerOpen(true)}>
+            <button
+              className="openbtn"
+              onClick={() => setDrawerOpen(true)}
+              aria-label="open nav menu"
+            >
               <GiHamburgerMenu />
             </button>
           </div>

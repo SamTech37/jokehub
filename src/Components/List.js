@@ -122,7 +122,7 @@ export default function List({
         />
         <button type="submit">🔍</button>
       </Search>
-      <BackToTop onClick={backToTop}>
+      <BackToTop onClick={backToTop} aria-label="back to top">
         <ImArrowUp2 />
       </BackToTop>
       {posts.map((post) => {

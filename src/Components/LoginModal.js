@@ -112,16 +112,12 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
           </button>
           {language === "中文" ? (
             <p className="caveats">
-              登入與驗證是用來識別使用者， 發布還有評分笑話仍是匿名的。
-              <span style={{ color: "tomato" }}>我們不會使用</span>
-              任何您的個人資料
+              登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。
             </p>
           ) : (
             <p className="caveats">
               Authentication is used to identify users and prevent other issues.
-              Posting and rating is anonymous and
-              <span style={{ color: "tomato" }}> we won't use</span> any of your
-              personal information.
+              Posting and rating is still anonymous.
             </p>
           )}
         </div>

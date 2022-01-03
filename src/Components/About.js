@@ -26,9 +26,7 @@ export default function About() {
       <h2>用Google登入之後就可以發布笑話還有給分;沒有登入也可以瀏覽笑話。</h2>
 
       <h1>隱私政策</h1>
-      <h2>
-        登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。我們不會使用任何您的個人資料。
-      </h2>
+      <h2>登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。</h2>
       <Link to="/about/terms">服務條款</Link>
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved. 版權所有©</h5>
     </Body>
@@ -50,8 +48,7 @@ export default function About() {
       <h1>Privacy Policy</h1>
       <h2>
         Authentication is used to identify users in order to prevent duplicated
-        rates and other issues. Posting and rating is anonymous and we won't use
-        any of your personal information.
+        rates and other issues. Posting and rating is still anonymous.
       </h2>
       <Link to="/about/terms">Terms</Link>
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved.</h5>

@@ -78,12 +78,11 @@ function App() {
     }
   };
   const inPost = async (id) => {
-    const docRef = doc(db, "posts", id); //fetch only the post // deal with not existing doc
-    const docSnap = await getDoc(docRef);
+    const jokeRef = doc(db, "posts", id);
+    const docSnap = await getDoc(jokeRef);
     if (docSnap.exists()) {
-      return { ...docSnap.data(), id: docSnap.id }; //make sure to get the id
+      console.log(docSnap);
     } else {
-      return "empty";
     }
   };
   const getPosts = async (keyword) => {
@@ -186,13 +185,24 @@ function App() {
             element={
               <List
                 posts={posts}
+                user={user}
+                batchSize={batchSize}
                 rateJoke={rateJoke}
                 deleteJoke={deleteJoke}
                 nextBatch={nextBatch}
                 getPosts={getPosts}
+              />
+            }
+          />
+
+          <Route
+            path="/p/:postId"
+            element={
+              <Post
+                deleteJoke={deleteJoke}
+                inPost={inPost}
+                rateJoke={rateJoke}
                 user={user}
-                signed={signed}
-                batchSize={batchSize}
               />
             }
           />
@@ -203,18 +213,6 @@ function App() {
           <Route path="/about/terms" element={<Terms />} />
           <Route exact path="/about" element={<About />} />
 
-          <Route
-            path="/p/:postId"
-            element={
-              <Post
-                deleteJoke={deleteJoke}
-                inPost={inPost}
-                rateJoke={rateJoke}
-                user={user}
-                signed={signed}
-              />
-            }
-          />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Container>

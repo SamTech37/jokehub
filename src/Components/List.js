@@ -85,7 +85,6 @@ export default function List({
   getPosts,
   batchSize,
   user,
-  signed,
   deleteJoke,
 }) {
   const backToTop = () => {
@@ -137,7 +136,6 @@ export default function List({
             ratedUsers={post.ratedUsers}
             keyword={post.keyword}
             user={user}
-            signed={signed}
             rateJoke={rateJoke}
             deleteJoke={deleteJoke}
             isList={true}

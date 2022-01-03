@@ -40,16 +40,19 @@ const FetchArea = styled.div`
   margin-left: 1em;
   margin-right: 1em;
   button {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    color: white;
     background-color: #ffab01;
-    border: 2px solid #ffab01;
-    color: #fff;
-    font-size: 2em;
-    margin: 1em;
-    padding: 0.25em 1em;
-
-    border-radius: 1em;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 10px 20px;
+    font-size: 2rem;
+    box-shadow: 0px 0px 5px #000000;
+    cursor: pointer;
     &:hover {
-      opacity: 0.5;
+      background-color: #c58300;
+      box-shadow: 0 0 5px #c58300;
     }
   }
 `;

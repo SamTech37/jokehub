@@ -21,7 +21,7 @@ const Body = styled.div`
     margin-bottom: 1em;
     color: white;
     background-color: #ffab01;
-    border: 1px orange solid;
+    border: none;
     border-radius: 0.5rem;
     padding: 10px 20px;
     font-size: 2rem;
@@ -35,6 +35,7 @@ const Body = styled.div`
     &:disabled {
       background-color: #757575;
       cursor: unset;
+      box-shadow: unset;
     }
   }
   .keyword {

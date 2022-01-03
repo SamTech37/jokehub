@@ -48,9 +48,9 @@ const Body = styled.section`
     }
   }
   .toggler {
-    color: #ffab01;
+    color: #00dd93;
     border-radius: 1em;
-    font-size: 1.5rem;
+    font-size: 16px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }

@@ -6,6 +6,7 @@ import Post from "./Components/Post";
 import PostingPage from "./Components/PostingPage";
 import NoMatch from "./Components/NoMatch";
 import Terms from "./Components/Terms";
+import TermsZh from "./Components/TermsZh";
 import styled from "styled-components";
 //context
 import { LangContext } from "./LangContext";
@@ -222,7 +223,10 @@ function App() {
               path="/post"
               element={<PostingPage postJoke={postJoke} signed={signed} />}
             />
-            <Route path="/about/terms" element={<Terms />} />
+            <Route
+              path="/about/terms"
+              element={language === "中文" ? <TermsZh /> : <Terms />}
+            />
             <Route exact path="/about" element={<About />} />
 
             <Route path="*" element={<NoMatch />} />

@@ -110,7 +110,7 @@ export default function Terms() {
         </li>
         <li>
           <strong>Website: </strong>
-          JokeHub’s site, which can be accessed via this URL:
+          JokeHub's site, which can be accessed via this URL:
           {" https://jokehub6969.web.app/"}.
         </li>
         <li>
@@ -258,7 +258,7 @@ export default function Terms() {
       </p>
       <h1>Copyright Infringement Notice</h1>
       <p>
-        If you are a copyright owner or such owner’s agent and believe any
+        If you are a copyright owner or such owner's agent and believe any
         material from us constitutes an infringement on your copyright, please
         contact us setting forth the following information: (a) a physical or
         electronic signature of the copyright owner or a person authorized to
@@ -417,9 +417,9 @@ export default function Terms() {
       </p>
       <h1>Agreement to Arbitrate</h1>
       <p>
-        This section applies to any dispute EXCEPT IT DOESN’T INCLUDE A DISPUTE
+        This section applies to any dispute EXCEPT IT DOESN'T INCLUDE A DISPUTE
         RELATING TO CLAIMS FOR INJUNCTIVE OR EQUITABLE RELIEF REGARDING THE
-        ENFORCEMENT OR VALIDITY OF YOUR OR ’s INTELLECTUAL PROPERTY RIGHTS. The
+        ENFORCEMENT OR VALIDITY OF YOUR OR 's INTELLECTUAL PROPERTY RIGHTS. The
         term “dispute” means any dispute, action, or other controversy between
         you and us concerning the Services or this agreement, whether in
         contract, warranty, tort, statute, regulation, ordinance, or any other
@@ -440,7 +440,7 @@ export default function Terms() {
       </p>
       <h1>Binding Arbitration</h1>
       <p>
-        If you and us don’t resolve any dispute by informal negotiation, any
+        If you and us don't resolve any dispute by informal negotiation, any
         other effort to resolve the dispute will be conducted exclusively by
         binding arbitration as described in this section. You are giving up the
         right to litigate (or participate in as a party or class member) all
@@ -448,7 +448,7 @@ export default function Terms() {
         by binding arbitration in accordance with the commercial arbitration
         rules of the American Arbitration Association. Either party may seek any
         interim or preliminary injunctive relief from any court of competent
-        jurisdiction, as necessary to protect the party’s rights or property
+        jurisdiction, as necessary to protect the party's rights or property
         pending the completion of arbitration. Any and all legal, accounting,
         and other costs, fees, and expenses incurred by the prevailing party
         shall be borne by the non-prevailing party.

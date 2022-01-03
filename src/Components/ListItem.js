@@ -111,7 +111,6 @@ export default function ListItem({
   deleteJoke,
   ratedUsers,
   user,
-  isList,
 }) {
   const [userRate, setUserRate] = useState(5);
   const [folded, setFolded] = useState(true);
@@ -145,7 +144,7 @@ export default function ListItem({
           {"#" + keyword}
         </a>
         <div>
-          {folded && isList ? ( //don't show ellipsis when inside a post
+          {folded ? (
             <ResponsiveEllipsis
               className="content"
               text={content}
@@ -160,11 +159,9 @@ export default function ListItem({
           ) : (
             <div>
               <p className="content">{content}</p>
-              {isList && (
-                <div className="toggler" onClick={() => setFolded(true)}>
-                  Read less
-                </div>
-              )}
+              <div className="toggler" onClick={() => setFolded(true)}>
+                Read less
+              </div>
             </div>
           )}
 

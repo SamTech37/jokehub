@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import ListItem from "./ListItem";
 import { ImArrowUp2 } from "react-icons/im";
 import { useSearchParams, useNavigate } from "react-router-dom";
+//context
+import { LangContext } from "../LangContext";
 
 const BackToTop = styled.button`
   z-index: 50;
@@ -113,12 +115,16 @@ export default function List({
     () => getPosts(keyword?.toLocaleLowerCase().replaceAll(" ", "")),
     []
   ); //aware of null //remove blanks, lowercased for better search
+
+  const language = useContext(LangContext);
   return (
     <div>
       <Search>
         <input
           type="text"
-          placeholder="Search keyword..."
+          placeholder={
+            language === "中文" ? "搜尋關鍵字..." : "Search keyword..."
+          }
           name="keyword"
           required
         />
@@ -146,9 +152,11 @@ export default function List({
       })}
       <FetchArea>
         {posts.length === batchSize ? (
-          <button onClick={handleNext}>Next</button>
+          <button onClick={handleNext}>
+            {language === "中文" ? "更多" : "Next"}
+          </button>
         ) : (
-          <button onClick={handleLast}>What's new!</button>
+          <button onClick={handleLast}>What's new!</button> //no need translate here
         )}
       </FetchArea>
     </div>

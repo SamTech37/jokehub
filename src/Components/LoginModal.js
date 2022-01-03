@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { IoMdClose } from "react-icons/io";
+//context
+import { LangContext } from "../LangContext";
+
 const Body = styled.div`
   .modal {
     //props should be passed like in react
@@ -81,6 +84,8 @@ const Body = styled.div`
   }
 `;
 export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
+  const language = useContext(LangContext);
+
   const handleGoogleAuth = () => {
     signInGoogle();
     setModalOpen(false);
@@ -95,19 +100,30 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
           <button className="closebtn" onClick={() => setModalOpen(false)}>
             <IoMdClose />
           </button>
-          <h2>Sign in to Share and Rate jokes</h2>
+          <h2>
+            {language === "中文"
+              ? "登入以分享與評分笑話"
+              : "Sign in to Share and Rate jokes"}
+          </h2>
 
           <button className="signin-btn" onClick={handleGoogleAuth}>
             <FcGoogle />
-            Sign in with Google
+            {language === "中文" ? "用Google登入" : "Sign in with Google"}
           </button>
-
-          <p className="caveats">
-            Authentication is used to identify users and prevent other issues.
-            Posting and rating is anonymous and
-            <span style={{ color: "tomato" }}> we won't use</span> any of your
-            personal information.
-          </p>
+          {language === "中文" ? (
+            <p className="caveats">
+              登入與驗證是用來識別使用者， 發布還有評分笑話仍是匿名的。
+              <span style={{ color: "tomato" }}>我們不會使用</span>
+              任何您的個人資料
+            </p>
+          ) : (
+            <p className="caveats">
+              Authentication is used to identify users and prevent other issues.
+              Posting and rating is anonymous and
+              <span style={{ color: "tomato" }}> we won't use</span> any of your
+              personal information.
+            </p>
+          )}
         </div>
       </div>
     </Body>

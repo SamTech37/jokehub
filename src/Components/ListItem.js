@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { BiTrash } from "react-icons/bi";
 import Slider from "./Slider";
 import Spacer from "./Spacer";
-
 import blob from "../assets/blob.svg";
 import blob2 from "../assets/blob2.svg";
 import blob3 from "../assets/blob3.svg";
+//context
+import { LangContext } from "../LangContext";
 //ellispsis
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
@@ -35,16 +36,23 @@ const Body = styled.section`
   }
   button {
     color: #ffab01;
+    background-color: white;
     font-size: 1em;
     margin: 1em;
     margin-top: 3em;
     padding: 0.25em 1em;
-    box-shadow: 0 0 5px #dfe0df;
+    box-shadow: 0 0 10px #dfe0df;
     border: 2px solid #ffab01;
     border-radius: 3px;
     cursor: pointer;
     &:hover {
-      opacity: 0.5;
+      box-shadow: 0 0 20px #dfe0df;
+    }
+    &:disabled {
+      border: 2px solid #999;
+      color: #999;
+      cursor: unset;
+      box-shadow: unset;
     }
   }
   .toggler {
@@ -112,11 +120,9 @@ export default function ListItem({
   ratedUsers,
   user,
 }) {
-  const [userRate, setUserRate] = useState(5);
+  const [userRate, setUserRate] = useState(5); //if user has rated, the button can't send rate
   const [folded, setFolded] = useState(true);
-
-  //if user has rated, the button can't send rate
-
+  const language = useContext(LangContext);
   const patterns = [blob, blob2, blob3];
   const [pattern, setPattern] = useState(
     patterns[Math.floor(Math.random() * patterns.length)]
@@ -129,11 +135,14 @@ export default function ListItem({
   const handleCopy = () => {
     let text = "https://jokehub6969.web.app/p/" + postId;
     navigator.clipboard.writeText(text);
-    alert("URL copied!");
+    alert("URL copied!"); // fix this later
   };
   const handleDelete = () => {
-    const flag = prompt("You sure? Type 'Yes' if you want to delete.", "bruh");
-    if (flag === "Yes") deleteJoke(postId);
+    const flag =
+      language === "中文"
+        ? prompt("你確定嗎?如果確定要刪除，輸入'是' ", "bruh")
+        : prompt("You sure? Type ' Yes ' if you want to delete.", "bruh");
+    if (flag === "Yes" || flag === "是") deleteJoke(postId);
   };
 
   return (
@@ -151,7 +160,7 @@ export default function ListItem({
               maxLine="10"
               ellipsis={
                 <div className="toggler" onClick={() => setFolded(false)}>
-                  Read more
+                  {language === "中文" ? "展開" : "Read more"}
                 </div>
               }
               basedOn="words"
@@ -160,30 +169,42 @@ export default function ListItem({
             <div>
               <p className="content">{content}</p>
               <div className="toggler" onClick={() => setFolded(true)}>
-                Read less
+                {language === "中文" ? "收起" : "Read less"}
               </div>
             </div>
           )}
 
           <Blob pat={pattern}>
             <h1>
-              {rates !== 0 ? Math.round((totRating / rates) * 10) / 10 : "None"}
+              {rates !== 0
+                ? Math.round((totRating / rates) * 10) / 10
+                : language === "中文"
+                ? "無"
+                : "None"}
             </h1>
           </Blob>
-          <p>{`average out of ${rates} rates`}</p>
+          <p>
+            {language === "中文"
+              ? ` ${rates} 則評分裡平均`
+              : `average out of ${rates} rates`}
+          </p>
 
           {user && (
             <div className="ratingSec">
               <Slider userRate={userRate} setUserRate={setUserRate} />
               <div className="btnGroup">
                 {ratedUsers.includes(user?.uid) ? (
-                  <button onClick={() => alert("You've Rated This!")}>
-                    Rated
+                  <button disabled>
+                    {language === "中文" ? "給過了" : "Rated"}
                   </button>
                 ) : (
-                  <button onClick={handleRate}>Rate</button>
+                  <button onClick={handleRate}>
+                    {language === "中文" ? "給分" : "Rate"}
+                  </button>
                 )}
-                <button onClick={handleCopy}>Share</button>
+                <button onClick={handleCopy}>
+                  {language === "中文" ? "分享" : "Share"}
+                </button>
               </div>
               {user.uid === posterUid && (
                 <div className="modifyBtn">

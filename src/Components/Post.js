@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import ListItem from "./ListItem";
 import NoMatch from "./NoMatch";
 import { useParams } from "react-router-dom";
+//context
+import { LangContext } from "../LangContext";
 
 export default function Post({
   user,
@@ -10,6 +12,7 @@ export default function Post({
   rateJoke,
   deleteJoke,
 }) {
+  const language = useContext(LangContext);
   //fetch the joke by its ID here
   let { postId } = useParams();
   useEffect(() => {
@@ -17,7 +20,8 @@ export default function Post({
       try {
         await inPost(postId);
       } catch (error) {
-        alert("Loading faild, Please try again.");
+        if (language === "中文") alert("載入失敗，請再試一次");
+        else alert("Loading faild, Please try again.");
       }
     }
     fetchPost();

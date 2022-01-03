@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+//context
+import { LangContext } from "../LangContext";
 const Body = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,6 +64,8 @@ const Body = styled.div`
   }
 `;
 export default function PostingPage({ postJoke, signed }) {
+  const language = useContext(LangContext);
+
   const [newContent, setNewContent] = useState("");
   const [newKeyword, setNewKeyword] = useState("");
   const [newLanguage, setNewLanguage] = useState("English");
@@ -79,12 +82,22 @@ export default function PostingPage({ postJoke, signed }) {
   };
   return (
     <Body>
-      {!signed && <h2>Please Sign in with Google First!</h2>}
+      {!signed && (
+        <h2>
+          {language === "中文"
+            ? "請先用Google登入"
+            : "Please Sign in with Google First!"}
+        </h2>
+      )}
 
       <form onSubmit={handleSubmit}>
         <textarea
           type="text"
-          placeholder="Write your joke here..."
+          placeholder={
+            language === "中文"
+              ? "把你的笑話寫在這裡"
+              : "Write your joke here..."
+          }
           maxLength={maxLen}
           autoFocus
           required
@@ -93,11 +106,20 @@ export default function PostingPage({ postJoke, signed }) {
           }}
           value={newContent}
         />
-        <p>{"word count " + newContent.length + "/" + maxLen}</p>
+        {language === "中文" ? (
+          <p>{"字數 " + newContent.length + "/" + maxLen}</p>
+        ) : (
+          <p>{"word count " + newContent.length + "/" + maxLen}</p>
+        )}
+
         <input
-          className=" keyword"
+          className="keyword"
           type="text"
-          placeholder="a keyword, genre, whatsoever..."
+          placeholder={
+            language === "中文"
+              ? "一個關鍵字、分類、索引之類的"
+              : "a keyword, genre, whatsoever..."
+          }
           maxLength="20"
           required
           onChange={(event) => {
@@ -105,8 +127,16 @@ export default function PostingPage({ postJoke, signed }) {
           }}
           value={newKeyword}
         />
-        <p>{"word count " + newKeyword.length + "/20"}</p>
-        <label>{"Language of the joke"}</label>
+
+        {language === "中文" ? (
+          <p>{"字數 " + newKeyword.length + "/20"}</p>
+        ) : (
+          <p>{"word count " + newKeyword.length + "/20"}</p>
+        )}
+
+        <label>
+          {language === "中文" ? "笑話的語言" : "Language of the joke"}
+        </label>
         <select
           name="language"
           required
@@ -115,12 +145,13 @@ export default function PostingPage({ postJoke, signed }) {
             setNewLanguage(event.target.value);
           }}
         >
-          <option>English</option>
           <option>中文</option>
+          <option>English</option>
         </select>
         <input
+          alt="HI"
           type="submit"
-          value="Submit"
+          value={language === "中文" ? "提交" : "Submit"}
           className="submit"
           disabled={!signed}
         />

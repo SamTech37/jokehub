@@ -2,10 +2,12 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import icon from "../assets/icon.svg";
 import LoginModal from "./LoginModal";
-import { LangContext } from "../LangContext";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { RiCloseLine } from "react-icons/ri";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
+//context
+import { LangContext } from "../LangContext";
 
 const MobileNav = styled.div`
   position: relative;
@@ -53,8 +55,8 @@ const MobileNav = styled.div`
   .closebtn {
     position: absolute;
     top: 20px;
-    right: 45px;
-    font-size: 30px;
+    right: 20px;
+    font-size: 50px;
     color: white;
     background-color: transparent;
     border: none;
@@ -156,6 +158,11 @@ export default function NavBar({
     if (signed) return signOut();
     return mobileSignInGoogle();
   };
+  const handleLangChange = () => {
+    setLanguage((prevLanguage) =>
+      prevLanguage === "中文" ? "English" : "中文"
+    );
+  };
 
   return (
     <div>
@@ -165,18 +172,17 @@ export default function NavBar({
             <img src={icon} alt="home" width={"200px"} height={" 60px"} />
           </NavLink>
           <div className="NavContent">
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Link to="/post">Post</Link>
-            <a onClick={handleAuth}>{signed ? "Sign out" : "Sign in"}</a>
-            <button
-              onClick={() =>
-                setLanguage((prevLanguage) =>
-                  prevLanguage === "中文" ? "English" : "中文"
-                )
-              }
-            >
-              {language}
+            <Link to="/">{language === "中文" ? "主頁" : "Home"}</Link>
+            <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
+            <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
+            {language === "中文" ? (
+              <a onClick={handleAuth}>{signed ? "登出" : "登入"}</a>
+            ) : (
+              <a onClick={handleAuth}>{signed ? "Sign out" : "Sign in"}</a>
+            )}
+
+            <button className="langToggle" onClick={handleLangChange}>
+              {language === "中文" ? "To Eng" : "切中文"}
             </button>
           </div>
 
@@ -187,6 +193,7 @@ export default function NavBar({
           ></LoginModal>
         </Nav>
       </BrowserView>
+
       <MobileView>
         <MobileNav open={drawerOpen}>
           <NavLink to="/">
@@ -199,11 +206,17 @@ export default function NavBar({
             />
           </NavLink>
           <div className="headerRight">
-            <button className="headerBtn" onClick={handleAuthMobile}>
-              {signed ? "SignOut" : "SignIn"}
-            </button>
+            {language === "中文" ? (
+              <button className="headerBtn" onClick={handleAuthMobile}>
+                {signed ? "登出" : "登入"}
+              </button>
+            ) : (
+              <button className="headerBtn" onClick={handleAuthMobile}>
+                {signed ? "SignOut" : "SignIn"}
+              </button>
+            )}
             <Link className="headerBtn" to="/post">
-              Post
+              {language === "中文" ? "發布" : "Post"}
             </Link>
             <button
               className="openbtn"
@@ -215,11 +228,16 @@ export default function NavBar({
           </div>
 
           <div className="drawerNav" onClick={() => setDrawerOpen(false)}>
-            <button className="closebtn">Close</button>
+            <button className="closebtn">
+              <RiCloseLine />
+            </button>
             <div className="drawerNav-content">
-              <Link to="/">Home</Link>
-              <Link to="/about">About</Link>
-              <Link to="/post">Post</Link>
+              <Link to="/">{language === "中文" ? "主頁" : "Home"}</Link>
+              <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
+              <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
+              <button className="langToggle" onClick={handleLangChange}>
+                {language === "中文" ? "To Eng" : "切中文"}
+              </button>
             </div>
           </div>
         </MobileNav>

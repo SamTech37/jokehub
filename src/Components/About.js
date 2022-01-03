@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+//context
+import { LangContext } from "../LangContext";
+
 const Body = styled.div`
   margin-right: 1em;
   margin-left: 1em;
@@ -10,7 +13,26 @@ const Body = styled.div`
 `;
 
 export default function About() {
-  return (
+  const language = useContext(LangContext);
+  return language === "中文" ? (
+    <Body>
+      <h1>這是什麼?</h1>
+      <h2>這是一個可以匿名發笑話還有評分笑話的網站。</h2>
+      <h1>為什麼?</h1>
+      <h2>
+        做好玩的。認真講大概是因為我跟同學有時候會互評笑話，丟到網路上看看有沒有其他人會感興趣。
+      </h2>
+      <h1>如何使用這個網站?</h1>
+      <h2>用Google登入之後就可以發布笑話還有給分;沒有登入也可以瀏覽笑話。</h2>
+
+      <h1>隱私政策</h1>
+      <h2>
+        登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。我們不會使用任何您的個人資料。
+      </h2>
+      <Link to="/about/terms">服務條款</Link>
+      <h5>© 2021 CK Sam K. and Hank L. All rights reserved. 版權所有©</h5>
+    </Body>
+  ) : (
     <Body>
       <h1>What is this site?</h1>
       <h2>

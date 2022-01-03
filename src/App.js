@@ -42,6 +42,8 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [lastDoc, setLastDoc] = useState();
   const batchSize = 5;
+
+  const [currentPost, setCurrentPost] = useState();
   const postsColletionRef = collection(db, "posts");
   const postJoke = async (content, keyword, language) => {
     //write data
@@ -81,13 +83,16 @@ function App() {
     const jokeRef = doc(db, "posts", id);
     const docSnap = await getDoc(jokeRef);
     if (docSnap.exists()) {
-      console.log(docSnap);
+      onSnapshot(jokeRef, (snapshot) => {
+        setCurrentPost({ ...snapshot.data(), id: snapshot.id });
+      });
     } else {
+      setCurrentPost("empty");
     }
   };
   const getPosts = async (keyword) => {
+    //keyword is lowercased and without blanks for sake of convenience
     if (keyword) {
-      //keyword is lowercased for sake of convenience
       const q = query(
         postsColletionRef,
         where("keyword", "==", keyword), // where clause first
@@ -199,10 +204,11 @@ function App() {
             path="/p/:postId"
             element={
               <Post
+                user={user}
+                currentPost={currentPost}
                 deleteJoke={deleteJoke}
                 inPost={inPost}
                 rateJoke={rateJoke}
-                user={user}
               />
             }
           />

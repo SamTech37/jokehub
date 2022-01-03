@@ -111,7 +111,6 @@ export default function ListItem({
   deleteJoke,
   ratedUsers,
   user,
-  signed,
   isList,
 }) {
   const [userRate, setUserRate] = useState(5);

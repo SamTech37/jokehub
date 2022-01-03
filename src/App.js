@@ -61,8 +61,7 @@ function App() {
     }
   };
   const rateJoke = async (id, userRate) => {
-    const jokeDoc = doc(db, "posts", id);
-    await updateDoc(jokeDoc, {
+    await updateDoc(doc(db, "posts", id), {
       ratedUsers: arrayUnion(user.uid),
       rates: increment(1),
       totalRating: increment(userRate),
@@ -82,7 +81,7 @@ function App() {
     const docRef = doc(db, "posts", id); //fetch only the post // deal with not existing doc
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      return docSnap.data();
+      return { ...docSnap.data(), id: docSnap.id }; //make sure to get the id
     } else {
       return "empty";
     }

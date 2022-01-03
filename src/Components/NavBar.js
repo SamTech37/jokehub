@@ -112,8 +112,9 @@ const MobileNav = styled.div`
   }
 `;
 const Nav = styled.div`
+  position: relative;
   background: #fdfd66;
-  max-height: 15%;
+  height: 100px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -136,6 +137,22 @@ const Nav = styled.div`
       &:hover {
         opacity: 0.5;
       }
+    }
+  }
+`;
+const Toggle = styled.div`
+  position: absolute;
+  right: 50px;
+  top: 30px;
+  margin: auto;
+  .langToggle {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 24px;
+    border: 1px solid black;
+    &:hover {
+      box-shadow: 0 0 10px #777;
     }
   }
 `;
@@ -180,10 +197,11 @@ export default function NavBar({
             ) : (
               <a onClick={handleAuth}>{signed ? "Sign out" : "Sign in"}</a>
             )}
-
-            <button className="langToggle" onClick={handleLangChange}>
-              {language === "中文" ? "To Eng" : "切中文"}
-            </button>
+            <Toggle>
+              <button className="langToggle" onClick={handleLangChange}>
+                {"中/EN"}
+              </button>
+            </Toggle>
           </div>
 
           <LoginModal
@@ -228,16 +246,14 @@ export default function NavBar({
           </div>
 
           <div className="drawerNav" onClick={() => setDrawerOpen(false)}>
-            <button className="closebtn">
+            <button className="closebtn" aria-label="close nav menu">
               <RiCloseLine />
             </button>
             <div className="drawerNav-content">
               <Link to="/">{language === "中文" ? "主頁" : "Home"}</Link>
               <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
               <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
-              <button className="langToggle" onClick={handleLangChange}>
-                {language === "中文" ? "To Eng" : "切中文"}
-              </button>
+              <a onClick={handleLangChange}>{"中/EN"}</a>
             </div>
           </div>
         </MobileNav>

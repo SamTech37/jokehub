@@ -7,6 +7,8 @@ import PostingPage from "./Components/PostingPage";
 import NoMatch from "./Components/NoMatch";
 import Terms from "./Components/Terms";
 import styled from "styled-components";
+//context
+import { LangContext } from "./LangContext";
 //routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //DB
@@ -45,13 +47,13 @@ function App() {
 
   const [currentPost, setCurrentPost] = useState();
   const postsColletionRef = collection(db, "posts");
-  const postJoke = async (content, keyword, language) => {
+  const postJoke = async (newContent, newKeyword, newLanguage) => {
     //write data
     try {
       await addDoc(postsColletionRef, {
-        content: content,
-        keyword: keyword,
-        language: language,
+        content: newContent,
+        keyword: newKeyword,
+        language: newLanguage,
         time: serverTimestamp(),
         posterUid: user.uid,
         rates: Number(0),
@@ -174,54 +176,59 @@ function App() {
     setUser(currentUser);
   });
 
+  const [language, setLanguage] = useState("中文");
+
   return (
     <Router>
-      <Container>
-        <NavBar
-          signInGoogle={signInGoogle}
-          mobileSignInGoogle={mobileSignInGoogle}
-          signOut={userSignOut}
-          signed={signed}
-        />
-
-        <Routes>
-          <Route
-            index
-            element={
-              <List
-                posts={posts}
-                user={user}
-                batchSize={batchSize}
-                rateJoke={rateJoke}
-                deleteJoke={deleteJoke}
-                nextBatch={nextBatch}
-                getPosts={getPosts}
-              />
-            }
+      <LangContext.Provider value={language}>
+        <Container>
+          <NavBar
+            signInGoogle={signInGoogle}
+            mobileSignInGoogle={mobileSignInGoogle}
+            signOut={userSignOut}
+            signed={signed}
+            setLanguage={setLanguage}
           />
 
-          <Route
-            path="/p/:postId"
-            element={
-              <Post
-                user={user}
-                currentPost={currentPost}
-                deleteJoke={deleteJoke}
-                inPost={inPost}
-                rateJoke={rateJoke}
-              />
-            }
-          />
-          <Route
-            path="/post"
-            element={<PostingPage postJoke={postJoke} signed={signed} />}
-          />
-          <Route path="/about/terms" element={<Terms />} />
-          <Route exact path="/about" element={<About />} />
+          <Routes>
+            <Route
+              index
+              element={
+                <List
+                  posts={posts}
+                  user={user}
+                  batchSize={batchSize}
+                  rateJoke={rateJoke}
+                  deleteJoke={deleteJoke}
+                  nextBatch={nextBatch}
+                  getPosts={getPosts}
+                />
+              }
+            />
 
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </Container>
+            <Route
+              path="/p/:postId"
+              element={
+                <Post
+                  user={user}
+                  currentPost={currentPost}
+                  deleteJoke={deleteJoke}
+                  inPost={inPost}
+                  rateJoke={rateJoke}
+                />
+              }
+            />
+            <Route
+              path="/post"
+              element={<PostingPage postJoke={postJoke} signed={signed} />}
+            />
+            <Route path="/about/terms" element={<Terms />} />
+            <Route exact path="/about" element={<About />} />
+
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </Container>
+      </LangContext.Provider>
     </Router>
   );
 }

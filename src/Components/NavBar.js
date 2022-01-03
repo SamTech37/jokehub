@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import icon from "../assets/icon.svg";
 import LoginModal from "./LoginModal";
+import { LangContext } from "../LangContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
@@ -30,7 +31,7 @@ const MobileNav = styled.div`
   .headerBtn {
     border: none;
     color: white;
-    background-color: #aa8b66;
+    background-color: #836c50;
     border-radius: 3px;
     padding: 7px 14px;
     margin-right: 8px;
@@ -141,11 +142,13 @@ export default function NavBar({
   signOut,
   mobileSignInGoogle,
   signed,
+  setLanguage,
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const language = useContext(LangContext);
 
-  const handleClick = () => {
+  const handleAuth = () => {
     if (signed) return signOut();
     return setModalOpen(true);
   };
@@ -165,7 +168,16 @@ export default function NavBar({
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/post">Post</Link>
-            <a onClick={handleClick}>{signed ? "Sign out" : "Sign in"}</a>
+            <a onClick={handleAuth}>{signed ? "Sign out" : "Sign in"}</a>
+            <button
+              onClick={() =>
+                setLanguage((prevLanguage) =>
+                  prevLanguage === "中文" ? "English" : "中文"
+                )
+              }
+            >
+              {language}
+            </button>
           </div>
 
           <LoginModal

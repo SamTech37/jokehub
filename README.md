@@ -14,6 +14,6 @@ Powered by React js.
 You can browse jokes without logging in.  
 Once you've logged in with Google , you can post and rate jokes.  
 The authentication is used to identify users in order to prevent duplicated rates and other issues.  
-Posting and rating is anonymous and we won't collect any of your personal information.
+Posting and rating is anonymous.
 
 ## Have Fun!

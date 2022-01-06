@@ -122,6 +122,7 @@ export default function ListItem({
 }) {
   const [userRate, setUserRate] = useState(5); //if user has rated, the button can't send rate
   const [folded, setFolded] = useState(true);
+  const [copied, setCopied] = useState(false);
   const language = useContext(LangContext);
   const patterns = [blob, blob2, blob3];
   const [pattern, setPattern] = useState(
@@ -133,9 +134,10 @@ export default function ListItem({
     }
   };
   const handleCopy = () => {
-    let text = "https://jokehub6969.web.app/p/" + postId;
+    let text = window.location.origin + "/p/" + postId; // current orgin + path to post
     navigator.clipboard.writeText(text);
-    alert("URL copied!"); // fix this later
+    if (copied) alert("URL copied!");
+    setCopied(true);
   };
   const handleDelete = () => {
     const flag =
@@ -174,6 +176,9 @@ export default function ListItem({
             </div>
           )}
 
+          {/*for crawling*/}
+          <a href={"/p/" + postId} />
+
           <Blob pat={pattern}>
             <h1>
               {rates !== 0
@@ -202,9 +207,16 @@ export default function ListItem({
                     {language === "中文" ? "給分" : "Rate"}
                   </button>
                 )}
-                <button onClick={handleCopy}>
-                  {language === "中文" ? "分享" : "Share"}
-                </button>
+
+                {language === "中文" ? (
+                  <button onClick={handleCopy}>
+                    {copied ? "已複製" : "分享"}
+                  </button>
+                ) : (
+                  <button onClick={handleCopy}>
+                    {copied ? "Copied" : "Share"}
+                  </button>
+                )}
               </div>
               {user.uid === posterUid && (
                 <div className="modifyBtn">

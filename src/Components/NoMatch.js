@@ -18,6 +18,7 @@ export default function NoMatch() {
 
   return language === "中文" ? (
     <Body>
+      <h1>404 Not Found</h1>
       <h1>看起來這裡什麼都沒有</h1>
       <h2>或許是打錯網址之類的</h2>
       {"\n"}
@@ -25,6 +26,7 @@ export default function NoMatch() {
     </Body>
   ) : (
     <Body>
+      <h1>404 Not Found</h1>
       <h1>Looks like we got nothing here</h1>
       <h2>Maybe a misspelling or something</h2>
       {"\n"}

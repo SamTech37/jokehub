@@ -1,12 +1,7 @@
-import react, { useEffect, useState } from "react";
+import React, { useState, Suspense } from "react";
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
-import About from "./Components/About";
-import Post from "./Components/Post";
-import PostingPage from "./Components/PostingPage";
 import NoMatch from "./Components/NoMatch";
-import Terms from "./Components/Terms";
-import TermsZh from "./Components/TermsZh";
 import styled from "styled-components";
 //context
 import { LangContext } from "./LangContext";
@@ -39,6 +34,12 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
 } from "firebase/auth";
+//Lazy loading
+const About = React.lazy(() => import("./Components/About"));
+const Post = React.lazy(() => import("./Components/Post"));
+const PostingPage = React.lazy(() => import("./Components/PostingPage"));
+const Terms = React.lazy(() => import("./Components/Terms"));
+const TermsZh = React.lazy(() => import("./Components/TermsZh"));
 
 function App() {
   //DB
@@ -212,24 +213,42 @@ function App() {
             <Route
               path="/p/:postId"
               element={
-                <Post
-                  user={user}
-                  currentPost={currentPost}
-                  deleteJoke={deleteJoke}
-                  inPost={inPost}
-                  rateJoke={rateJoke}
-                />
+                <Suspense fallback={<>Loading</>}>
+                  <Post
+                    user={user}
+                    currentPost={currentPost}
+                    deleteJoke={deleteJoke}
+                    inPost={inPost}
+                    rateJoke={rateJoke}
+                  />
+                </Suspense>
               }
             />
             <Route
               path="/post"
-              element={<PostingPage postJoke={postJoke} signed={signed} />}
+              element={
+                <Suspense fallback={<>Loading</>}>
+                  <PostingPage postJoke={postJoke} signed={signed} />
+                </Suspense>
+              }
             />
             <Route
               path="/about/terms"
-              element={language === "中文" ? <TermsZh /> : <Terms />}
+              element={
+                <Suspense fallback={<>Loading</>}>
+                  {language === "中文" ? <TermsZh /> : <Terms />}
+                </Suspense>
+              }
             />
-            <Route exact path="/about" element={<About />} />
+
+            <Route
+              path="about"
+              element={
+                <Suspense fallback={<>Loading</>}>
+                  <About />
+                </Suspense>
+              }
+            />
 
             <Route path="*" element={<NoMatch />} />
           </Routes>

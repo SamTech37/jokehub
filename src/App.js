@@ -75,7 +75,7 @@ function App() {
       rates: increment(1),
       totalRating: increment(userRate),
     });
-    logEvent(analytics, "rate_joke", { user_rate: String(userRate) });
+    logEvent(analytics, "rate_joke", { user_rate: userRate });
   };
 
   const deleteJoke = async (id) => {

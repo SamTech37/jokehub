@@ -176,8 +176,10 @@ function App() {
     setSigned(currentUser ? true : false);
     setUser(currentUser);
   });
-
-  const [language, setLanguage] = useState("中文");
+  const userLang = navigator.language || navigator.userLanguage;
+  const [language, setLanguage] = useState(
+    userLang >= "zh" ? "中文" : "English"
+  );
 
   return (
     <Router>

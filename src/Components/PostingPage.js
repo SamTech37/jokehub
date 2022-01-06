@@ -7,25 +7,43 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   textarea {
-    margin-top: 0.5em;
-    font-size: 1.5em;
-    padding: 0.5em;
-    border-width: 0.1em;
-    border-radius: 0.5em;
-    height: 60vh;
+    margin-top: 8px;
+    resize: none;
+    font-size: 24px;
+    padding: 8px;
+    border-width: 2px;
+    border-radius: 8px;
+    height: 50vh;
     width: 70vw;
   }
+  .keyword {
+    font-size: 24px;
+    padding: 8px;
+    border-width: 2px;
+    border-radius: 8px;
+    width: 70vw;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  p {
+    margin: 8px;
+    width: 70%;
+    font-size: 16px;
+  }
+  h2 {
+    margin: 8px;
+  }
   .submit {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
     color: white;
     background-color: #ffab01;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 8px;
+    margin-top: 8px;
     padding: 10px 20px;
-    font-size: 2rem;
+    font-size: 32px;
     box-shadow: 0px 0px 5px #000000;
     cursor: pointer;
     transition: 400ms, ease-in;
@@ -39,28 +57,27 @@ const Body = styled.div`
       box-shadow: unset;
     }
   }
-  .keyword {
-    font-size: 1em;
-    padding: 0.5em;
-    border-width: 0.1em;
-    border-radius: 0.5em;
-
-    width: 70vw;
-  }
-  form {
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-  }
-  p {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    width: 70%;
-    font-size: 16px;
-  }
-  h2 {
-    margin-top: 0.5em;
-    margin-bottom: 0;
+  @media screen and (max-height: 750px) {
+    h2 {
+      font-size: 24px;
+    }
+    textarea {
+      font-size: 20px;
+      height: 40vh;
+    }
+    .keyword {
+      font-size: 20px;
+    }
+    label {
+      font-size: 16px;
+    }
+    p {
+      font-size: 14px;
+    }
+    .submit {
+      padding: 5px 10px;
+      font-size: 24px;
+    }
   }
 `;
 export default function PostingPage({ postJoke, signed }) {

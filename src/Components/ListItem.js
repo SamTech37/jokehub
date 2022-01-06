@@ -65,7 +65,7 @@ const Body = styled.section`
   .ratingSec {
     margin-top: 2em;
   }
-  .modifyBtn {
+  .deleteBtn {
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -119,6 +119,7 @@ export default function ListItem({
   deleteJoke,
   ratedUsers,
   user,
+  isList,
 }) {
   const [userRate, setUserRate] = useState(5); //if user has rated, the button can't send rate
   const [folded, setFolded] = useState(true);
@@ -218,8 +219,8 @@ export default function ListItem({
                   </button>
                 )}
               </div>
-              {user.uid === posterUid && (
-                <div className="modifyBtn">
+              {user.uid === posterUid && isList && (
+                <div className="deleteBtn">
                   <BiTrash onClick={handleDelete} color="red" />
                 </div>
               )}

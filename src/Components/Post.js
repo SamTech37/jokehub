@@ -40,6 +40,7 @@ export default function Post({
         user={user}
         rateJoke={rateJoke}
         deleteJoke={deleteJoke}
+        isList={false}
       />
     );
   } else {

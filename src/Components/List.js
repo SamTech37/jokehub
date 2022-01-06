@@ -147,6 +147,7 @@ export default function List({
             user={user}
             rateJoke={rateJoke}
             deleteJoke={deleteJoke}
+            isList={false}
           />
         );
       })}

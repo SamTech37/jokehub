@@ -110,8 +110,8 @@ export default function Terms() {
         </li>
         <li>
           <strong>Website: </strong>
-          JokeHub's site, which can be accessed via this URL:
-          {" https://jokehub6969.web.app/"}.
+          JokeHub's site, which can be accessed via these URLs:
+          {" https://jokehub6969.web.app/ or https://jokehub.web.app/ "}.
         </li>
         <li>
           <strong>You: </strong>a person or entity that is registered with

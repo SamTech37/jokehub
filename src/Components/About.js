@@ -27,6 +27,13 @@ export default function About() {
 
       <h1>隱私政策</h1>
       <h2>登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。</h2>
+
+      <p>可用站點:</p>
+      <a href="https://jokehub.web.app/">https://jokehub.web.app/</a>
+      <br />
+      <a href="https://jokehub6969.web.app/">https://jokehub6969.web.app/</a>
+      <br />
+      <br />
       <Link to="/about/terms">服務條款</Link>
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved. 版權所有©</h5>
     </Body>
@@ -50,6 +57,12 @@ export default function About() {
         Authentication is used to identify users in order to prevent duplicated
         rates and other issues. Posting and rating is still anonymous.
       </h2>
+      <p>available sites:</p>
+      <a href="https://jokehub.web.app/">https://jokehub.web.app/</a>
+      <br />
+      <a href="https://jokehub6969.web.app/">https://jokehub6969.web.app/</a>
+      <br />
+      <br />
       <Link to="/about/terms">Terms</Link>
       <h5>© 2021 CK Sam K. and Hank L. All rights reserved.</h5>
     </Body>

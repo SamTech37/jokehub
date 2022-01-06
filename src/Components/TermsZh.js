@@ -112,8 +112,8 @@ export default function TermsZh() {
 
         <li>
           <strong>網站:</strong>
-          JokeHub 的站點，可以通過這個 URL 訪問:
-          {"https://jokehub6969.web.app/ "}
+          JokeHub 的站點，可以通過這些 URL 訪問:
+          {" https://jokehub6969.web.app/ 或 https://jokehub.web.app/ "}.
         </li>
 
         <li>

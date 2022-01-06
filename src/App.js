@@ -62,7 +62,7 @@ function App() {
         ratedUsers: [],
       });
     } catch (error) {
-      alert("Post Failed, Please Try Again.");
+      alert("Something went wrong. Please try again!");
     }
   };
   const rateJoke = async (id, userRate) => {
@@ -76,7 +76,7 @@ function App() {
   const deleteJoke = async (id) => {
     if (signed) {
       await deleteDoc(doc(db, "posts", id)).catch((error) =>
-        alert("Failed deleting, please try again.")
+        alert("Something went wrong. Please try again!")
       );
     } else {
       alert("Illegal Modification!");
@@ -160,7 +160,7 @@ function App() {
   const signInGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).catch((error) => {
-      alert("Login Failed, Please Try Again.");
+      alert("Something went wrong. Please try again!");
     });
   };
   const mobileSignInGoogle = () => {

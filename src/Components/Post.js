@@ -21,7 +21,7 @@ export default function Post({
         await inPost(postId);
       } catch (error) {
         if (language === "中文") alert("載入失敗，請再試一次");
-        else alert("Loading faild, Please try again.");
+        else alert("Something went wrong. Please try again!");
       }
     }
     fetchPost();

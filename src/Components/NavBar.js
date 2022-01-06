@@ -85,6 +85,14 @@ const MobileNav = styled.div`
         opacity: 0.5;
       }
     }
+    button {
+      padding: 8px;
+      font-size: 36px;
+      color: #fff;
+      background-color: transparent;
+      border: none;
+      transition: 0.3s;
+    }
   }
   .drawerNav-content {
     position: relative;
@@ -253,7 +261,7 @@ export default function NavBar({
               <Link to="/">{language === "中文" ? "主頁" : "Home"}</Link>
               <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
               <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
-              <a onClick={handleLangChange}>{"中/EN"}</a>
+              <button onClick={handleLangChange}>{"中/EN"}</button>
             </div>
           </div>
         </MobileNav>

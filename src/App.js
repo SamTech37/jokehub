@@ -8,7 +8,7 @@ import { LangContext } from "./LangContext";
 //routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //DB
-import { db, auth } from "./firebaseConfig";
+import { db, auth, analytics } from "./firebaseConfig";
 import {
   collection,
   onSnapshot,
@@ -34,6 +34,8 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
 } from "firebase/auth";
+//analytics
+import { logEvent } from "firebase/analytics";
 //Lazy loading
 const About = React.lazy(() => import("./Components/About"));
 const Post = React.lazy(() => import("./Components/Post"));
@@ -62,6 +64,7 @@ function App() {
         totalRating: Number(0),
         ratedUsers: [],
       });
+      logEvent(analytics, "post_joke");
     } catch (error) {
       alert("Something went wrong. Please try again!");
     }
@@ -72,6 +75,7 @@ function App() {
       rates: increment(1),
       totalRating: increment(userRate),
     });
+    logEvent(analytics, "rate_joke", { user_rate: String(userRate) });
   };
 
   const deleteJoke = async (id) => {
@@ -79,6 +83,7 @@ function App() {
       await deleteDoc(doc(db, "posts", id)).catch((error) =>
         alert("Something went wrong. Please try again!")
       );
+      logEvent(analytics, "delete_joke");
     } else {
       alert("Illegal Modification!");
     }
@@ -90,6 +95,7 @@ function App() {
       onSnapshot(jokeRef, (snapshot) => {
         setCurrentPost({ ...snapshot.data(), id: snapshot.id });
       });
+      logEvent(analytics, "read_in_post");
     } else {
       setCurrentPost("empty");
     }

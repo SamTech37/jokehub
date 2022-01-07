@@ -1,11 +1,21 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { BiTrash } from "react-icons/bi";
+import { AiOutlineLink, AiOutlineCheck } from "react-icons/ai";
 import Slider from "./Slider";
 import Spacer from "./Spacer";
 import blob from "../assets/blob.svg";
 import blob2 from "../assets/blob2.svg";
 import blob3 from "../assets/blob3.svg";
+import {
+  FacebookIcon,
+  FacebookMessengerIcon,
+  TwitterIcon,
+  LineIcon,
+  FacebookShareButton,
+  LineShareButton,
+  TwitterShareButton,
+} from "react-share";
 //context
 import { LangContext } from "../LangContext";
 //ellispsis
@@ -34,27 +44,7 @@ const Body = styled.section`
     font-size: 1.5em;
     line-height: 1.4;
   }
-  button {
-    color: #ffab01;
-    background-color: white;
-    font-size: 1em;
-    margin: 1em;
-    margin-top: 3em;
-    padding: 0.25em 1em;
-    box-shadow: 0 0 10px #dfe0df;
-    border: 2px solid #ffab01;
-    border-radius: 3px;
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 0 20px #dfe0df;
-    }
-    &:disabled {
-      border: 2px solid #999;
-      color: #999;
-      cursor: unset;
-      box-shadow: unset;
-    }
-  }
+
   .toggler {
     color: #00dd93;
     border-radius: 1em;
@@ -63,8 +53,37 @@ const Body = styled.section`
     -webkit-tap-highlight-color: transparent;
   }
   .ratingSec {
-    margin-top: 2em;
+    margin-top: 24px;
   }
+  .btnGroup {
+    margin-bottom: 20px;
+    .myBtn {
+      color: #ffab01;
+      background-color: white;
+      font-size: 20px;
+      padding: 0.25em 1em;
+      box-shadow: 0 0 10px #dfe0df;
+      border: 2px solid #ffab01;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        box-shadow: 0 0 20px #dfe0df;
+      }
+      &:disabled {
+        border: 2px solid #999;
+        color: #999;
+        cursor: unset;
+        box-shadow: unset;
+      }
+    }
+    button {
+      margin: 8px;
+    }
+  }
+  .share {
+    display: block;
+  }
+
   .deleteBtn {
     cursor: pointer;
     position: absolute;
@@ -85,8 +104,7 @@ const Body = styled.section`
       font-size: 5vw;
     }
     .btnGroup {
-      display: flex;
-      justify-content: center;
+      font-size: 5vw;
     }
     .modifyBtn {
       font-size: 20px;
@@ -134,10 +152,10 @@ export default function ListItem({
       rateJoke(postId, userRate);
     }
   };
+  const link = window.location.origin + "/p/" + postId; // current orgin + path to post
   const handleCopy = () => {
-    let text = window.location.origin + "/p/" + postId; // current orgin + path to post
-    navigator.clipboard.writeText(text);
-    if (copied) alert("URL copied!");
+    navigator.clipboard.writeText(link);
+    if (copied) alert("Link copied!");
     setCopied(true);
   };
   const handleDelete = () => {
@@ -200,27 +218,47 @@ export default function ListItem({
               <Slider userRate={userRate} setUserRate={setUserRate} />
               <div className="btnGroup">
                 {ratedUsers.includes(user?.uid) ? (
-                  <button disabled>
+                  <button disabled className="myBtn">
                     {language === "中文" ? "給過了" : "Rated"}
                   </button>
                 ) : (
-                  <button onClick={handleRate}>
+                  <button onClick={handleRate} className="myBtn">
                     {language === "中文" ? "給分" : "Rate"}
                   </button>
                 )}
+                <button
+                  onClick={handleCopy}
+                  aria-label="copy link"
+                  className="myBtn"
+                >
+                  {copied ? (
+                    <AiOutlineCheck size={20} />
+                  ) : (
+                    <AiOutlineLink size={20} />
+                  )}
+                </button>
 
-                {language === "中文" ? (
-                  <button onClick={handleCopy}>
-                    {copied ? "已複製" : "分享"}
-                  </button>
-                ) : (
-                  <button onClick={handleCopy}>
-                    {copied ? "Copied" : "Share"}
-                  </button>
-                )}
+                <div className="share">
+                  <FacebookShareButton
+                    url={link}
+                    quote="Haha funny joke on Jokehub"
+                    hashtag="#jokehub"
+                  >
+                    <FacebookIcon size={30} />
+                  </FacebookShareButton>
+                  <TwitterShareButton
+                    url={link}
+                    title="Haha funny joke on Jokehub"
+                  >
+                    <TwitterIcon size={30} />
+                  </TwitterShareButton>
+                  <LineShareButton url={link}>
+                    <LineIcon size={30} />
+                  </LineShareButton>
+                </div>
               </div>
               {user.uid === posterUid && isList && (
-                <div className="deleteBtn">
+                <div className="deleteBtn" aria-label="delete post">
                   <BiTrash onClick={handleDelete} color="red" />
                 </div>
               )}

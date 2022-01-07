@@ -9,7 +9,6 @@ import blob2 from "../assets/blob2.svg";
 import blob3 from "../assets/blob3.svg";
 import {
   FacebookIcon,
-  FacebookMessengerIcon,
   TwitterIcon,
   LineIcon,
   FacebookShareButton,
@@ -58,6 +57,7 @@ const Body = styled.section`
   .btnGroup {
     margin-bottom: 20px;
     .myBtn {
+      margin: 8px;
       color: #ffab01;
       background-color: white;
       font-size: 20px;
@@ -76,12 +76,12 @@ const Body = styled.section`
         box-shadow: unset;
       }
     }
-    button {
-      margin: 8px;
-    }
   }
   .share {
     display: block;
+    button {
+      margin: 8px;
+    }
   }
 
   .deleteBtn {
@@ -237,26 +237,8 @@ export default function ListItem({
                     <AiOutlineLink size={20} />
                   )}
                 </button>
-
-                <div className="share">
-                  <FacebookShareButton
-                    url={link}
-                    quote="Haha funny joke on Jokehub"
-                    hashtag="#jokehub"
-                  >
-                    <FacebookIcon size={30} />
-                  </FacebookShareButton>
-                  <TwitterShareButton
-                    url={link}
-                    title="Haha funny joke on Jokehub"
-                  >
-                    <TwitterIcon size={30} />
-                  </TwitterShareButton>
-                  <LineShareButton url={link}>
-                    <LineIcon size={30} />
-                  </LineShareButton>
-                </div>
               </div>
+
               {user.uid === posterUid && isList && (
                 <div className="deleteBtn" aria-label="delete post">
                   <BiTrash onClick={handleDelete} color="red" />
@@ -264,6 +246,21 @@ export default function ListItem({
               )}
             </div>
           )}
+          <div className="share">
+            <FacebookShareButton
+              url={link}
+              quote="Haha funny joke on Jokehub"
+              hashtag="#jokehub"
+            >
+              <FacebookIcon size={30} />
+            </FacebookShareButton>
+            <TwitterShareButton url={link} title="Haha funny joke on Jokehub">
+              <TwitterIcon size={30} />
+            </TwitterShareButton>
+            <LineShareButton url={link}>
+              <LineIcon size={30} />
+            </LineShareButton>
+          </div>
         </div>
       </Body>
     </div>

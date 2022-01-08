@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { IoMdClose } from "react-icons/io";
+import { BsFacebook } from "react-icons/bs";
 //context
 import { LangContext } from "../LangContext";
 
@@ -9,7 +10,7 @@ const Body = styled.div`
   .modal {
     //props should be passed like in react
     width: 100%;
-    height: ${(props) => (props.open ? "100%" : "0")};
+    height: ${(props) => (props.open ? "100vh" : "0")};
     position: fixed;
     display: flex;
     justify-content: center;
@@ -34,14 +35,14 @@ const Body = styled.div`
     background-color: white;
     h2 {
       font-weight: bold;
-      margin-bottom: 1.5em;
+      margin-bottom: 20px;
     }
   }
   .closebtn {
     position: absolute;
     top: 20px;
     right: 20px;
-    font-size: 2em;
+    font-size: 32px;
     border: 0;
     overflow: hidden;
     background: transparent;
@@ -82,6 +83,22 @@ const Body = styled.div`
     width: 300px;
     line-height: 1.462;
   }
+  @media screen and (max-width: 700px) {
+    .modal-content {
+      width: 100%;
+      padding: 20px;
+    }
+    h2 {
+      font-size: 24px;
+      margin: 8px;
+    }
+    .signin-btn {
+      font-size: 18px;
+    }
+    .caveats {
+      font-size: 12px;
+    }
+  }
 `;
 export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
   const language = useContext(LangContext);
@@ -102,13 +119,18 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
           </button>
           <h2>
             {language === "中文"
-              ? "登入以分享與評分笑話"
-              : "Sign in to Share and Rate jokes"}
+              ? "登入以分享與評分"
+              : "Sign in to Share and Rate"}
           </h2>
 
           <button className="signin-btn" onClick={handleGoogleAuth}>
             <FcGoogle />
             {language === "中文" ? "用Google登入" : "Sign in with Google"}
+          </button>
+
+          <button className="signin-btn">
+            <BsFacebook color="#4267B2" />
+            {language === "中文" ? "用Facebook登入" : "Sign in with Facebook"}
           </button>
           {language === "中文" ? (
             <p className="caveats">

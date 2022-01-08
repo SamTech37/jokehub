@@ -175,13 +175,9 @@ export default function NavBar({
   const [modalOpen, setModalOpen] = useState(false);
   const language = useContext(LangContext);
 
-  const handleAuth = () => {
+  const handleSignModal = () => {
     if (signed) return signOut();
     return setModalOpen(true);
-  };
-  const handleAuthMobile = () => {
-    if (signed) return signOut();
-    return mobileSignInGoogle();
   };
   const handleLangChange = () => {
     setLanguage((prevLanguage) =>
@@ -201,9 +197,9 @@ export default function NavBar({
             <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
             <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
             {language === "中文" ? (
-              <a onClick={handleAuth}>{signed ? "登出" : "登入"}</a>
+              <a onClick={handleSignModal}>{signed ? "登出" : "登入"}</a>
             ) : (
-              <a onClick={handleAuth}>{signed ? "Sign out" : "Sign in"}</a>
+              <a onClick={handleSignModal}>{signed ? "Sign out" : "Sign in"}</a>
             )}
             <Toggle>
               <button className="langToggle" onClick={handleLangChange}>
@@ -233,11 +229,11 @@ export default function NavBar({
           </NavLink>
           <div className="headerRight">
             {language === "中文" ? (
-              <button className="headerBtn" onClick={handleAuthMobile}>
+              <button className="headerBtn" onClick={handleSignModal}>
                 {signed ? "登出" : "登入"}
               </button>
             ) : (
-              <button className="headerBtn" onClick={handleAuthMobile}>
+              <button className="headerBtn" onClick={handleSignModal}>
                 {signed ? "SignOut" : "SignIn"}
               </button>
             )}
@@ -265,6 +261,12 @@ export default function NavBar({
             </div>
           </div>
         </MobileNav>
+
+        <LoginModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          signInGoogle={mobileSignInGoogle}
+        ></LoginModal>
       </MobileView>
     </div>
   );

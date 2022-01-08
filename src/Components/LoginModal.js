@@ -100,9 +100,17 @@ const Body = styled.div`
     }
   }
 `;
-export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
+export default function LoginModal({
+  modalOpen,
+  setModalOpen,
+  signInGoogle,
+  signInFacebook,
+}) {
   const language = useContext(LangContext);
-
+  const handleFacebookAuth = () => {
+    signInFacebook();
+    setModalOpen(false);
+  };
   const handleGoogleAuth = () => {
     signInGoogle();
     setModalOpen(false);
@@ -128,7 +136,7 @@ export default function LoginModal({ modalOpen, setModalOpen, signInGoogle }) {
             {language === "中文" ? "用Google登入" : "Sign in with Google"}
           </button>
 
-          <button className="signin-btn">
+          <button className="signin-btn" onClick={handleFacebookAuth}>
             <BsFacebook color="#4267B2" />
             {language === "中文" ? "用Facebook登入" : "Sign in with Facebook"}
           </button>

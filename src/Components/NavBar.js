@@ -168,6 +168,8 @@ export default function NavBar({
   signInGoogle,
   signOut,
   mobileSignInGoogle,
+  signInFacebook,
+  mobileSignInFacebook,
   signed,
   setLanguage,
 }) {
@@ -212,6 +214,7 @@ export default function NavBar({
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             signInGoogle={signInGoogle}
+            signInFacebook={signInFacebook}
           ></LoginModal>
         </Nav>
       </BrowserView>
@@ -266,6 +269,7 @@ export default function NavBar({
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
           signInGoogle={mobileSignInGoogle}
+          signInFacebook={mobileSignInFacebook}
         ></LoginModal>
       </MobileView>
     </div>

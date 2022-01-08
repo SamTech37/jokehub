@@ -33,6 +33,7 @@ import {
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
+  FacebookAuthProvider,
 } from "firebase/auth";
 //analytics
 import { logEvent } from "firebase/analytics";
@@ -173,9 +174,24 @@ function App() {
       alert("Something went wrong. Please try again!");
     });
   };
+
   const mobileSignInGoogle = () => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+    signInWithRedirect(auth, provider).catch((error) => {
+      alert("Something went wrong. Please try again!");
+    });
+  };
+  const signInFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider).catch((error) => {
+      alert("Something went wrong. Please try again!");
+    });
+  };
+  const mobileSignInFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithRedirect(auth, provider).catch((error) => {
+      alert("Something went wrong. Please try again!");
+    });
   };
 
   const userSignOut = () => {
@@ -198,6 +214,8 @@ function App() {
           <NavBar
             signInGoogle={signInGoogle}
             mobileSignInGoogle={mobileSignInGoogle}
+            signInFacebook={signInFacebook}
+            mobileSignInFacebook={mobileSignInFacebook}
             signOut={userSignOut}
             signed={signed}
             setLanguage={setLanguage}

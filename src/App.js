@@ -42,7 +42,8 @@ const Post = React.lazy(() => import("./Components/Post"));
 const PostingPage = React.lazy(() => import("./Components/PostingPage"));
 const Terms = React.lazy(() => import("./Components/Terms"));
 const TermsZh = React.lazy(() => import("./Components/TermsZh"));
-
+const Privacy = React.lazy(() => import("./Components/Privacy"));
+const PrivacyZh = React.lazy(() => import("./Components/PrivacyZh"));
 function App() {
   //DB
   const [posts, setPosts] = useState([]);
@@ -245,6 +246,14 @@ function App() {
               element={
                 <Suspense fallback={<>Loading</>}>
                   {language === "中文" ? <TermsZh /> : <Terms />}
+                </Suspense>
+              }
+            />
+            <Route
+              path="/about/privacy"
+              element={
+                <Suspense fallback={<>Loading</>}>
+                  {language === "中文" ? <PrivacyZh /> : <Privacy />}
                 </Suspense>
               }
             />

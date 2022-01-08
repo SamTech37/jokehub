@@ -106,6 +106,7 @@ function App() {
       const q = query(
         postsColletionRef,
         where("keyword", "==", keyword), // where clause first
+        where("language", "==", language),
         orderBy("time", "desc"),
         limit(batchSize)
       );
@@ -118,6 +119,7 @@ function App() {
     } else {
       const q = query(
         postsColletionRef,
+        where("language", "==", language),
         orderBy("time", "desc"),
         limit(batchSize)
       );
@@ -134,6 +136,7 @@ function App() {
       const next = query(
         postsColletionRef,
         where("keyword", "==", keyword), // where clause first
+        where("language", "==", language),
         orderBy("time", "desc"),
         startAfter(lastDoc),
         limit(batchSize)
@@ -147,6 +150,7 @@ function App() {
     } else {
       const next = query(
         postsColletionRef,
+        where("language", "==", language),
         orderBy("time", "desc"),
         startAfter(lastDoc),
         limit(batchSize)

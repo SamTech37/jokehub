@@ -23,7 +23,9 @@ export default function About() {
         做好玩的。認真講大概是因為我跟同學有時候會互評笑話，丟到網路上看看有沒有其他人會感興趣。
       </h2>
       <h1>如何使用這個網站?</h1>
-      <h2>用Google登入之後就可以發布笑話還有給分;沒有登入也可以瀏覽笑話。</h2>
+      <h2>
+        用Google或FB登入之後就可以發布笑話還有給分;沒有登入也可以瀏覽笑話。
+      </h2>
       <h1>關於登入</h1>
       <h2>登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。</h2>
       <p>可用站點:</p>
@@ -50,7 +52,9 @@ export default function About() {
         fun.
       </h2>
       <h1>How to use this site?</h1>
-      <h2>Once you've signed in, you can post and rate jokes.</h2>
+      <h2>
+        Once you've signed in with Google or FB, you can post and rate jokes.
+      </h2>
 
       <h1>About Signing in</h1>
       <h2>

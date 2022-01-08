@@ -100,11 +100,7 @@ export default function PostingPage({ postJoke, signed }) {
   return (
     <Body>
       {!signed && (
-        <h2>
-          {language === "中文"
-            ? "請先用Google登入"
-            : "Please Sign in with Google First!"}
-        </h2>
+        <h2>{language === "中文" ? "請先用登入" : "Please Sign in First!"}</h2>
       )}
 
       <form onSubmit={handleSubmit}>

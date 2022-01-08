@@ -105,8 +105,7 @@ function App() {
     if (keyword) {
       const q = query(
         postsColletionRef,
-        where("keyword", "==", keyword), // where clause first
-        where("language", "==", language),
+        where("keyword", "==", keyword), // where clause first, language is filtered by keyword already
         orderBy("time", "desc"),
         limit(batchSize)
       );
@@ -135,8 +134,7 @@ function App() {
     if (keyword) {
       const next = query(
         postsColletionRef,
-        where("keyword", "==", keyword), // where clause first
-        where("language", "==", language),
+        where("keyword", "==", keyword), // where clause first, language is filtered by keyword already
         orderBy("time", "desc"),
         startAfter(lastDoc),
         limit(batchSize)

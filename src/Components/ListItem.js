@@ -249,15 +249,22 @@ export default function ListItem({
           <div className="share">
             <FacebookShareButton
               url={link}
-              quote="Haha funny joke on Jokehub"
+              quote="Come share and rate jokes on JokeHub with me"
               hashtag="#jokehub"
             >
               <FacebookIcon size={30} />
             </FacebookShareButton>
-            <TwitterShareButton url={link} title="Haha funny joke on Jokehub">
+            <TwitterShareButton
+              url={link}
+              title="Come share and rate jokes on JokeHub with me"
+              hashtags={["#jokehub", "joke"]}
+            >
               <TwitterIcon size={30} />
             </TwitterShareButton>
-            <LineShareButton url={link}>
+            <LineShareButton
+              url={link}
+              title="Come share and rate jokes on JokeHub with me"
+            >
               <LineIcon size={30} />
             </LineShareButton>
           </div>

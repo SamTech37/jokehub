@@ -16,6 +16,10 @@ export default function About() {
   const language = useContext(LangContext);
   return language === "中文" ? (
     <Body>
+      <h1>
+        這是最後一個使用create-react-app的版本，我在2021年底到2022年初開發完成。接下來為了更好的SEO跟效能，我決定用Nextjs改寫。
+        這也是我在學習歷程裡面放的版本- Sam K. 1/10/2020
+      </h1>
       <h1>這是什麼?</h1>
       <h2>這是一個可以匿名發笑話還有評分笑話的網站。</h2>
       <h1>為什麼?</h1>
@@ -28,10 +32,6 @@ export default function About() {
       </h2>
       <h1>關於登入</h1>
       <h2>登入與驗證是用來識別使用者，發布還有評分笑話仍是匿名的。</h2>
-      <p>可用站點:</p>
-      <a href="https://jokehub.web.app/">https://jokehub.web.app/</a>
-      <br />
-      <a href="https://jokehub6969.web.app/">https://jokehub6969.web.app/</a>
       <br />
       <br />
       <Link to="/about/terms">服務條款</Link>
@@ -41,6 +41,10 @@ export default function About() {
     </Body>
   ) : (
     <Body>
+      <h1>
+        這是最後一個使用create-react-app的版本，我在2021年底到2022年初開發完成。接下來為了更好的SEO跟效能，我決定用Nextjs改寫。
+        這也是我在學習歷程裡面放的版本- Sam K. 1/10/2020
+      </h1>
       <h1>What is this site?</h1>
       <h2>
         It's a site where you can post jokes and rate others' jokes,
@@ -61,10 +65,6 @@ export default function About() {
         Authentication is used to identify users in order to prevent duplicated
         rates and other issues. Posting and rating is still anonymous.
       </h2>
-      <p>available sites:</p>
-      <a href="https://jokehub.web.app/">https://jokehub.web.app/</a>
-      <br />
-      <a href="https://jokehub6969.web.app/">https://jokehub6969.web.app/</a>
       <br />
       <br />
       <Link to="/about/terms">Terms</Link>

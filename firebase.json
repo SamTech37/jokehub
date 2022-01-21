@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "site": "jokehubcra",
+      "site": "jokehub",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [

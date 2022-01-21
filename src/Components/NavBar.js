@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLine } from "react-icons/ri";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Link, NavLink } from "react-router-dom";
+import usePwa from "use-pwa";
 //context
 import { LangContext } from "../LangContext";
 
@@ -95,8 +96,9 @@ const MobileNav = styled.div`
     }
   }
   .drawerNav-content {
+    display: grid;
     position: relative;
-    top: 25%;
+    top: 20%;
     width: 100%;
     text-align: center;
     margin-top: 30px;
@@ -148,17 +150,32 @@ const Nav = styled.div`
     }
   }
 `;
-const Toggle = styled.div`
+const RightBtn = styled.div`
   position: absolute;
   right: 50px;
   top: 30px;
   margin: auto;
   .langToggle {
+    margin-left: 6px;
     cursor: pointer;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 24px;
-    border: 1px solid black;
+    border: none;
+    box-shadow: 0 0 5px #333;
+    &:hover {
+      box-shadow: 0 0 10px #777;
+    }
+  }
+  .install {
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 24px;
+    color: white;
+    border: none;
+    box-shadow: 0 0 5px #333;
+    background-color: #f7a400;
     &:hover {
       box-shadow: 0 0 10px #777;
     }
@@ -176,7 +193,6 @@ export default function NavBar({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const language = useContext(LangContext);
-
   const handleSignModal = () => {
     if (signed) return signOut();
     return setModalOpen(true);
@@ -186,6 +202,7 @@ export default function NavBar({
       prevLanguage === "中文" ? "English" : "中文"
     );
   };
+  const { appinstalled, enabledPwa, isPwa, showInstallPrompt } = usePwa();
 
   return (
     <div>
@@ -198,16 +215,23 @@ export default function NavBar({
             <Link to="/">{language === "中文" ? "主頁" : "Home"}</Link>
             <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
             <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
+
             {language === "中文" ? (
               <a onClick={handleSignModal}>{signed ? "登出" : "登入"}</a>
             ) : (
               <a onClick={handleSignModal}>{signed ? "Sign out" : "Sign in"}</a>
             )}
-            <Toggle>
+            <RightBtn>
+              {enabledPwa && !isPwa && !appinstalled && (
+                <button className="install" onClick={showInstallPrompt}>
+                  {language === "中文" ? "安裝" : "Install"}
+                </button>
+              )}
+
               <button className="langToggle" onClick={handleLangChange}>
                 {"中/EN"}
               </button>
-            </Toggle>
+            </RightBtn>
           </div>
 
           <LoginModal
@@ -261,6 +285,11 @@ export default function NavBar({
               <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
               <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
               <button onClick={handleLangChange}>{"中/EN"}</button>
+              {enabledPwa && !isPwa && !appinstalled && (
+                <button className="install" onClick={showInstallPrompt}>
+                  {language === "中文" ? "安裝" : "Install"}
+                </button>
+              )}
             </div>
           </div>
         </MobileNav>

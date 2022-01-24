@@ -1,8 +1,15 @@
-import React, { useState, Suspense } from "react";
+import React, { useState } from "react";
 import NavBar from "./Components/NavBar";
 import List from "./Components/List";
 import NoMatch from "./Components/NoMatch";
 import styled from "styled-components";
+import About from "./Components/About";
+import Post from "./Components/Post";
+import PostingPage from "./Components/PostingPage";
+import Terms from "./Components/Terms";
+import TermsZh from "./Components/TermsZh";
+import Privacy from "./Components/Privacy";
+import PrivacyZh from "./Components/PrivacyZh";
 //context
 import { LangContext } from "./LangContext";
 //routing
@@ -37,14 +44,7 @@ import {
 } from "firebase/auth";
 //analytics
 import { logEvent } from "firebase/analytics";
-//Lazy loading
-const About = React.lazy(() => import("./Components/About"));
-const Post = React.lazy(() => import("./Components/Post"));
-const PostingPage = React.lazy(() => import("./Components/PostingPage"));
-const Terms = React.lazy(() => import("./Components/Terms"));
-const TermsZh = React.lazy(() => import("./Components/TermsZh"));
-const Privacy = React.lazy(() => import("./Components/Privacy"));
-const PrivacyZh = React.lazy(() => import("./Components/PrivacyZh"));
+
 function App() {
   //DB
   const [posts, setPosts] = useState([]);
@@ -240,50 +240,29 @@ function App() {
             <Route
               path="/p/:postId"
               element={
-                <Suspense fallback={<>Loading</>}>
-                  <Post
-                    user={user}
-                    currentPost={currentPost}
-                    deleteJoke={deleteJoke}
-                    inPost={inPost}
-                    rateJoke={rateJoke}
-                  />
-                </Suspense>
+                <Post
+                  user={user}
+                  currentPost={currentPost}
+                  deleteJoke={deleteJoke}
+                  inPost={inPost}
+                  rateJoke={rateJoke}
+                />
               }
             />
             <Route
               path="/post"
-              element={
-                <Suspense fallback={<>Loading</>}>
-                  <PostingPage postJoke={postJoke} signed={signed} />
-                </Suspense>
-              }
+              element={<PostingPage postJoke={postJoke} signed={signed} />}
             />
             <Route
               path="/about/terms"
-              element={
-                <Suspense fallback={<>Loading</>}>
-                  {language === "中文" ? <TermsZh /> : <Terms />}
-                </Suspense>
-              }
+              element={language === "中文" ? <TermsZh /> : <Terms />}
             />
             <Route
               path="/about/privacy"
-              element={
-                <Suspense fallback={<>Loading</>}>
-                  {language === "中文" ? <PrivacyZh /> : <Privacy />}
-                </Suspense>
-              }
+              element={language === "中文" ? <PrivacyZh /> : <Privacy />}
             />
 
-            <Route
-              path="about"
-              element={
-                <Suspense fallback={<>Loading</>}>
-                  <About />
-                </Suspense>
-              }
-            />
+            <Route path="about" element={<About />} />
 
             <Route path="*" element={<NoMatch />} />
           </Routes>
@@ -295,7 +274,6 @@ function App() {
 
 const Container = styled.div`
   height: 100vh;
-  width: 100vw;
   background: #fff;
   font-family: Arial, Helvetica, sans-serif;
 `;

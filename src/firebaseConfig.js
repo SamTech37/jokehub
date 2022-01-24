@@ -4,14 +4,14 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
-  apiKey: "AIzaSyC6pFwwbDsBp3k0JPE0vbGmzI0ehotdAcI",
-  authDomain: "jokehub6969.firebaseapp.com",
-  databaseURL: "https://jokehub6969-default-rtdb.firebaseio.com",
-  projectId: "jokehub6969",
-  storageBucket: "jokehub6969.appspot.com",
-  messagingSenderId: "494799104202",
-  appId: "1:494799104202:web:7e5a266be800b7ef9c6c33",
-  measurementId: "G-3S70Y68DB0",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASSUREMENT_ID,
 };
 
 // Initialize Firebase

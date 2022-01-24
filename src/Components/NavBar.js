@@ -285,11 +285,10 @@ export default function NavBar({
               <Link to="/about">{language === "中文" ? "關於" : "About"}</Link>
               <Link to="/post">{language === "中文" ? "發布" : "Post"}</Link>
               <button onClick={handleLangChange}>{"中/EN"}</button>
-              {enabledPwa && !isPwa && !appinstalled && (
-                <button className="install" onClick={showInstallPrompt}>
-                  {language === "中文" ? "安裝" : "Install"}
-                </button>
-              )}
+
+              <button className="install" onClick={showInstallPrompt}>
+                {language === "中文" ? "安裝" : "Install"}
+              </button>
             </div>
           </div>
         </MobileNav>

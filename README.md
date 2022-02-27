@@ -1,5 +1,9 @@
 # JokeHub
 
+### Jokehub 台灣最好的笑話網站
+你受夠IG,FB上那些無聊梗圖了嗎?  
+快來Jokehub分享你自己的笑話，並幫其他人的笑話評分
+
 ### What is it?
 
 JokeHub is a website where you can posts joke and rate jokes, anonymously.

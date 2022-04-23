@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../styles/Joke.module.css";
 import { Range, getTrackBackground } from "react-range";
-export default function joke({ joke, blobPattern }) {
+export default function Joke({ joke, blobPattern }) {
   const [score, setScore] = useState([5]); //remeber to math.floor before writing to db
   return (
     <div className={styles.main}>

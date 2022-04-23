@@ -8,7 +8,7 @@ export default function Navbar() {
     <div className={styles.body}>
       <Link href="/">
         <a>
-          <Image src={icon} height={80} />
+          <Image src={icon} height={80} alt="Icon of this website, JokeHub." />
         </a>
       </Link>
       <DropdownMenu />

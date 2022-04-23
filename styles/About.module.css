@@ -1,0 +1,17 @@
+.body {
+  margin-left: 2em;
+  height: 100%;
+
+  margin: 1em 2em;
+}
+.body p {
+  margin-left: 2em;
+}
+.body a {
+  color: blue;
+}
+.body a:hover,
+.body a:focus {
+  font-weight: 700;
+  cursor: pointer;
+}

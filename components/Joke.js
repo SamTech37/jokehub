@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/Joke.module.css";
-
+import { Range, getTrackBackground } from "react-range";
 export default function joke({ joke, blobPattern }) {
+  const [score, setScore] = useState([5]); //remeber to math.floor before writing to db
   return (
     <div className={styles.main}>
       <style jsx>{`
@@ -25,7 +26,68 @@ export default function joke({ joke, blobPattern }) {
         }
       `}</style>
       <div className="blob">7</div>
-      <div className={styles.body}>{joke}</div>
+      <div className={styles.body}>
+        <p>{joke}</p>
+
+        <Range
+          values={score}
+          step={0.1}
+          min={0}
+          max={10}
+          onChange={(values) => setScore(values)}
+          renderTrack={({ props, children }) => (
+            <div
+              onMouseDown={props.onMouseDown}
+              onTouchStart={props.onTouchStart}
+              style={{
+                ...props.style,
+                height: "36px",
+                display: "flex",
+                width: "80%",
+                marginLeft: "5%",
+              }}
+            >
+              <div
+                ref={props.ref}
+                style={{
+                  height: "7px",
+                  width: "100%",
+                  borderRadius: "4px",
+                  background: getTrackBackground({
+                    values: score,
+                    colors: ["#FFAB10", "#ccc"],
+                    min: 0,
+                    max: 10,
+                  }),
+                  alignSelf: "center",
+                }}
+              >
+                {children}
+              </div>
+            </div>
+          )}
+          renderThumb={({ props }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: "40px",
+                width: "40px",
+                borderRadius: "4px",
+                backgroundColor: "#FFF",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                boxShadow: "0px 2px 6px #AAA",
+                fontWeight: "500",
+                fontSize: "24px",
+              }}
+            >
+              {score[0].toFixed(0)}
+            </div>
+          )}
+        />
+      </div>
     </div>
   );
 }

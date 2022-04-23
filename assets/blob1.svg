@@ -1,0 +1,28 @@
+<svg
+      viewBox="0 0 500 500"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="100%"
+      id="blobSvg"
+    >
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color: rgb(255, 52, 192);"></stop>
+        <stop offset="100%" style="stop-color: rgb(255, 0, 0);"></stop>
+      </linearGradient>
+      </defs>
+      <path fill="url(#gradient)">
+        <animate
+          attributeName="d"
+          dur="10000ms"
+          repeatCount="indefinite"
+          values="M409,357.5Q374,465,264.5,439.5Q155,414,105,332Q55,250,96.5,152.5Q138,55,253.5,49Q369,43,406.5,146.5Q444,250,409,357.5Z
+          ;M380,327.5Q339,405,237,427Q135,449,148,349.5Q161,250,160.5,172Q160,94,241,110Q322,126,371.5,188Q421,250,380,327.5Z
+          ;M363,347.5Q363,445,272,407Q181,369,114,309.5Q47,250,98,163Q149,76,249,77.5Q349,79,356,164.5Q363,250,363,347.5Z
+          ;M389.5,320.5Q331,391,235.5,415.5Q140,440,79,345Q18,250,100,190.5Q182,131,277.5,83.5Q373,36,410.5,143Q448,250,389.5,320.5Z
+          ;M409,357.5Q374,465,264.5,439.5Q155,414,105,332Q55,250,96.5,152.5Q138,55,253.5,49Q369,43,406.5,146.5Q444,250,409,357.5Z"    
+           
+          ></animate>
+          <!-- set the first and last same for loop-->
+      </path>
+    </svg>

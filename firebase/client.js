@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  getDocs,
+  query,
+  where,
+  limit,
+  collection,
+  documentId,
+} from "firebase/firestore/lite";
 import {
   getAuth,
   signInWithPopup,
@@ -24,8 +32,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const postsRef = collection(db, "posts");
+//database
 
-//lib
+function makeid(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+export const getRandomJoke = async (setJokes) => {
+  const key = makeid(20); //make a random id and query the closest docs
+  const q = query(postsRef, limit(1), where(documentId(), ">=", key));
+  const backupQ = query(postsRef, limit(1), where(documentId(), "<", key));
+  let snapshot = await getDocs(q);
+  if (snapshot.size == 0) snapshot = await getDocs(backupQ); //backup if the first result is empty
+
+  const newJokes = [];
+  snapshot.forEach((doc) => {
+    newJokes.push({ ...doc.data(), id: doc.id });
+    console.log({ ...doc.data(), id: doc.id });
+  });
+  setJokes((prevJokes) => [...prevJokes, ...newJokes]);
+};
+
+//auth
 export const signInGooglePop = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).catch((error) => {

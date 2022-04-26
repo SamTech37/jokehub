@@ -25,9 +25,11 @@ export default function Joke({ joke, blobPattern }) {
           }
         }
       `}</style>
-      <div className="blob">7</div>
+      <div className="blob">
+        {Math.round((joke.totalRating / joke.rates) * 10) / 10 || "無"}
+      </div>
       <div className={styles.body}>
-        <p>{joke}</p>
+        <p>{joke.content}</p>
 
         <Range
           values={score}

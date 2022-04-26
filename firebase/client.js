@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-//import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore/lite";
 import {
   getAuth,
   signInWithPopup,
@@ -22,8 +22,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//const db = getFirestore(app);
+const db = getFirestore(app);
 const auth = getAuth(app);
+
+//lib
 export const signInGooglePop = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).catch((error) => {
@@ -41,6 +43,24 @@ export const signInFacebookPop = () => {
     console.log(errorCode, errorMessage);
   });
 };
+
+/*export const signInGoogleRedirect = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithRedirect(auth, provider).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  });
+};
+
+export const signInFacebookRedirect = () => {
+  const provider = new FacebookAuthProvider();
+  signInWithRedirect(auth, provider).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  });
+};*/
 
 export const userSignOut = () => {
   signOut(auth);

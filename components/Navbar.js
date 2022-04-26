@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import icon from "../assets/icon.svg";
-export default function Navbar() {
+import styles from "../styles/Navbar.module.css";
+export default function Navbar({ AuthBtn }) {
   return (
     <div className={styles.body}>
       <Link href="/">
@@ -11,6 +11,7 @@ export default function Navbar() {
           <Image src={icon} height={80} alt="Icon of this website, JokeHub." />
         </a>
       </Link>
+      {AuthBtn}
       <DropdownMenu />
     </div>
   );

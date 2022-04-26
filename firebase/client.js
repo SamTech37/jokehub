@@ -5,8 +5,9 @@ import {
   signInWithPopup,
   signOut,
   signInWithRedirect,
-  onAuthStateChanged,
   GoogleAuthProvider,
+  FacebookAuthProvider,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -23,23 +24,29 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 //const db = getFirestore(app);
 const auth = getAuth(app);
-export const signInGooglePop = (setUser) => {
+export const signInGooglePop = () => {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // The signed-in user info.
-      const user = result.user;
-      setUser(user);
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    });
+  signInWithPopup(auth, provider).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  });
 };
 
-export const userSignOut = (setUser) => {
+export const signInFacebookPop = () => {
+  const provider = new FacebookAuthProvider();
+  signInWithPopup(auth, provider).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  });
+};
+
+export const userSignOut = () => {
   signOut(auth);
-  setUser();
+};
+export const useAuth = (setUser) => {
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
 };

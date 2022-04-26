@@ -1,18 +1,33 @@
 import "../styles/globals.css";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
-import { signInGooglePop, userSignOut } from "../firebase/client";
+import {
+  signInGooglePop,
+  signInFacebookPop,
+  userSignOut,
+  useAuth,
+} from "../firebase/client";
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState();
+  useAuth(setUser);
   const AuthBtn = (
     <div>
       <button
         onClick={() => {
-          if (user) userSignOut(setUser);
-          else signInGooglePop(setUser);
+          if (user) userSignOut();
+          else signInGooglePop();
         }}
       >
-        {user ? "SignOut" : "SignIn"}
+        {user ? "SignOut" : "Google"}
+      </button>
+
+      <button
+        onClick={() => {
+          if (user) userSignOut();
+          else signInFacebookPop();
+        }}
+      >
+        {user ? "SignOut" : "FB"}
       </button>
       <button onClick={() => console.log(user)}>Check</button>
     </div>
@@ -20,7 +35,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Navbar AuthBtn={AuthBtn}></Navbar>
-      <Component {...pageProps} />
+      <Component {...pageProps} user={user} />
     </>
   );
 }

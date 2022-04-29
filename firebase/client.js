@@ -50,7 +50,7 @@ function makeid(length) {
 
 let nextBatch = {};
 
-export const getJokesChrono = async (setJokes) => {
+export const getJokesChrono = async () => {
   const q = query(
     postsRef,
     limit(3),
@@ -73,10 +73,9 @@ export const getRandomJoke = async () => {
   const backupQ = query(postsRef, limit(1), where(documentId(), "<", key));
 
   let snapshot = await getDocs(q);
-  if (snapshot.size == 0) snapshot = await getDocs(backupQ); //backup if the first result is empty
-  const newJokes = [];
-  snapshot.forEach((doc) => newJokes.push({ ...doc.data(), id: doc.id }));
-  return newJokes;
+  if (snapshot.size == 0) snapshot = await getDocs(backupQ); //in case the first result is empty
+  const newJoke = { ...snapshot.docs[0].data(), id: snapshot.docs[0].id };
+  return newJoke;
 };
 
 //auth

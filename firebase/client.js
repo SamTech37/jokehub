@@ -7,6 +7,8 @@ import {
   limit,
   collection,
   documentId,
+  orderBy,
+  startAfter,
 } from "firebase/firestore/lite";
 import {
   getAuth,
@@ -46,19 +48,35 @@ function makeid(length) {
   return result;
 }
 
-export const getRandomJoke = async (setJokes) => {
+let nextBatch = {};
+
+export const getJokesChrono = async (setJokes) => {
+  const q = query(
+    postsRef,
+    limit(3),
+    orderBy("time", "desc"),
+    startAfter(nextBatch)
+  );
+
+  const newJokes = [];
+  let snapshot = await getDocs(q);
+  snapshot.forEach((doc) => newJokes.push({ ...doc.data(), id: doc.id }));
+
+  if (snapshot.empty) nextBatch = "No More";
+  else nextBatch = snapshot.docs[snapshot.docs.length - 1]; //set the startAfter
+  return newJokes;
+};
+
+export const getRandomJoke = async () => {
   const key = makeid(20); //make a random id and query the closest docs
   const q = query(postsRef, limit(1), where(documentId(), ">=", key));
   const backupQ = query(postsRef, limit(1), where(documentId(), "<", key));
+
   let snapshot = await getDocs(q);
   if (snapshot.size == 0) snapshot = await getDocs(backupQ); //backup if the first result is empty
-
   const newJokes = [];
-  snapshot.forEach((doc) => {
-    newJokes.push({ ...doc.data(), id: doc.id });
-    console.log({ ...doc.data(), id: doc.id });
-  });
-  setJokes((prevJokes) => [...prevJokes, ...newJokes]);
+  snapshot.forEach((doc) => newJokes.push({ ...doc.data(), id: doc.id }));
+  return newJokes;
 };
 
 //auth

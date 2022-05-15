@@ -20,8 +20,14 @@ export default function Home({ initialJokes }) {
       setJokes((prevJokes) => [...prevJokes, ...newJokes]);
       if (newJokes.length == 0) setHasMore(false);
     }, 1000);
+  const backToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div>
+      <button className={styles.scroll} onClick={backToTop}>
+        ⬆
+      </button>
       <main className={styles.main}>
         <PostingBlock />
         <InfiniteScroll

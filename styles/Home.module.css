@@ -2,3 +2,21 @@
   overflow: auto;
   min-height: 100vh;
 }
+
+.scroll {
+  z-index: 50;
+  border: none;
+  outline: none;
+  background-color: #ffaa01cc;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1rem;
+  position: fixed;
+  bottom: 2em;
+  right: 1em;
+  font-size: 24px;
+  -webkit-tap-highlight-color: transparent;
+}

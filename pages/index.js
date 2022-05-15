@@ -10,16 +10,18 @@ import { getRandomJoke, getJokesChrono } from "../firebase/client";
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function Home({ initialJokes }) {
+export default function Home({ initialJokes, user }) {
   const blobs = [blob, blob1, blob2, blob3, blob4];
   const [jokes, setJokes] = useState(JSON.parse(initialJokes));
   const [hasMore, setHasMore] = useState(true);
+
   const loadMore = () =>
     setTimeout(async () => {
       const newJokes = await getJokesChrono();
       setJokes((prevJokes) => [...prevJokes, ...newJokes]);
       if (newJokes.length == 0) setHasMore(false);
     }, 1000);
+
   const backToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -29,7 +31,7 @@ export default function Home({ initialJokes }) {
         ⬆
       </button>
       <main className={styles.main}>
-        <PostingBlock />
+        <PostingBlock user={user} />
         <InfiniteScroll
           dataLength={jokes.length}
           next={loadMore}

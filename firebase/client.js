@@ -9,6 +9,8 @@ import {
   documentId,
   orderBy,
   startAfter,
+  addDoc,
+  serverTimestamp,
 } from "firebase/firestore/lite";
 import {
   getAuth,
@@ -49,7 +51,6 @@ function makeid(length) {
 }
 
 let nextBatch = {};
-
 export const getJokesChrono = async () => {
   const q = query(
     postsRef,
@@ -76,6 +77,20 @@ export const getRandomJoke = async () => {
   if (snapshot.size == 0) snapshot = await getDocs(backupQ); //in case the first result is empty
   const newJoke = { ...snapshot.docs[0].data(), id: snapshot.docs[0].id };
   return newJoke;
+};
+
+export const postJoke = async (content, keyword, uid) => {
+  const newDoc = await addDoc(postsRef, {
+    content: content,
+    keyword: keyword,
+    language: "中文",
+    time: serverTimestamp(),
+    posterUid: uid,
+    rates: Number(0),
+    totalRating: Number(0),
+    ratedUsers: [],
+  });
+  return newDoc.id;
 };
 
 //auth

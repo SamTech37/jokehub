@@ -17,8 +17,9 @@ export default function Joke({ joke, blobPattern }) {
           background-image: url(${blobPattern.src});
           background-repeat: no-repeat;
           background-position: center;
-          font-size: 32px;
+          font-size: 40px;
           font-weight: 500;
+          font-family: "VT323";
           transition: 300ms;
           @media screen and (max-width: 450px) {
             height: 20vh;
@@ -83,7 +84,8 @@ export default function Joke({ joke, blobPattern }) {
                 alignItems: "center",
                 boxShadow: "0px 2px 6px #AAA",
                 fontWeight: "500",
-                fontSize: "24px",
+                fontSize: "30px",
+                fontFamily: "VT323",
               }}
             >
               {score[0].toFixed(0)}

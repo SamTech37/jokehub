@@ -29,7 +29,6 @@ function MyApp({ Component, pageProps }) {
       >
         {user ? "SignOut" : "FB"}
       </button>
-      <button onClick={() => console.log(user)}>Check</button>
     </div>
   );
   return (

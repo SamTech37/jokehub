@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { Range, getTrackBackground } from "react-range";
 import styles from "../styles/Joke.module.css";
 export default function Joke({
@@ -36,8 +37,19 @@ export default function Joke({
           }
         }
       `}</style>
-      <div className="blob">
-        {Math.round((joke.totalRating / joke.rates) * 10) / 10 || "None"}
+      <div>
+        <div className="blob">
+          {Math.round((joke.totalRating / joke.rates) * 10) / 10 || "None"}
+        </div>
+        <Link href={`/u/${joke.posterUid}`} passHref>
+          <img
+            className={styles.u}
+            src={`https://avatars.dicebear.com/api/croodles-neutral/${joke.posterUid}.svg`}
+            alt="poster"
+            width={80}
+            height={80}
+          />
+        </Link>
       </div>
       <div className={styles.body}>
         {isModal ? (

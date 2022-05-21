@@ -30,12 +30,13 @@ export default function Home({ initialJokes, user }) {
   };
   return (
     <div>
-      <JokeModal
-        open={open}
-        setOpen={setOpen}
-        joke={modalContent}
-        blobPattern={blobs[Math.floor(Math.random() * blobs.length)]}
-      ></JokeModal>
+      <JokeModal open={open} setOpen={setOpen}>
+        <Joke
+          isModal={true}
+          joke={modalContent}
+          blobPattern={blobs[Math.floor(Math.random() * blobs.length)]}
+        />
+      </JokeModal>
       <button className={styles.scroll} onClick={backToTop}>
         ⬆
       </button>
@@ -58,6 +59,7 @@ export default function Home({ initialJokes, user }) {
               index //the i is useful
             ) => (
               <Joke
+                isModal={false}
                 setModalContent={setModalContent}
                 setOpen={setOpen}
                 key={index}

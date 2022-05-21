@@ -31,7 +31,7 @@ export default function Joke({ joke, blobPattern }) {
         {Math.round((joke.totalRating / joke.rates) * 10) / 10 || "None"}
       </div>
       <div className={styles.body}>
-        <p>{joke.content}</p>
+        <p className={styles.clamp}>{joke.content}</p>
 
         <Range
           values={score}

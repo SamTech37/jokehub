@@ -4,7 +4,7 @@
 }
 
 .scroll {
-  z-index: 50;
+  z-index: 3;
   border: none;
   outline: none;
   background-color: #ffaa01cc;

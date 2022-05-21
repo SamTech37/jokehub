@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Range, getTrackBackground } from "react-range";
 import styles from "../styles/Joke.module.css";
-export default function Joke({ joke, blobPattern }) {
+export default function Joke({ joke, blobPattern, setModalContent, setOpen }) {
   const [score, setScore] = useState([5]); //remeber to math.floor before writing to db
-
+  const openModal = () => {
+    setModalContent(joke);
+    setOpen(true);
+  };
   return (
     <div className={styles.main}>
       <style jsx>{`
@@ -31,8 +34,9 @@ export default function Joke({ joke, blobPattern }) {
         {Math.round((joke.totalRating / joke.rates) * 10) / 10 || "None"}
       </div>
       <div className={styles.body}>
-        <p className={styles.clamp}>{joke.content}</p>
-
+        <a className={styles.link} onClick={openModal}>
+          <p className={styles.clamp}>{joke.content}</p>
+        </a>
         <Range
           values={score}
           step={0.1}

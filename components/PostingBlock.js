@@ -18,7 +18,7 @@ export default function PostingBlock({ user }) {
     setNewKeyword("");
   };
   return (
-    <div className={styles.main}>
+    <div className={styles.postingblock}>
       <form className={styles.post}>
         <textarea
           className={styles.input}

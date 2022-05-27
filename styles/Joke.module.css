@@ -66,7 +66,9 @@
   position: relative;
   top: 2px;
 }
-
+.content {
+  overflow: auto;
+}
 .backdrop {
   position: fixed;
   height: 100%;

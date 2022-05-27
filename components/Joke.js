@@ -13,6 +13,7 @@ export default function Joke({
   const openModal = () => {
     setModalContent(joke);
     setOpen(true);
+    document.body.style.overflow = "hidden";
   };
   return (
     <div className={isModal ? styles.modal : styles.main}>
@@ -53,7 +54,7 @@ export default function Joke({
       </div>
       <div className={styles.body}>
         {isModal ? (
-          <p>{joke.content}</p>
+          <p className={styles.content}>{joke.content}</p>
         ) : (
           <a className={styles.link} onClick={openModal}>
             <p className={styles.clamp}>{joke.content}</p>
@@ -118,6 +119,10 @@ export default function Joke({
             </div>
           )}
         />
+      </div>
+      <div className={styles.interact}>
+        <button>Share</button>
+        <button>Rate</button>
       </div>
     </div>
   );

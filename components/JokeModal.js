@@ -10,7 +10,7 @@ export default function JokeModal({ open, setOpen, children }) {
           className={styles.backdrop}
           onClick={() => {
             setOpen(false);
-            //document.body.style.overflow = "visible";
+            document.body.style.overflow = "visible";
           }}
         />
         {children}

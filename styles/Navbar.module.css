@@ -32,7 +32,12 @@
   box-shadow: 0 0 3px black;
   position: absolute;
   top: 75px;
-  transform: translateX(-20%);
+  transform: translateX(-40%);
   width: 300px;
   padding: 10px;
+}
+@media screen and (max-width: 800px) {
+  .menu {
+    width: 150px;
+  }
 }

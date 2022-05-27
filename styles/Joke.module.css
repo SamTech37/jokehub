@@ -133,6 +133,21 @@
 .score {
   grid-area: score;
 }
+.blob {
+  display: flex;
+  height: 15vw;
+  width: 15vw;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: "VT323";
+  transition: 300ms;
+}
+
 .body {
   grid-area: joke;
   display: flex;
@@ -178,23 +193,11 @@
   z-index: 4;
 }
 @media screen and (max-width: 800px) {
-  .score {
-    display: flex;
-    flex-direction: row;
-  }
   .main {
     border-radius: 60px;
     width: 100vw;
     margin: 5px 0;
-
-    grid-template-areas:
-      "score score"
-      "tag tag"
-      "joke joke"
-      "share share"
-      "slide rate";
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 2fr 50px 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
   }
   .postingblock {
     border-radius: 60px;

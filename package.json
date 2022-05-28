@@ -16,6 +16,7 @@
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-range": "^1.8.12",
+    "react-share": "^4.4.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

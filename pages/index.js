@@ -32,7 +32,7 @@ export default function Home({ initialJokes, user }) {
     <div>
       <JokeModal open={open} setOpen={setOpen}>
         <Joke
-          isModal={true}
+          displayMode="modal"
           joke={modalContent}
           blobPattern={blobs[Math.floor(Math.random() * blobs.length)]}
         />
@@ -59,7 +59,7 @@ export default function Home({ initialJokes, user }) {
               index //the i is useful
             ) => (
               <Joke
-                isModal={false}
+                displayMode="main"
                 setModalContent={setModalContent}
                 setOpen={setOpen}
                 key={index}

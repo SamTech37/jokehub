@@ -178,6 +178,10 @@
   margin: 5px 15%;
   background-color: #fff;
 }
+.page {
+  composes: main;
+  height: auto;
+}
 .modal {
   composes: main;
   position: fixed;

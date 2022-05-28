@@ -2,14 +2,24 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Range, getTrackBackground } from "react-range";
 import { FaShare } from "react-icons/fa";
+import { HiLink } from "react-icons/hi";
+import {
+  FacebookShareButton,
+  LineShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  LineIcon,
+  TwitterIcon,
+} from "react-share";
 import styles from "../styles/Joke.module.css";
 export default function Joke({
   joke,
   blobPattern,
-  isModal,
+  displayMode,
   setModalContent,
   setOpen,
 }) {
+  const shareUrl = `https://jokehub.vercel.app/p/${joke.id}`;
   const [score, setScore] = useState([5]); //remeber to math.floor before writing to db
   const openModal = () => {
     setModalContent(joke);
@@ -17,7 +27,7 @@ export default function Joke({
     document.body.style.overflow = "hidden";
   };
   return (
-    <div className={isModal ? styles.modal : styles.main}>
+    <div className={styles[displayMode]}>
       <style jsx>{`
         .pattern {
           background-image: url(${blobPattern.src});
@@ -38,12 +48,12 @@ export default function Joke({
         </Link>
       </div>
       <div className={styles.body}>
-        {isModal ? (
-          <p className={styles.content}>{joke.content}</p>
-        ) : (
+        {displayMode == "main" ? (
           <a className={styles.link} onClick={openModal}>
             <p className={styles.clamp}>{joke.content}</p>
           </a>
+        ) : (
+          <p className={styles.content}>{joke.content}</p>
         )}
       </div>
       <div className={styles.slide}>
@@ -114,7 +124,21 @@ export default function Joke({
             <FaShare />
           </button>
           <span className={styles.menu}>
-            <button className={styles.sharebtn}>h </button>
+            <button
+              className={styles.sharebtn}
+              onClick={() => navigator.clipboard.writeText(shareUrl)}
+            >
+              <HiLink />
+            </button>
+            <TwitterShareButton url={shareUrl} tags={["JokeHub"]}>
+              <TwitterIcon size={32} round={true} />
+            </TwitterShareButton>
+            <FacebookShareButton url={shareUrl} hashtag="JokeHub">
+              <FacebookIcon size={32} round={true} />
+            </FacebookShareButton>
+            <LineShareButton url={shareUrl} title="JokeHub">
+              <LineIcon size={32} round={true} />
+            </LineShareButton>
           </span>
         </span>
       </div>

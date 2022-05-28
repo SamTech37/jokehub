@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "../styles/Joke.module.css";
 import { postJoke } from "../firebase/client";
+import { useRouter } from "next/router";
 
 export default function PostingBlock({ user }) {
+  let router = useRouter();
   const [newContent, setNewContent] = useState("");
   const [newKeyword, setNewKeyword] = useState("");
   const handleSubmit = async (e) => {
@@ -13,7 +15,7 @@ export default function PostingBlock({ user }) {
     }
     const processedTag = newKeyword.replaceAll(" ", "").replaceAll("#", "");
     const jokeId = await postJoke(newContent, processedTag, user.uid);
-    console.log(jokeId);
+    router.push(`/p/${jokeId}`, `/p/${jokeId}`, {});
     setNewContent("");
     setNewKeyword("");
   };

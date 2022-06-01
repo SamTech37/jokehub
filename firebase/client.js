@@ -123,7 +123,7 @@ export const signInFacebookPop = () => {
   });
 };
 
-/*export const signInGoogleRedirect = () => {
+export const signInGoogleRedirect = () => {
   const provider = new GoogleAuthProvider();
   signInWithRedirect(auth, provider).catch((error) => {
     const errorCode = error.code;
@@ -139,7 +139,7 @@ export const signInFacebookRedirect = () => {
     const errorMessage = error.message;
     console.log(errorCode, errorMessage);
   });
-};*/
+};
 
 export const userSignOut = () => {
   signOut(auth);

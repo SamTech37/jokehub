@@ -48,8 +48,18 @@
     0 0 0 3px #c8dafc;
 }
 
-@media screen and (max-width: 500px) {
+.loginMobile {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
   .signin {
     font-size: 24px;
+  }
+  .loginWeb {
+    display: none;
+  }
+  .loginMobile {
+    display: unset;
   }
 }

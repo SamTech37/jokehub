@@ -27,17 +27,30 @@ export default function me({ user }) {
           <h1> {user?.displayName}</h1>
         </div>
       ) : (
-        <div className={styles.login}>
-          <button className={styles.signin} onClick={signInGooglePop}>
-            <FcGoogle />
-            用Google登入
-          </button>
+        <>
+          <div className={`${styles.login} ${styles.loginWeb}`}>
+            <button className={styles.signin} onClick={signInGooglePop}>
+              <FcGoogle />
+              用Google登入
+            </button>
 
-          <button className={styles.signin} onClick={signInFacebookPop}>
-            <BsFacebook color="#4267B2" />
-            用Facebook登入
-          </button>
-        </div>
+            <button className={styles.signin} onClick={signInFacebookPop}>
+              <BsFacebook color="#4267B2" />
+              用Facebook登入
+            </button>
+          </div>
+          <div className={`${styles.login} ${styles.loginMobile}`}>
+            <button className={styles.signin} onClick={signInGoogleRedirect}>
+              <FcGoogle />
+              用Google登入
+            </button>
+
+            <button className={styles.signin} onClick={signInFacebookRedirect}>
+              <BsFacebook color="#4267B2" />
+              用Facebook登入
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

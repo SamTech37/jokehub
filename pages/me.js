@@ -25,7 +25,7 @@ export default function me({ user }) {
           />
           <div className={styles.profile}>
             <h1>{"NickName"}</h1>
-            <p>you haven't set you nickname</p>
+            <p>{"you haven't set you nickname"}</p>
             <h2>{"Bio:"}</h2>
           </div>
         </div>

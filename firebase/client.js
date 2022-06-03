@@ -13,6 +13,9 @@ import {
   serverTimestamp,
   doc,
   getDoc,
+  updateDoc,
+  increment,
+  arrayUnion,
 } from "firebase/firestore/lite";
 import {
   getAuth,
@@ -102,6 +105,15 @@ export const postJoke = async (content, keyword, uid) => {
     ratedUsers: [],
   });
   return newDoc.id;
+};
+
+const rateJoke = async (pid, uid, userRate) => {
+  if (userRate >= 0 && userRate <= 10)
+    await updateDoc(doc(db, "posts", pid), {
+      ratedUsers: arrayUnion(uid),
+      rates: increment(1),
+      totalRating: increment(userRate),
+    });
 };
 
 //auth

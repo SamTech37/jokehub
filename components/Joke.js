@@ -128,14 +128,17 @@ export default function Joke({
               className={styles.sharebtn}
               onClick={() => navigator.clipboard.writeText(shareUrl)}
             >
-              <HiLink />
+              <HiLink size={32} />
             </button>
+
             <TwitterShareButton url={shareUrl} tags={["JokeHub"]}>
               <TwitterIcon size={32} round={true} />
             </TwitterShareButton>
+
             <FacebookShareButton url={shareUrl} hashtag="JokeHub">
               <FacebookIcon size={32} round={true} />
             </FacebookShareButton>
+
             <LineShareButton url={shareUrl} title="JokeHub">
               <LineIcon size={32} round={true} />
             </LineShareButton>

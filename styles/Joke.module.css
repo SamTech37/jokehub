@@ -54,10 +54,24 @@
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
 }
-.tell:active,
+.tell:active {
+  position: relative;
+  top: 2px;
+}
+
+.sharebtn {
+  font-weight: bold;
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+  padding: 0px;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
 .sharebtn:active {
   position: relative;
   top: 2px;
+  color: #ffab01;
 }
 .content {
   overflow: auto;
@@ -72,7 +86,7 @@
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  width: 160px;
   border-radius: 5px;
   padding: 10px;
   z-index: 1;
@@ -89,15 +103,6 @@
 
 .share {
   grid-area: share;
-}
-.sharebtn {
-  font-weight: bold;
-  font-size: 30px;
-  border: none;
-  background-color: transparent;
-  padding: 10px;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
 }
 .ratebtn {
   font-weight: bold;
@@ -243,5 +248,9 @@
   .modal {
     padding: 10px;
     width: 100vw;
+  }
+  .dropup:hover .menu {
+    flex-direction: column;
+    width: 80px;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import icon from "../assets/icon.svg";
@@ -18,9 +18,35 @@ export default function Navbar({ user }) {
 
 function DropdownMenu({ user }) {
   const [open, setOpen] = useState(false);
+  const wrapperRef = useRef(null);
+  useEffect(() => {
+    //close if clicked outside
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    //subcribe
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      //unsubscribe
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
+
   return (
-    <div className={styles.menuBtn}>
-      <a onClick={() => setOpen(!open)}>😅</a>
+    <div
+      className={styles.menuBtn}
+      ref={wrapperRef} //clicks outside this div will close the menu
+    >
+      <a
+        onClick={(e) => {
+          setOpen(!open);
+          e.preventDefault();
+        }}
+      >
+        😅
+      </a>
       {open && (
         <div className={styles.menu}>
           <Link href="/">

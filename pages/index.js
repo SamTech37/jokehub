@@ -1,12 +1,12 @@
 import styles from "../styles/Home.module.css";
 import Joke from "../components/Joke";
-
 import PostingBlock from "../components/PostingBlock";
 import blob from "../assets/blob.svg";
 import blob1 from "../assets/blob1.svg";
 import blob2 from "../assets/blob2.svg";
 import blob3 from "../assets/blob3.svg";
 import blob4 from "../assets/blob4.svg";
+import { MdArrowUpward } from "react-icons/md";
 import { getRandomJoke, getJokesChrono } from "../firebase/client";
 import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -28,7 +28,7 @@ export default function Home({ initialJokes, user }) {
   return (
     <div>
       <button className={styles.scroll} onClick={backToTop}>
-        ⬆
+        <MdArrowUpward />
       </button>
       <main className={styles.main}>
         <PostingBlock user={user} />

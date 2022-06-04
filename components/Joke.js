@@ -4,6 +4,8 @@ import { rateJoke } from "../firebase/client";
 import { Range, getTrackBackground } from "react-range";
 import { FaShare } from "react-icons/fa";
 import { HiLink } from "react-icons/hi";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
 import {
   FacebookShareButton,
   LineShareButton,
@@ -28,6 +30,10 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
     setDisplay("modal");
     document.body.style.overflow = "hidden";
   };
+  const closeModal = () => {
+    setDisplay("main");
+    document.body.style.overflow = "visible";
+  };
 
   const backToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -45,20 +51,24 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
   return (
     <>
       {display == "modal" && (
-        <div
-          className={styles.backdrop}
-          onClick={() => {
-            setDisplay("main");
-            document.body.style.overflow = "visible";
-          }}
-        />
+        <div className={styles.backdrop} onClick={closeModal} />
       )}
+
       <div className={styles[display]}>
+        {display == "modal" && (
+          <div className={styles.close} onClick={closeModal}>
+            <span className={styles.closebtn}>
+              <AiOutlineCloseCircle />
+            </span>
+          </div>
+        )}
+
         <style jsx>{`
           .pattern {
             background-image: url(${blobPattern.src});
           }
         `}</style>
+
         <div className={styles.score}>
           <div className={`${styles.blob} pattern`}>{score}</div>
           <Link href={`/u/${joke.posterUid}`} passHref>

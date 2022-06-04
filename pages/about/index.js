@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../styles/About.module.css";
 export default function About() {

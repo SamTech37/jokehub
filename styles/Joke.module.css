@@ -156,6 +156,18 @@
   grid-area: tag;
   margin: 10px 0;
 }
+.close {
+  grid-area: close;
+  cursor: pointer;
+  font-size: 40px;
+  color: #ffab01;
+  display: flex;
+}
+.closebtn {
+  margin-left: 30px;
+  width: fit-content;
+  height: fit-content;
+}
 .main {
   display: grid;
   grid-template-areas:
@@ -178,6 +190,10 @@
 }
 .modal {
   composes: main;
+  grid-template-areas:
+    "close tag share"
+    "score joke joke"
+    "score slide rate";
   position: fixed;
   top: 0;
   bottom: 0;
@@ -232,7 +248,7 @@
     margin: 5px 0;
     padding: 10px 0;
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 30px auto 60px 60px;
+    grid-template-rows: 40px auto 60px 60px;
 
     grid-template-areas:
       "score tag tag"
@@ -248,9 +264,17 @@
   .modal {
     padding: 10px;
     width: 100vw;
+    grid-template-areas:
+      "close tag tag"
+      "score joke joke"
+      "score slide share"
+      "rate rate rate";
   }
   .dropup:hover .menu {
     flex-direction: column;
     width: 80px;
+  }
+  .closebtn {
+    margin: 0;
   }
 }

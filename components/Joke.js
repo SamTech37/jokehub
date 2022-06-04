@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { rateJoke } from "../firebase/client";
 import { Range, getTrackBackground } from "react-range";
 import { FaShare } from "react-icons/fa";
 import { HiLink } from "react-icons/hi";
@@ -13,6 +14,7 @@ import {
 } from "react-share";
 import styles from "../styles/Joke.module.css";
 export default function Joke({
+  user,
   joke,
   blobPattern,
   displayMode,
@@ -20,11 +22,32 @@ export default function Joke({
   setOpen,
 }) {
   const shareUrl = `https://jokehub.vercel.app/p/${joke.id}`;
-  const [score, setScore] = useState([5]); //remeber to math.floor before writing to db
+  const [userRate, setUserRate] = useState([5]); //remeber to [0]and math.round before writing to db
+  const [rated, setRated] = useState(joke.ratedUsers.includes(user?.uid));
+  const [score, setScore] = useState(
+    joke.rates == 0
+      ? "None"
+      : Math.round((joke.totalRating / joke.rates) * 10) / 10
+  ); //update display score without refetching
+
   const openModal = () => {
     setModalContent(joke);
     setOpen(true);
     document.body.style.overflow = "hidden";
+  };
+
+  const backToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleRate = () => {
+    setScore(
+      Math.round(
+        ((joke.totalRating + Math.round(userRate[0])) / (joke.rates + 1)) * 10
+      ) / 10
+    );
+    setRated(true);
+    //rateJoke(joke.id, user.uid, userRate[0]);
   };
   return (
     <div className={styles[displayMode]}>
@@ -34,9 +57,7 @@ export default function Joke({
         }
       `}</style>
       <div className={styles.score}>
-        <div className={`${styles.blob} pattern`}>
-          {Math.round((joke.totalRating / joke.rates) * 10) / 10 || "None"}
-        </div>
+        <div className={`${styles.blob} pattern`}>{score}</div>
         <Link href={`/u/${joke.posterUid}`} passHref>
           <img
             className={styles.u}
@@ -58,11 +79,11 @@ export default function Joke({
       </div>
       <div className={styles.slide}>
         <Range
-          values={score}
+          values={userRate}
           step={0.1}
           min={0}
           max={10}
-          onChange={(values) => setScore(values)}
+          onChange={(values) => setUserRate(values)}
           renderTrack={({ props, children }) => (
             <div
               onMouseDown={props.onMouseDown}
@@ -81,7 +102,7 @@ export default function Joke({
                   width: "100%",
                   borderRadius: "4px",
                   background: getTrackBackground({
-                    values: score,
+                    values: userRate,
                     colors: ["#FFAB10", "#ccc"],
                     min: 0,
                     max: 10,
@@ -111,7 +132,7 @@ export default function Joke({
                 fontFamily: "VT323",
               }}
             >
-              {score[0].toFixed(0)}
+              {userRate[0].toFixed(0)}
             </div>
           )}
         />
@@ -146,7 +167,21 @@ export default function Joke({
         </span>
       </div>
       <div className={styles.rate}>
-        <button className={styles.ratebtn}>Rate</button>
+        {user ? (
+          rated ? (
+            <button disabled className={styles.ratebtn}>
+              給過了
+            </button>
+          ) : (
+            <button className={styles.ratebtn} onClick={handleRate}>
+              給分
+            </button>
+          )
+        ) : (
+          <button className={styles.ratebtn} onClick={backToTop}>
+            請登入
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import styles from "../styles/Home.module.css";
 import Joke from "../components/Joke";
-import JokeModal from "../components/JokeModal";
 
 import PostingBlock from "../components/PostingBlock";
 import blob from "../assets/blob.svg";
@@ -16,8 +15,6 @@ export default function Home({ initialJokes, user }) {
   const blobs = [blob, blob1, blob2, blob3, blob4];
   const [jokes, setJokes] = useState(JSON.parse(initialJokes));
   const [hasMore, setHasMore] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
   const loadMore = () =>
     setTimeout(async () => {
       const newJokes = await getJokesChrono();
@@ -30,14 +27,6 @@ export default function Home({ initialJokes, user }) {
   };
   return (
     <div>
-      <JokeModal open={open} setOpen={setOpen}>
-        <Joke
-          user={user}
-          displayMode="modal"
-          joke={modalContent}
-          blobPattern={blobs[Math.floor(Math.random() * blobs.length)]}
-        />
-      </JokeModal>
       <button className={styles.scroll} onClick={backToTop}>
         ⬆
       </button>
@@ -62,8 +51,6 @@ export default function Home({ initialJokes, user }) {
               <Joke
                 user={user}
                 displayMode="main"
-                setModalContent={setModalContent}
-                setOpen={setOpen}
                 key={index}
                 joke={jokes[index]}
                 blobPattern={blobs[index % blobs.length]}

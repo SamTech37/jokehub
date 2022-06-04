@@ -29,10 +29,10 @@ export default function Joke({
       ? "None"
       : Math.round((joke.totalRating / joke.rates) * 10) / 10
   ); //update display score without refetching
+  const [display, setDisplay] = useState(displayMode); //"main","modal" or "page"
 
   const openModal = () => {
-    setModalContent(joke);
-    setOpen(true);
+    setDisplay("modal");
     document.body.style.overflow = "hidden";
   };
 
@@ -50,139 +50,150 @@ export default function Joke({
     //rateJoke(joke.id, user.uid, userRate[0]);
   };
   return (
-    <div className={styles[displayMode]}>
-      <style jsx>{`
-        .pattern {
-          background-image: url(${blobPattern.src});
-        }
-      `}</style>
-      <div className={styles.score}>
-        <div className={`${styles.blob} pattern`}>{score}</div>
-        <Link href={`/u/${joke.posterUid}`} passHref>
-          <img
-            className={styles.u}
-            src={`https://avatars.dicebear.com/api/croodles-neutral/${joke.posterUid}.svg`}
-            alt="poster"
-            width={80}
-            height={80}
-          />
-        </Link>
-      </div>
-      <div className={styles.body}>
-        {displayMode == "main" ? (
-          <a className={styles.link} onClick={openModal}>
-            <p className={styles.clamp}>{joke.content}</p>
-          </a>
-        ) : (
-          <p className={styles.content}>{joke.content}</p>
-        )}
-      </div>
-      <div className={styles.slide}>
-        <Range
-          values={userRate}
-          step={0.1}
-          min={0}
-          max={10}
-          onChange={(values) => setUserRate(values)}
-          renderTrack={({ props, children }) => (
-            <div
-              onMouseDown={props.onMouseDown}
-              onTouchStart={props.onTouchStart}
-              style={{
-                ...props.style,
-                height: "36px",
-                display: "flex",
-                width: "90%",
-              }}
-            >
+    <>
+      {display == "modal" && (
+        <div
+          className={styles.backdrop}
+          onClick={() => {
+            setDisplay("main");
+            document.body.style.overflow = "visible";
+          }}
+        />
+      )}
+      <div className={styles[display]}>
+        <style jsx>{`
+          .pattern {
+            background-image: url(${blobPattern.src});
+          }
+        `}</style>
+        <div className={styles.score}>
+          <div className={`${styles.blob} pattern`}>{score}</div>
+          <Link href={`/u/${joke.posterUid}`} passHref>
+            <img
+              className={styles.u}
+              src={`https://avatars.dicebear.com/api/croodles-neutral/${joke.posterUid}.svg`}
+              alt="poster"
+              width={80}
+              height={80}
+            />
+          </Link>
+        </div>
+        <div className={styles.body}>
+          {displayMode == "main" ? (
+            <a className={styles.link} onClick={openModal}>
+              <p className={styles.clamp}>{joke.content}</p>
+            </a>
+          ) : (
+            <p className={styles.content}>{joke.content}</p>
+          )}
+        </div>
+        <div className={styles.slide}>
+          <Range
+            values={userRate}
+            step={0.1}
+            min={0}
+            max={10}
+            onChange={(values) => setUserRate(values)}
+            renderTrack={({ props, children }) => (
               <div
-                ref={props.ref}
+                onMouseDown={props.onMouseDown}
+                onTouchStart={props.onTouchStart}
                 style={{
-                  height: "7px",
-                  width: "100%",
-                  borderRadius: "4px",
-                  background: getTrackBackground({
-                    values: userRate,
-                    colors: ["#FFAB10", "#ccc"],
-                    min: 0,
-                    max: 10,
-                  }),
-                  alignSelf: "center",
+                  ...props.style,
+                  height: "36px",
+                  display: "flex",
+                  width: "90%",
                 }}
               >
-                {children}
+                <div
+                  ref={props.ref}
+                  style={{
+                    height: "7px",
+                    width: "100%",
+                    borderRadius: "4px",
+                    background: getTrackBackground({
+                      values: userRate,
+                      colors: ["#FFAB10", "#ccc"],
+                      min: 0,
+                      max: 10,
+                    }),
+                    alignSelf: "center",
+                  }}
+                >
+                  {children}
+                </div>
               </div>
-            </div>
-          )}
-          renderThumb={({ props }) => (
-            <div
-              {...props}
-              style={{
-                ...props.style,
-                height: "40px",
-                width: "40px",
-                borderRadius: "4px",
-                backgroundColor: "#FFF",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                boxShadow: "0px 2px 6px #AAA",
-                fontWeight: "500",
-                fontSize: "30px",
-                fontFamily: "VT323",
-              }}
-            >
-              {userRate[0].toFixed(0)}
-            </div>
-          )}
-        />
-      </div>
-      <p className={styles.tag}>{"#" + joke.keyword}</p>
+            )}
+            renderThumb={({ props }) => (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "4px",
+                  backgroundColor: "#FFF",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  boxShadow: "0px 2px 6px #AAA",
+                  fontWeight: "500",
+                  fontSize: "30px",
+                  fontFamily: "VT323",
+                }}
+              >
+                {userRate[0].toFixed(0)}
+              </div>
+            )}
+          />
+        </div>
+        <p className={styles.tag}>{"#" + joke.keyword}</p>
 
-      <div className={styles.share}>
-        <span className={styles.dropup}>
-          <button className={styles.sharebtn}>
-            <FaShare />
-          </button>
-          <span className={styles.menu}>
-            <button
-              className={styles.sharebtn}
-              onClick={() => navigator.clipboard.writeText(shareUrl)}
-            >
-              <HiLink size={32} />
+        <div className={styles.share}>
+          <span className={styles.dropup}>
+            <button className={styles.sharebtn}>
+              <FaShare />
             </button>
+            <span className={styles.menu}>
+              <button
+                className={styles.sharebtn}
+                onClick={() => navigator.clipboard.writeText(shareUrl)}
+              >
+                <HiLink size={32} />
+              </button>
 
-            <TwitterShareButton url={shareUrl} tags={["JokeHub"]}>
-              <TwitterIcon size={32} round={true} />
-            </TwitterShareButton>
+              <TwitterShareButton url={shareUrl} tags={["JokeHub"]}>
+                <TwitterIcon size={32} round={true} />
+              </TwitterShareButton>
 
-            <FacebookShareButton url={shareUrl} hashtag="JokeHub">
-              <FacebookIcon size={32} round={true} />
-            </FacebookShareButton>
+              <FacebookShareButton url={shareUrl} hashtag="JokeHub">
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
 
-            <LineShareButton url={shareUrl} title="JokeHub">
-              <LineIcon size={32} round={true} />
-            </LineShareButton>
+              <LineShareButton url={shareUrl} title="JokeHub">
+                <LineIcon size={32} round={true} />
+              </LineShareButton>
+            </span>
           </span>
-        </span>
-      </div>
-      <div className={styles.rate}>
-        {user ? (
-          rated ? (
-            <button disabled className={styles.ratebtn}>
-              給過了
-            </button>
+        </div>
+        <div className={styles.rate}>
+          {user ? (
+            rated ? (
+              <button disabled className={styles.ratebtn}>
+                給過了
+              </button>
+            ) : (
+              <button className={styles.ratebtn} onClick={handleRate}>
+                給分
+              </button>
+            )
           ) : (
-            <button className={styles.ratebtn} onClick={handleRate}>
-              給分
+            <button className={styles.ratebtn} onClick={backToTop}>
+              請登入
             </button>
-          )
-        ) : (
-          <button className={styles.ratebtn} onClick={backToTop}>
-            請登入
-          </button>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -90,6 +90,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
             <p className={styles.content}>{joke.content}</p>
           )}
         </div>
+
         <div className={styles.slide}>
           <Range
             values={userRate}

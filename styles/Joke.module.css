@@ -73,9 +73,7 @@
   top: 2px;
   color: #ffab01;
 }
-.content {
-  overflow: auto;
-}
+
 .dropup {
   position: relative;
   display: inline-block;
@@ -208,6 +206,26 @@
   white-space: pre-wrap;
   background-color: #fff;
   z-index: 4;
+  overflow-y: auto;
+}
+.modal::-webkit-scrollbar {
+  width: 7px;
+}
+.modal::-webkit-scrollbar-button {
+  background: transparent;
+
+  border-radius: 4px;
+}
+.modal::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  border: 1px solid slategrey;
+}
+.modal::-webkit-scrollbar-track-piece,
+.modal::-webkit-scrollbar-track {
+  box-shadow: transparent;
 }
 .backdrop {
   position: fixed;
@@ -276,5 +294,9 @@
   }
   .closebtn {
     margin: 0;
+  }
+  .content,
+  .clamp {
+    font-size: 20px;
   }
 }

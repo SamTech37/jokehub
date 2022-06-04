@@ -208,25 +208,6 @@
   z-index: 4;
   overflow-y: auto;
 }
-.modal::-webkit-scrollbar {
-  width: 7px;
-}
-.modal::-webkit-scrollbar-button {
-  background: transparent;
-
-  border-radius: 4px;
-}
-.modal::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-
-  background-color: rgba(0, 0, 0, 0.4);
-
-  border: 1px solid slategrey;
-}
-.modal::-webkit-scrollbar-track-piece,
-.modal::-webkit-scrollbar-track {
-  box-shadow: transparent;
-}
 .backdrop {
   position: fixed;
   height: 100%;
@@ -288,6 +269,7 @@
       "score slide share"
       "rate rate rate";
   }
+
   .dropup:hover .menu {
     flex-direction: column;
     width: 80px;
@@ -298,5 +280,26 @@
   .content,
   .clamp {
     font-size: 20px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .modal::-webkit-scrollbar {
+    width: 7px;
+  }
+  .modal::-webkit-scrollbar-button {
+    background: transparent;
+
+    border-radius: 4px;
+  }
+  .modal::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    border: 1px solid slategrey;
+  }
+  .modal::-webkit-scrollbar-track-piece,
+  .modal::-webkit-scrollbar-track {
+    box-shadow: transparent;
   }
 }

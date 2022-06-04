@@ -16,7 +16,7 @@ import styles from "../styles/Joke.module.css";
 export default function Joke({ user, joke, blobPattern, displayMode }) {
   const shareUrl = `https://jokehub.vercel.app/p/${joke.id}`;
   const [userRate, setUserRate] = useState([5]); //remeber to [0]and math.round before writing to db
-  const [rated, setRated] = useState(joke.ratedUsers.includes(user?.uid));
+  const [rated, setRated] = useState(false);
   const [score, setScore] = useState(
     joke.rates == 0
       ? "None"
@@ -40,7 +40,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
       ) / 10
     );
     setRated(true);
-    //rateJoke(joke.id, user.uid, userRate[0]);
+    rateJoke(joke.id, user.uid, userRate[0]);
   };
   return (
     <>
@@ -171,7 +171,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
         </div>
         <div className={styles.rate}>
           {user ? (
-            rated ? (
+            rated || joke.ratedUsers.includes(user?.uid) ? (
               <button disabled className={styles.ratebtn}>
                 給過了
               </button>

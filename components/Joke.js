@@ -13,14 +13,7 @@ import {
   TwitterIcon,
 } from "react-share";
 import styles from "../styles/Joke.module.css";
-export default function Joke({
-  user,
-  joke,
-  blobPattern,
-  displayMode,
-  setModalContent,
-  setOpen,
-}) {
+export default function Joke({ user, joke, blobPattern, displayMode }) {
   const shareUrl = `https://jokehub.vercel.app/p/${joke.id}`;
   const [userRate, setUserRate] = useState([5]); //remeber to [0]and math.round before writing to db
   const [rated, setRated] = useState(joke.ratedUsers.includes(user?.uid));
@@ -79,7 +72,7 @@ export default function Joke({
           </Link>
         </div>
         <div className={styles.body}>
-          {displayMode == "main" ? (
+          {display == "main" ? (
             <a className={styles.link} onClick={openModal}>
               <p className={styles.clamp}>{joke.content}</p>
             </a>

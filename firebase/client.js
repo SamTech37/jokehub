@@ -71,6 +71,23 @@ export const getJokesChrono = async () => {
   else nextBatch = snapshot.docs[snapshot.docs.length - 1]; //set the startAfter
   return newJokes;
 };
+let nextBatchTag = {};
+export const getJokesTag = async (tag) => {
+  const q = query(
+    postsRef,
+    limit(3),
+    where("keyword", "==", tag),
+    orderBy("time", "desc"),
+    startAfter(nextBatchTag)
+  );
+  const newJokes = [];
+  let snapshot = await getDocs(q);
+  snapshot.forEach((doc) => newJokes.push({ ...doc.data(), id: doc.id }));
+
+  if (snapshot.empty) nextBatchTag = "No More";
+  else nextBatchTag = snapshot.docs[snapshot.docs.length - 1]; //set the startAfter
+  return newJokes;
+};
 
 export const getRandomJoke = async () => {
   const key = makeid(20); //make a random id and query the closest docs

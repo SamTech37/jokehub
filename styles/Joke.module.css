@@ -153,6 +153,8 @@
 .tag {
   grid-area: tag;
   margin: 10px 0;
+  color: hsl(3, 100%, 75%);
+  cursor: pointer;
 }
 .close {
   grid-area: close;

@@ -151,7 +151,9 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
             )}
           />
         </div>
-        <p className={styles.tag}>{"#" + joke.keyword}</p>
+        <Link href={`/t/${joke.keyword}`}>
+          <p className={styles.tag}>{"#" + joke.keyword}</p>
+        </Link>
 
         <div className={styles.share}>
           <span className={styles.dropup}>

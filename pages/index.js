@@ -10,6 +10,7 @@ import { MdArrowUpward } from "react-icons/md";
 import { getRandomJoke, getJokesChrono } from "../firebase/client";
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import NoMore from "../components/NoMore";
 
 export default function Home({ user }) {
   const blobs = [blob, blob1, blob2, blob3, blob4];
@@ -27,15 +28,15 @@ export default function Home({ user }) {
         (prevJokes) => [...prevJokes, ...newJokes],
         (document.body.style.overflow = "visible")
       );
-      if (newJokes.length == 0) setHasMore(false);
     }
     initialLoad();
   }, []);
   const loadMore = () =>
     setTimeout(async () => {
       const newJokes = await getJokesChrono();
-      setJokes((prevJokes) => [...prevJokes, ...newJokes]);
       if (newJokes.length == 0) setHasMore(false);
+      newJokes.push(await getRandomJoke()); //then add another randomJoke
+      setJokes((prevJokes) => [...prevJokes, ...newJokes]);
     }, 1000);
 
   const backToTop = () => {
@@ -54,9 +55,11 @@ export default function Home({ user }) {
           hasMore={hasMore}
           loader={<h2>loading...</h2>}
           endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
+            <NoMore>
+              <h1 className={styles.click} onClick={backToTop}>
+                回上面說個笑話吧
+              </h1>
+            </NoMore>
           }
         >
           {jokes.map(

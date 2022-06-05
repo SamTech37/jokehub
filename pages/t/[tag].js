@@ -7,9 +7,14 @@ import blob3 from "../../assets/blob3.svg";
 import blob4 from "../../assets/blob4.svg";
 import { getJokesTag } from "../../firebase/client";
 import { MdArrowUpward } from "react-icons/md";
+import { BiArrowBack } from "react-icons/bi";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/dist/client/router";
 import InfiniteScroll from "react-infinite-scroll-component";
+import NoMore from "../../components/NoMore";
+
 export default function Home({ tag, user }) {
+  const router = useRouter();
   const blobs = [blob, blob1, blob2, blob3, blob4];
   const [jokes, setJokes] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -42,7 +47,12 @@ export default function Home({ tag, user }) {
       <button className={styles.scroll} onClick={backToTop}>
         <MdArrowUpward />
       </button>
-      <h1>{tag}</h1>
+      <div className={styles.header}>
+        <button className={styles.back} onClick={() => router.back()}>
+          <BiArrowBack />
+        </button>
+        <h1>{tag}</h1>
+      </div>
       {/* <button onClick={loadMore}>Load</button>
        {jokes.map((j) => (
         <Joke
@@ -59,11 +69,7 @@ export default function Home({ tag, user }) {
           next={loadMore}
           hasMore={hasMore}
           loader={<h2>loading...</h2>}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
+          endMessage={<NoMore />}
         >
           {jokes.map(
             (

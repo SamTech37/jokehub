@@ -20,3 +20,46 @@
   font-size: 24px;
   -webkit-tap-highlight-color: transparent;
 }
+
+.back {
+  background-color: transparent;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+.back:active {
+  position: relative;
+  top: 2px;
+}
+.header {
+  display: flex;
+}
+.nomore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid black;
+  border-radius: 60px;
+  width: 70%;
+  min-height: 400px;
+  white-space: pre-wrap;
+  margin: 5px 15%;
+  background-color: #fff;
+}
+
+.click {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .click {
+    font-size: 32px;
+  }
+  .nomore {
+    border-radius: 40px;
+    width: 100vw;
+    margin: 5px 0;
+  }
+}

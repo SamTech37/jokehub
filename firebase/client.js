@@ -42,8 +42,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const postsRef = collection(db, "posts");
-//database
 
+//profile&users
+
+//jokes
 function makeid(length) {
   var result = "";
   var characters =
@@ -54,6 +56,17 @@ function makeid(length) {
   }
   return result;
 }
+export const getRandomJoke = async () => {
+  const key = makeid(20); //make a random id and query the closest docs
+  const q = query(postsRef, limit(1), where(documentId(), ">=", key));
+  const backupQ = query(postsRef, limit(1), where(documentId(), "<", key));
+
+  let snapshot = await getDocs(q);
+  if (snapshot.size == 0) snapshot = await getDocs(backupQ); //in case the first result is empty
+  const newJoke = { ...snapshot.docs[0].data(), id: snapshot.docs[0].id };
+  return newJoke;
+};
+
 let nextBatch = {};
 export const getJokesChrono = async () => {
   const q = query(
@@ -89,16 +102,6 @@ export const getJokesTag = async (tag) => {
   return newJokes;
 };
 
-export const getRandomJoke = async () => {
-  const key = makeid(20); //make a random id and query the closest docs
-  const q = query(postsRef, limit(1), where(documentId(), ">=", key));
-  const backupQ = query(postsRef, limit(1), where(documentId(), "<", key));
-
-  let snapshot = await getDocs(q);
-  if (snapshot.size == 0) snapshot = await getDocs(backupQ); //in case the first result is empty
-  const newJoke = { ...snapshot.docs[0].data(), id: snapshot.docs[0].id };
-  return newJoke;
-};
 export const getJoke = async (jokeId) => {
   const docRef = doc(db, "posts", jokeId);
   const docSnap = await getDoc(docRef);
@@ -106,7 +109,7 @@ export const getJoke = async (jokeId) => {
     const joke = { ...docSnap.data(), id: docSnap.id };
     return joke;
   } else {
-    return;
+    return "none";
   }
 };
 

@@ -8,13 +8,29 @@ import blob3 from "../assets/blob3.svg";
 import blob4 from "../assets/blob4.svg";
 import { MdArrowUpward } from "react-icons/md";
 import { getRandomJoke, getJokesChrono } from "../firebase/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home({ initialJokes, user }) {
   const blobs = [blob, blob1, blob2, blob3, blob4];
   const [jokes, setJokes] = useState(JSON.parse(initialJokes));
   const [hasMore, setHasMore] = useState(true);
+  // useEffect(() => {
+  //   async function initialLoad() {
+  //     document.body.style.overflow = "hidden";
+  //     const newJokes = [
+  //       await getRandomJoke(),
+  //       await getRandomJoke(),
+  //       await getRandomJoke(),
+  //     ];
+  //     setJokes(
+  //       (prevJokes) => [...prevJokes, ...newJokes],
+  //       (document.body.style.overflow = "visible")
+  //     );
+  //     if (newJokes.length == 0) setHasMore(false);
+  //   }
+  //   initialLoad();
+  // }, []);
   const loadMore = () =>
     setTimeout(async () => {
       const newJokes = await getJokesChrono();
@@ -63,7 +79,7 @@ export default function Home({ initialJokes, user }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   //these codes run on server
   let randomJokes = [
     await getRandomJoke(),
@@ -72,5 +88,6 @@ export async function getServerSideProps() {
   ];
   return {
     props: { initialJokes: JSON.stringify(randomJokes) },
+    revalidate: 60,
   };
 }

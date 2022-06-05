@@ -86,12 +86,6 @@ export default function Home({ tag, user }) {
 }
 
 export async function getServerSideProps({ query }) {
-  //these codes run on server
   const tag = query.tag;
-  //let { newJokes, nextBatchTag } = await getJokesTag(tag, {});
-  return {
-    props: {
-      tag,
-    },
-  };
+  return { props: { tag } };
 }

@@ -79,15 +79,9 @@ export default function Home({ user }) {
   );
 }
 
-// export async function getStaticProps() {
-//   //these codes run on server
-//   let randomJokes = [
-//     await getRandomJoke(),
-//     await getRandomJoke(),
-//     await getRandomJoke(),
-//   ];
-//   return {
-//     props: { initialJokes: JSON.stringify(randomJokes) },
-//     revalidate: 60,
-//   };
-// }
+export async function getServerSideProps() {
+  //these codes run on server
+  return {
+    props: {},
+  };
+}

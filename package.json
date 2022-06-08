@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "downshift": "^6.1.7",
     "firebase": "^9.6.11",
     "next": "12.1.1",
     "react": "17.0.2",

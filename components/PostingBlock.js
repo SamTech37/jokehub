@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "../styles/Joke.module.css";
 import { postJoke } from "../firebase/client";
 import { useRouter } from "next/router";
-
+import { AiFillCaretDown } from "react-icons/ai";
+import { useCombobox } from "downshift";
 export default function PostingBlock({ user }) {
   let router = useRouter();
   const [newContent, setNewContent] = useState("");
@@ -26,11 +27,39 @@ export default function PostingBlock({ user }) {
     setNewContent("");
     setNewKeyword("");
   };
+
+  const categories = [
+    "諧音",
+    "政治",
+    "老媽",
+    "地獄",
+    "爛笑話",
+    "黑色幽默",
+    "雙關",
+    "反串",
+  ];
+  const [inputItems, setInputItems] = useState(categories);
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+  } = useCombobox({
+    items: inputItems,
+    onInputValueChange: ({ inputValue }) => {
+      setInputItems(categories.filter((item) => item.includes(inputValue)));
+      setNewKeyword(inputValue);
+    },
+  });
+
   return (
     <div className={styles.postingblock}>
       <form className={styles.post}>
         <textarea
-          className={styles.input}
+          className={styles.textarea}
           placeholder="說個笑話"
           maxLength={1500}
           onChange={(e) => setNewContent(e.target.value)}
@@ -38,15 +67,42 @@ export default function PostingBlock({ user }) {
           required
         />
 
-        <input
-          type="text"
-          className={styles.input}
-          placeholder="風格,類型,關鍵字之類的"
-          maxLength={15}
-          onChange={(e) => setNewKeyword(e.target.value)}
-          value={newKeyword}
-          required
-        />
+        <div className={styles.combobox}>
+          <div {...getComboboxProps()} className={styles.flex}>
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="風格,類型,關鍵字之類的"
+              maxLength={15}
+              {...getInputProps()}
+              required
+            />
+            <button
+              type="button"
+              {...getToggleButtonProps()}
+              aria-label="toggle menu"
+              className={styles.suggestBtn}
+            >
+              <AiFillCaretDown />
+            </button>
+          </div>
+          <ul {...getMenuProps()} className={styles.suggestions}>
+            {isOpen &&
+              inputItems.map((item, index) => (
+                <li
+                  style={
+                    highlightedIndex === index
+                      ? { backgroundColor: "#bde4ff" }
+                      : {}
+                  }
+                  key={`${item}${index}`}
+                  {...getItemProps({ item, index })}
+                >
+                  {item}
+                </li>
+              ))}
+          </ul>
+        </div>
         <button className={styles.tell} disabled={!user} onClick={handleSubmit}>
           {user ? "Tell" : "請先登入"}
         </button>

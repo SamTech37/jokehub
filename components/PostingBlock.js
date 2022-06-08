@@ -13,7 +13,14 @@ export default function PostingBlock({ user }) {
       alert("請先登入!");
       return;
     }
-    const processedTag = newKeyword.replaceAll(" ", "").replaceAll("#", "");
+    if (!newContent || !newKeyword) {
+      alert("Please tell a joke");
+      return;
+    }
+    const processedTag = newKeyword
+      .toLowerCase()
+      .replaceAll(" ", "")
+      .replaceAll("#", "");
     const jokeId = await postJoke(newContent, processedTag, user.uid);
     router.push(`/p/${jokeId}`, `/p/${jokeId}`, {});
     setNewContent("");

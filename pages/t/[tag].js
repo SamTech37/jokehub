@@ -13,7 +13,7 @@ import { useRouter } from "next/dist/client/router";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NoMore from "../../components/NoMore";
 
-export default function Home({ tag, user }) {
+export default function Tagged({ tag, user }) {
   const router = useRouter();
   const blobs = [blob, blob1, blob2, blob3, blob4];
   const [jokes, setJokes] = useState([]);

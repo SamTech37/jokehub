@@ -1,6 +1,7 @@
 .body {
   height: 100vh;
   width: 100vw;
+  user-select: none;
 }
 .doodle {
   width: 200px;
@@ -19,6 +20,36 @@
   margin-left: 10px;
   display: flex;
   flex-direction: column;
+  min-width: 50%;
+}
+.nickname {
+  border: none;
+  font-size: 24px;
+  padding: 10px 0;
+  margin: 5px 0;
+  max-width: 240px;
+}
+.bio {
+  resize: none;
+  height: 70%;
+  white-space: pre-wrap;
+  font-size: 24px;
+  padding: 10px 0;
+  margin: 5px 0;
+  border: none;
+}
+.edit {
+  display: flex;
+  justify-content: flex-end;
+}
+.editbtn {
+  font-size: 48px;
+  cursor: pointer;
+  color: green;
+}
+.editbtn:active {
+  position: relative;
+  top: 2px;
 }
 .signout {
   position: absolute;
@@ -27,7 +58,6 @@
   font-size: 40px;
   top: 5px;
   left: 5px;
-
   cursor: pointer;
   color: hsl(0, 100%, 50%);
 }
@@ -41,17 +71,6 @@
   justify-content: center;
 }
 
-.closebtn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 32px;
-  border: 0;
-  overflow: hidden;
-  background: transparent;
-  cursor: pointer;
-  color: black;
-}
 .signin {
   transition: background-color 0.3s, box-shadow 0.3s;
   width: 100%;
@@ -83,16 +102,18 @@
 }
 
 @media screen and (max-width: 800px) {
+  .nickname,
+  .bio {
+    font-size: 24px;
+  }
   .main {
     margin: 0 0;
-  }
-  .main h2 {
-    font-size: 24px;
   }
   .doodle {
     width: 100px;
     height: 100px;
   }
+
   .signout {
     font-size: 30px;
     top: 0;

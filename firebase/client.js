@@ -45,15 +45,17 @@ const auth = getAuth(app);
 const postsRef = collection(db, "posts");
 const usersRef = collection(db, "users");
 //profile&users
-export const changeNickname = async (uid, newName) => {
-  await setDoc(doc(db, "users", uid), { nickname: newName }, { merge: true });
-};
-export const changeBio = async (uid, newBio) => {
-  await setDoc(doc(db, "users", uid), { bio: newBio }, { merge: true });
+export const updateProfile = async (uid, newName, newBio) => {
+  await setDoc(
+    doc(db, "users", uid),
+    { nickname: newName, bio: newBio },
+    { merge: true }
+  );
 };
 export const getProfile = async (uid) => {
   const q = query(usersRef, limit(1), where(documentId(), "==", uid));
   let snapshot = await getDocs(q);
+
   if (snapshot.docs.length == 0) {
     return "none";
   } else {

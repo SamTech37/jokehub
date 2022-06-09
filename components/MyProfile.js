@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Me.module.css";
 import { BiLogOut } from "react-icons/bi";
 import { BsCheckLg } from "react-icons/bs";
 
-import { userSignOut, changeNickname, changeBio } from "../firebase/client";
+import { userSignOut, updateProfile, getProfile } from "../firebase/client";
 export default function MyProfile({ user }) {
-  const [nickname, setNickname] = useState("暱稱");
-  const [bio, setBio] = useState(`按一下開始編輯`);
+  useEffect(() => {
+    async function onMount() {
+      const data = await getProfile(user.uid);
 
-  const handleUpdate = async () => {};
+      if (data == "none") {
+        //user hasn't setted profile
+        setProfile({ nickname: "暱稱", bio: "簡介按一下開始編輯" });
+      } else setProfile(data);
+      console.log(profile);
+      setNewNickname(profile.nickname);
+      setNewBio(profile.bio);
+    }
+    onMount();
+  }, []);
+  const [profile, setProfile] = useState({
+    nickname: "暱稱",
+    bio: "簡介按一下開始編輯",
+  });
+  const [newNickname, setNewNickname] = useState("暱稱");
+  const [newBio, setNewBio] = useState("簡介按一下開始編輯");
+
+  const handleUpdate = async () => {
+    if (newNickname && newBio) {
+      await updateProfile(user.uid, newNickname, newBio);
+    } else {
+      alert("請不要留白");
+    }
+  };
   return (
     <div className={styles.main}>
       <button onClick={userSignOut} className={styles.signout}>
@@ -22,19 +46,24 @@ export default function MyProfile({ user }) {
       <div className={styles.profile}>
         <input
           className={styles.nickname}
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          value={newNickname}
+          onChange={(e) => setNewNickname(e.target.value)}
           maxLength={10}
         />
         <textarea
           className={styles.bio}
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
+          value={newBio}
+          onChange={(e) => setNewBio(e.target.value)}
           maxLength={200}
         />
-        <div className={styles.edit}>
-          <BsCheckLg className={styles.editbtn} />
-        </div>
+        {
+          //show when editing
+          (newNickname !== profile.nickname || newBio !== profile.bio) && (
+            <div className={styles.edit}>
+              <BsCheckLg className={styles.editbtn} onClick={handleUpdate} />
+            </div>
+          )
+        }
       </div>
     </div>
   );

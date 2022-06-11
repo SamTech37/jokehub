@@ -9,6 +9,7 @@ import blob from "../../assets/blob.svg";
 import styles from "../../styles/Home.module.css";
 export default function JokePage({ jokeJSON, user }) {
   const joke = JSON.parse(jokeJSON);
+  const postDate = new Date(joke.time.seconds * 1000);
   return joke == "none" ? (
     <NoMore>
       <Link href="/">
@@ -43,7 +44,7 @@ export default function JokePage({ jokeJSON, user }) {
           article: {
             authors: [joke.poster],
             tags: [joke.keyword],
-            publishedTime: new Date(joke.time._seconds * 1000).toISOString(),
+            publishedTime: postDate.toISOString(),
           },
         }}
         facebook={{

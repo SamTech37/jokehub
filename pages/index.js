@@ -44,7 +44,11 @@ export default function Home({ user }) {
   };
   return (
     <div>
-      <button className={styles.scroll} onClick={backToTop}>
+      <button
+        className={styles.scroll}
+        onClick={backToTop}
+        aria-label="back to top button"
+      >
         <MdArrowUpward />
       </button>
       <main className={styles.main}>

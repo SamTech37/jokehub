@@ -44,7 +44,11 @@ export default function Tagged({ tag, user }) {
   };
   return (
     <div>
-      <button className={styles.scroll} onClick={backToTop}>
+      <button
+        className={styles.scroll}
+        onClick={backToTop}
+        aria-label="back to top button"
+      >
         <MdArrowUpward />
       </button>
       <div className={styles.header}>

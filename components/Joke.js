@@ -145,6 +145,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
                   fontSize: "30px",
                   fontFamily: "VT323",
                 }}
+                aria-label="score of the joke"
               >
                 {userRate[0].toFixed(0)}
               </div>
@@ -157,7 +158,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
 
         <div className={styles.share}>
           <span className={styles.dropup}>
-            <button className={styles.sharebtn}>
+            <button className={styles.sharebtn} aria-label="share button">
               <FaShare />
             </button>
             <span className={styles.menu}>

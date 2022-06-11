@@ -13,14 +13,14 @@ function MyApp({ Component, pageProps }) {
       <DefaultSeo
         title="JokeHub | 笑是良藥"
         defaultTitle="JokeHub"
-        description="A website where you can share jokes and rate others' joke. Laugh and enjoy. No censorship."
+        description="A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
         canonical={"https://jokehub.vercel.app" + router.asPath}
         openGraph={{
           type: "website",
           url: "https://jokehub.vercel.app" + router.asPath,
           title: "JokeHub | 笑是良藥",
           description:
-            "A website where you can share jokes and rate others' joke. Laugh and enjoy. No censorship.",
+            "A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
           site_name: "JokeHub",
           images: [
             {
@@ -30,6 +30,9 @@ function MyApp({ Component, pageProps }) {
               alt: "JokeHub opengraph image",
             },
           ],
+        }}
+        facebook={{
+          appId: "256152399957750",
         }}
       />
       <Navbar user={user}></Navbar>

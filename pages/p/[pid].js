@@ -2,6 +2,7 @@ import React from "react";
 import Joke from "../../components/Joke";
 import NoMore from "../../components/NoMore";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 import { getJoke } from "../../firebase/client";
 import blob from "../../assets/blob.svg";
@@ -19,7 +20,38 @@ export default function JokePage({ jokeJSON, user }) {
       </Link>
     </NoMore>
   ) : (
-    <Joke displayMode="page" joke={joke} blobPattern={blob} user={user} />
+    <>
+      <NextSeo
+        title={"JokeHub | " + joke.content.slice(0, 30) + "..."}
+        description="A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
+        canonical={`https://jokehub.vercel.app/p/${joke.id}`}
+        openGraph={{
+          type: "website",
+          url: `https://jokehub.vercel.app/p/${joke.id}`,
+          title: `JokeHub | 笑是良藥 #${joke.keyword}`,
+          description:
+            "A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
+          site_name: "JokeHub",
+          images: [
+            {
+              url: "https://jokehub.vercel.app/og-image.png",
+              width: 1200,
+              height: 630,
+              alt: "JokeHub opengraph image",
+            },
+          ],
+          article: {
+            authors: [joke.poster],
+            tags: [joke.keyword],
+            publishedTime: new Date(joke.time._seconds * 1000).toISOString(),
+          },
+        }}
+        facebook={{
+          appId: "256152399957750",
+        }}
+      />
+      <Joke displayMode="page" joke={joke} blobPattern={blob} user={user} />
+    </>
   );
 }
 

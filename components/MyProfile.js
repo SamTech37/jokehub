@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/Me.module.css";
-import { BiLogOut } from "react-icons/bi";
+import { BiArrowBack, BiLogOut } from "react-icons/bi";
 import { BsCheckLg } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 import { userSignOut, updateProfile, getProfile } from "../firebase/client";
 export default function MyProfile({ user, profile, setProfile }) {
+  const router = useRouter();
+
   useEffect(() => {
     async function onMount() {
       const data = await getProfile(user.uid);
@@ -28,9 +31,14 @@ export default function MyProfile({ user, profile, setProfile }) {
   const [editting, setEditting] = useState(false);
   return (
     <div className={styles.main}>
-      <button onClick={userSignOut} className={styles.signout}>
-        <BiLogOut />
+      <button
+        className={styles.back}
+        onClick={() => router.back()}
+        aria-label="back to previous page"
+      >
+        <BiArrowBack />
       </button>
+
       <img
         src={`https://avatars.dicebear.com/api/croodles-neutral/${user?.uid}.svg`}
         alt="your avatar"
@@ -61,11 +69,10 @@ export default function MyProfile({ user, profile, setProfile }) {
             setEditting(true);
           }}
         />
+        <BiLogOut onClick={userSignOut} className={styles.signout} />
 
         {editting && (
-          <div className={styles.edit}>
-            <BsCheckLg className={styles.editbtn} onClick={handleUpdate} />
-          </div>
+          <BsCheckLg className={styles.editbtn} onClick={handleUpdate} />
         )}
       </div>
     </div>

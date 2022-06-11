@@ -52,7 +52,11 @@ export default function Tagged({ tag, user }) {
         <MdArrowUpward />
       </button>
       <div className={styles.header}>
-        <button className={styles.back} onClick={() => router.back()}>
+        <button
+          className={styles.back}
+          onClick={() => router.back()}
+          aria-label="back to previous page"
+        >
           <BiArrowBack />
         </button>
         <h1>{tag}</h1>

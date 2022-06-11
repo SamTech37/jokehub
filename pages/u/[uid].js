@@ -1,12 +1,21 @@
 import styles from "../../styles/Me.module.css";
 import React from "react";
 import { getProfile } from "../../firebase/client";
-
+import { BiArrowBack } from "react-icons/bi";
+import { useRouter } from "next/router";
 export default function User({ userProfile, uid }) {
   const profile = JSON.parse(userProfile);
+  const router = useRouter();
   return (
     <div className={styles.body}>
       <div className={styles.main}>
+        <button
+          className={styles.back}
+          onClick={() => router.back()}
+          aria-label="back to previous page"
+        >
+          <BiArrowBack />
+        </button>
         <img
           src={`https://avatars.dicebear.com/api/croodles-neutral/${uid}.svg`}
           alt="your avatar"

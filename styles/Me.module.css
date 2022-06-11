@@ -103,6 +103,9 @@
 }
 
 @media screen and (max-width: 800px) {
+  .profile h2 {
+    font-size: 24px;
+  }
   .nickname,
   .bio {
     font-size: 24px;

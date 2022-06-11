@@ -1,9 +1,9 @@
 import styles from "../../styles/Me.module.css";
 import React from "react";
-import { useRouter } from "next/router";
-export default function User() {
-  const router = useRouter();
-  const { uid } = router.query;
+import { getProfile } from "../../firebase/client";
+
+export default function User({ userProfile, uid }) {
+  const profile = JSON.parse(userProfile);
   return (
     <div className={styles.body}>
       <div className={styles.main}>
@@ -12,15 +12,20 @@ export default function User() {
           alt="your avatar"
           className={styles.doodle}
         />
+
         <div className={styles.profile}>
-          <h1>{"NickName"}</h1>
-          <h2>{"Bio:"}</h2>
+          <h2>{profile.nickname ? profile.nickname : "暱稱"}</h2>
+          <h2>{profile.bio ? profile.bio : "簡介"}</h2>
         </div>
       </div>
     </div>
   );
 }
 
-// export async function getServerSideProps(){
-
-// };
+export async function getServerSideProps({ query }) {
+  const userId = query.uid;
+  const data = await getProfile(userId);
+  return {
+    props: { uid: userId, userProfile: JSON.stringify(data) },
+  };
+}

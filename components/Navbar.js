@@ -3,12 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import icon from "../assets/icon.svg";
 import styles from "../styles/Navbar.module.css";
+import { BiMenuAltRight } from "react-icons/bi";
 export default function Navbar({ user }) {
   return (
     <div className={styles.body}>
       <Link href="/" shallow={true}>
         <a>
-          <Image src={icon} height={80} alt="Icon of this website, JokeHub." />
+          <Image
+            src={icon}
+            height={80}
+            width={320}
+            alt="Icon of this website, JokeHub."
+          />
         </a>
       </Link>
       <DropdownMenu user={user} />
@@ -39,14 +45,14 @@ function DropdownMenu({ user }) {
       className={styles.menuBtn}
       ref={wrapperRef} //clicks outside this div will close the menu
     >
-      <a
+      <BiMenuAltRight
+        color="white"
+        size={32}
         onClick={(e) => {
           setOpen(!open);
-          e.preventDefault();
         }}
-      >
-        😅
-      </a>
+      />
+
       {open && (
         <div className={styles.menu}>
           <Link href="/">

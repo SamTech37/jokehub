@@ -153,7 +153,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
           />
         </div>
         <Link href={`/t/${joke.keyword}`} passHref>
-          <p className={styles.tag}>{"#" + joke.keyword}</p>
+          <h1 className={styles.tag}>{"#" + joke.keyword}</h1>
         </Link>
 
         <div className={styles.share}>

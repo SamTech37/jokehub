@@ -6,12 +6,14 @@ export default function NoMore({ children }) {
   return (
     <div className={styles.nomore}>
       {children ? (
-        children
+        <Link href="/">
+          <a className={styles.click}>{children}</a>
+        </Link>
       ) : (
         <Link href="/">
-          <a>
-            <h1 className={styles.click}>看起來這裡什麼都沒有了</h1>
-            <h1 className={styles.click}>回主頁吧</h1>
+          <a className={styles.click}>
+            <h1>看起來這裡什麼都沒有了</h1>
+            <h1>回主頁吧</h1>
           </a>
         </Link>
       )}

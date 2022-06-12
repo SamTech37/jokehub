@@ -186,9 +186,10 @@
   width: 70%;
 }
 .tag {
+  font-size: 24px;
   grid-area: tag;
   margin: 10px 0;
-  color: hsl(3, 100%, 75%);
+  color: hsl(0, 100%, 72%);
   cursor: pointer;
 }
 .close {
@@ -266,6 +267,7 @@
   }
   .tag {
     margin: 0;
+    font-size: 20px;
   }
   .ratebtn {
     font-size: 24px;

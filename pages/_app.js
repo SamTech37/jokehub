@@ -4,7 +4,10 @@ import { useState } from "react";
 import { useAuth } from "../firebase/client";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
-function MyApp({ Component, pageProps }) {
+// export function reportWebVitals(metric) {
+//   console.log(metric);
+// }
+export default function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState();
   useAuth(setUser);
   const router = useRouter();
@@ -40,5 +43,3 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
-
-export default MyApp;

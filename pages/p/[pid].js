@@ -23,7 +23,10 @@ export default function JokePage({ jokeJSON, user }) {
   ) : (
     <>
       <NextSeo
-        title={"JokeHub | " + joke.content.slice(0, 30) + "..."}
+        title={`JokeHub | 笑是良藥 #${joke.keyword} ${joke.content.slice(
+          0,
+          30
+        )}...`}
         description="A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
         canonical={`https://jokehub.vercel.app/p/${joke.id}`}
         openGraph={{

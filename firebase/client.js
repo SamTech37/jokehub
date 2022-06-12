@@ -154,6 +154,20 @@ export const rateJoke = async (pid, uid, userRate) => {
   }
 };
 
+export const getSitemapPaths = async () => {
+  const q = query(
+    postsRef,
+    limit(100),
+    orderBy("time", "desc"),
+    startAfter(nextBatch)
+  );
+
+  const paths = [];
+  let snapshot = await getDocs(q);
+  snapshot.forEach((doc) => paths.push(doc.id));
+
+  return paths;
+};
 //auth
 export const signInGooglePop = () => {
   const provider = new GoogleAuthProvider();

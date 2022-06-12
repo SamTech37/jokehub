@@ -8,8 +8,8 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon-192x192.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="mask-icon" href="/icon-192x192.png" color="#5bbad5" />
           <meta name="theme-color" content="#000000" />
-
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"

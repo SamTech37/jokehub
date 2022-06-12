@@ -17,6 +17,7 @@ import {
   increment,
   arrayUnion,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore/lite";
 import {
   getAuth,
@@ -26,6 +27,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   onAuthStateChanged,
+  deleteUser,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -204,7 +206,15 @@ export const signInFacebookRedirect = () => {
     console.log(errorCode, errorMessage);
   });
 };
-
+export const deleteProfile = async (uid) => {
+  deleteDoc(doc(db, "users", uid));
+  deleteUser(auth.currentUser).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  });
+  return;
+};
 export const userSignOut = () => {
   signOut(auth);
 };

@@ -58,10 +58,6 @@
   color: green;
   -webkit-tap-highlight-color: hsla(120, 100%, 25%, 0.301);
 }
-.editbtn:active {
-  position: relative;
-  top: 2px;
-}
 
 .signout {
   position: absolute;

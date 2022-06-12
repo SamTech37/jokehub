@@ -24,6 +24,9 @@ export default function Login() {
           <BsFacebook color="#4267B2" />
           用Facebook登入
         </button>
+        <p>
+          登入僅為了創造一個可辨識用戶的獨特憑證，我們並不會使用或存取您的個人資料。而驗證程序則全由FB,Google包辦。
+        </p>
       </div>
 
       <div className={`${styles.login} ${styles.loginMobile}`}>
@@ -36,6 +39,9 @@ export default function Login() {
           <BsFacebook color="#4267B2" />
           用Facebook登入
         </button>
+        <p>
+          登入僅為了創造一個可辨識用戶的獨特憑證，我們並不會使用或存取您的個人資料。而驗證程序則全由FB,Google包辦。
+        </p>
       </div>
     </div>
   );

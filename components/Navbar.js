@@ -64,7 +64,10 @@ function DropdownMenu({ user }) {
           <Link href="/about">
             <a>關於</a>
           </Link>
-          <a>安裝</a>
+          {/* hide in standalone mode */}
+          <Link href="/install">
+            <a>安裝</a>
+          </Link>
         </div>
       )}
     </div>

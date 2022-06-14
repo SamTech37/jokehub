@@ -2,6 +2,7 @@
   "theme_color": "#ffab10",
   "background_color": "#000",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
   "name": "JokeHub",

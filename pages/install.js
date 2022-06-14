@@ -14,7 +14,7 @@ export default function Install() {
       window.removeEventListener("beforeinstallprompt", storeEvent);
       console.log(`event was cleaned.`);
     };
-  }, []);
+  }, [event]);
   return (
     <div>
       <h1>安裝 JokeHub App</h1>

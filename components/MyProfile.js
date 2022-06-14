@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/Me.module.css";
 import { BiArrowBack, BiLogOut } from "react-icons/bi";
 import { BsCheckLg } from "react-icons/bs";
-import { useRouter } from "next/router";
-
+import Link from "next/link";
 import { userSignOut, updateProfile, getProfile } from "../firebase/client";
 export default function MyProfile({ user, profile, setProfile }) {
-  const router = useRouter();
-
   useEffect(() => {
     async function onMount() {
       const data = await getProfile(user.uid);
@@ -31,13 +28,11 @@ export default function MyProfile({ user, profile, setProfile }) {
   const [editting, setEditting] = useState(false);
   return (
     <div className={styles.main}>
-      <button
-        className={styles.back}
-        onClick={() => router.back()}
-        aria-label="back to previous page"
-      >
-        <BiArrowBack />
-      </button>
+      <Link href="/" passHref>
+        <button className={styles.back} aria-label="back to previous page">
+          <BiArrowBack />
+        </button>
+      </Link>
 
       <img
         src={`https://avatars.dicebear.com/api/croodles-neutral/${user?.uid}.svg`}

@@ -6,7 +6,7 @@
   "scope": "/",
   "start_url": "/",
   "name": "JokeHub",
-  "short_name": "JokewHub",
+  "short_name": "JokeHub",
   "description": "A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
   "icons": [
     {

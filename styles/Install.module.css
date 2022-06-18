@@ -1,0 +1,23 @@
+.body {
+  height: 100%;
+  margin: 0 10%;
+}
+.instruction {
+  display: flex;
+  flex-direction: row;
+}
+.body h1 {
+  font-size: 2em;
+}
+.body a {
+  color: hsl(224, 100%, 50%);
+  font-weight: bold;
+}
+@media screen and (max-width: 800px) {
+  .body h1 {
+    font-size: 28px;
+  }
+  .body h2 {
+    font-size: 24px;
+  }
+}

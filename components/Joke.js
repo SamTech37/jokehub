@@ -46,7 +46,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
       ) / 10
     );
     setRated(true);
-    rateJoke(joke.id, user.uid, userRate[0]);
+    rateJoke(joke.id, user.uid, Math.round(userRate[0]));
   };
   return (
     <>

@@ -64,10 +64,14 @@ function DropdownMenu({ user }) {
           <Link href="/about">
             <a>關於</a>
           </Link>
-          {/* hide in standalone mode */}
-          <Link href="/install">
-            <a>安裝</a>
-          </Link>
+          {
+            /* hide in standalone mode */
+            !window.matchMedia("(display-mode: standalone)").matches && (
+              <Link href="/install">
+                <a>安裝</a>
+              </Link>
+            )
+          }
         </div>
       )}
     </div>

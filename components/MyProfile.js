@@ -6,12 +6,21 @@ import Link from "next/link";
 import { userSignOut, updateProfile, getProfile } from "../firebase/client";
 export default function MyProfile({ user, profile, setProfile }) {
   useEffect(() => {
-    async function onMount() {
+    async function initialLoad() {
       const data = await getProfile(user.uid);
       //if user has set profile
-      if (!(data == "none")) setProfile(data);
+      if (!(data == "none")) {
+        setProfile(data);
+        sessionStorage.setItem("Profile", JSON.stringify(data));
+      }
     }
-    onMount();
+
+    if (sessionStorage.getItem("Profile")) {
+      setProfile(JSON.parse(sessionStorage.getItem("Profile")));
+      console.log("get session");
+    } else {
+      initialLoad();
+    }
   }, []);
   const handleUpdate = async () => {
     if (profile.nickname && profile.bio) {
@@ -19,6 +28,7 @@ export default function MyProfile({ user, profile, setProfile }) {
       if (userInput) {
         await updateProfile(user.uid, profile.nickname, profile.bio);
         alert("修改成功");
+        sessionStorage.setItem("Profile", JSON.stringify(profile));
       }
     } else {
       alert("請不要留白");

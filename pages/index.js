@@ -19,24 +19,34 @@ export default function Home({ user }) {
   useEffect(() => {
     async function initialLoad() {
       document.body.style.overflow = "hidden";
-      const newJokes = [
-        await getRandomJoke(),
-        await getRandomJoke(),
-        await getRandomJoke(),
-      ];
+      const newJokes = [await getRandomJoke()]; //first fetch a random one
+      newJokes.push(...(await getJokesChrono()));
       setJokes(
         (prevJokes) => [...prevJokes, ...newJokes],
         (document.body.style.overflow = "visible")
       );
+      sessionStorage.setItem("Jokes", JSON.stringify(newJokes));
     }
-    initialLoad();
+    if (sessionStorage.getItem("Jokes")) {
+      const sessionJokes = JSON.parse(sessionStorage.getItem("Jokes"));
+      const HadMore = sessionStorage.getItem("HasMore");
+      setJokes(sessionJokes);
+      if (HadMore == "false") setHasMore(false);
+    } else {
+      console.log("Session Starts.");
+      initialLoad();
+    }
   }, []);
   const loadMore = () =>
     setTimeout(async () => {
       const newJokes = await getJokesChrono();
-      if (newJokes.length == 0) setHasMore(false);
-      newJokes.push(await getRandomJoke()); //then add another randomJoke
+      if (newJokes.length == 0) {
+        setHasMore(false);
+        sessionStorage.setItem("HasMore", "false");
+      }
+      newJokes.push(await getRandomJoke()); //then add another random Joke
       setJokes((prevJokes) => [...prevJokes, ...newJokes]);
+      sessionStorage.setItem("Jokes", JSON.stringify(jokes));
     }, 1000);
 
   const backToTop = () => {
@@ -86,9 +96,9 @@ export default function Home({ user }) {
   );
 }
 
-export async function getServerSideProps() {
-  //these codes run on server
-  return {
-    props: {},
-  };
-}
+// export async function getServerSideProps() {
+//   //these codes run on server
+//   return {
+//     props: {},
+//   };
+// }

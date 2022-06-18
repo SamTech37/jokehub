@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import NoMore from "../components/NoMore";
+import Link from "next/link";
 export default function Error404() {
   return (
     <div>
@@ -14,10 +15,12 @@ export default function Error404() {
       </Head>
 
       <NoMore>
-        <>
-          <h1>您要找的頁面並不存在</h1>
-          <h1>回主頁吧</h1>
-        </>
+        <Link href="/">
+          <a>
+            <h1>您要找的頁面並不存在</h1>
+            <h1>回主頁吧</h1>
+          </a>
+        </Link>
       </NoMore>
     </div>
   );

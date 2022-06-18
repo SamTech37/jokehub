@@ -10,6 +10,7 @@ export default function Navbar({ user }) {
       <Link href="/" shallow={true}>
         <a>
           <Image
+            priority
             src={icon}
             height={80}
             width={320}

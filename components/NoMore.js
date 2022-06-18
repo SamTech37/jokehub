@@ -6,9 +6,7 @@ export default function NoMore({ children }) {
   return (
     <div className={styles.nomore}>
       {children ? (
-        <Link href="/">
-          <a className={styles.click}>{children}</a>
-        </Link>
+        children
       ) : (
         <Link href="/">
           <a className={styles.click}>

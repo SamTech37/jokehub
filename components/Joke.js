@@ -83,9 +83,9 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
         </div>
         <div className={styles.body}>
           {display == "main" ? (
-            <a className={styles.link} onClick={openModal}>
-              <p className={styles.clamp}>{joke.content}</p>
-            </a>
+            <p className={styles.clamp} onClick={openModal}>
+              {joke.content}
+            </p>
           ) : (
             <p className={styles.content}>{joke.content}</p>
           )}

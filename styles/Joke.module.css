@@ -3,13 +3,10 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-}
-.link {
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
-  height: 100%;
 }
-.link:hover {
+.clamp:hover {
   font-weight: 700;
 }
 .u {
@@ -34,8 +31,11 @@
   justify-content: center;
   align-items: center;
 }
+.hide {
+  display: none;
+}
 .suggestions {
-  z-index: 50;
+  z-index: 3;
   overflow: auto;
   position: absolute;
   /* From https://css.glass */

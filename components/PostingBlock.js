@@ -86,7 +86,10 @@ export default function PostingBlock({ user }) {
               <AiFillCaretDown />
             </button>
           </div>
-          <ul {...getMenuProps()} className={styles.suggestions}>
+          <ul
+            {...getMenuProps()}
+            className={isOpen ? styles.suggestions : styles.hide}
+          >
             {isOpen &&
               inputItems.map((item, index) => (
                 <li

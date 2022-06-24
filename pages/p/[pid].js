@@ -23,19 +23,19 @@ export default function JokePage({ jokeJSON, user }) {
   ) : (
     <>
       <NextSeo
-        title={`JokeHub | 笑是良藥 #${joke.keyword} ${joke.content.slice(
+        title={`JokeHub | 笑話都在這 #${joke.keyword} ${joke.content.slice(
           0,
           30
         )}...`}
-        description="A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
+        description="一個可以分享與評分笑話的網站。沒有言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
         canonical={`https://jokehub.vercel.app/p/${joke.id}`}
         openGraph={{
           type: "website",
           url: `https://jokehub.vercel.app/p/${joke.id}`,
-          title: `JokeHub | 笑是良藥 #${joke.keyword}`,
+          title: `JokeHub | 笑話都在這 #${joke.keyword}`,
           description:
-            "A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
-          site_name: "JokeHub",
+            "一個可以分享與評分笑話的網站。沒有言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
+          site_name: "JokeHub | 笑話都在這",
           images: [
             {
               url: "https://jokehub.vercel.app/og-image.png",

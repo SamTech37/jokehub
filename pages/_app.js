@@ -16,14 +16,14 @@ export default function MyApp({ Component, pageProps }) {
       <DefaultSeo
         title="JokeHub | 笑話都在這"
         defaultTitle="JokeHub"
-        description="一個可以分享與評分笑話的網站。沒有言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
+        description="一個可以分享與評分笑話的網站。無言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
         canonical={"https://jokehub.vercel.app" + router.asPath}
         openGraph={{
           type: "website",
           url: "https://jokehub.vercel.app" + router.asPath,
           title: "JokeHub | 笑話都在這",
           description:
-            "一個可以分享與評分笑話的網站。沒有言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
+            "一個可以分享與評分笑話的網站。無言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
           site_name: "JokeHub | 笑話都在這",
           images: [
             {

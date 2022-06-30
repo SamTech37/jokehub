@@ -27,14 +27,14 @@ export default function JokePage({ jokeJSON, user }) {
           0,
           30
         )}...`}
-        description="一個可以分享與評分笑話的網站。沒有言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
+        description="一個可以分享與評分笑話的網站。無言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship."
         canonical={`https://jokehub.vercel.app/p/${joke.id}`}
         openGraph={{
           type: "website",
           url: `https://jokehub.vercel.app/p/${joke.id}`,
           title: `JokeHub | 笑話都在這 #${joke.keyword}`,
           description:
-            "一個可以分享與評分笑話的網站。沒有言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
+            "一個可以分享與評分笑話的網站。無言論審查。笑是良藥。A website where you can share jokes and rate others' jokes. Laugh and enjoy. No censorship.",
           site_name: "JokeHub | 笑話都在這",
           images: [
             {

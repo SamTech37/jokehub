@@ -23,6 +23,17 @@ export default function PostingBlock({ user }) {
       .replaceAll(" ", "")
       .replaceAll("#", "");
     const jokeId = await postJoke(newContent, processedTag, user.uid);
+    fetch("/api/autotweet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        keyword: newKeyword,
+        id: jokeId,
+        contentSliced: newContent.slice(0, 30),
+      }),
+    });
     router.push(`/p/${jokeId}`, `/p/${jokeId}`, {});
     setNewContent("");
     setNewKeyword("");

@@ -14,8 +14,7 @@ export default async function Post(req, res) {
     console.log(id, keyword, contentSliced, rwclient);
     await rwclient.v2
       .tweet(
-        `${contentSliced}...
-        在此查看完整笑話 https://jokehub.vercel.app/p/${id} \n#${keyword} #JOKEHUB`
+        `${contentSliced}...在此查看完整笑話 https://jokehub.vercel.app/p/${id} \n#${keyword} #JOKEHUB`
       )
       .catch((err) => console.log(err));
     res.json({ message: "Succeed" });

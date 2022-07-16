@@ -31,7 +31,6 @@ export default function PostingBlock({ user }) {
       body: JSON.stringify({
         keyword: newKeyword,
         id: jokeId,
-        contentSliced: newContent.slice(0, 30),
       }),
     });
     router.push(`/p/${jokeId}`, `/p/${jokeId}`, {});

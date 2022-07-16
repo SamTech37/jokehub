@@ -9,11 +9,20 @@ const rwclient = client.readWrite;
 
 export default async function Post(req, res) {
   if (req.method === "POST") {
-    const { id, keyword, contentSliced } = req.body;
+    const { id, keyword } = req.body;
     //share it with twitter bot
+    const starter = [
+      "到JokeHub查看完整笑話",
+      "JokeHub上最新的笑話",
+      "三個字 超級好笑",
+      "Check this out",
+      "Funny stuff",
+    ];
     await rwclient.v2
       .tweet(
-        `${contentSliced}...在此查看完整笑話 https://jokehub.vercel.app/p/${id} \n#${keyword} #JOKEHUB`
+        `${
+          starter[Math.floor(Math.random() * starter.length)]
+        }... https://jokehub.vercel.app/p/${id} \n#${keyword} #JOKEHUB #笑話 #JOKE #FUNNY`
       )
       .catch((err) => console.log(err));
     res.json({ message: "Succeed" });

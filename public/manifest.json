@@ -1,7 +1,7 @@
 {
   "theme_color": "#ffab10",
   "background_color": "#000",
-  "display": "standalone",
+  "display": "minimal-ui",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",

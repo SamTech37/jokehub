@@ -31,6 +31,7 @@ export default function PostingBlock({ user }) {
       body: JSON.stringify({
         keyword: newKeyword,
         id: jokeId,
+        slicedContent: newContent.slice(0, 100),
       }),
     });
     router.push(`/p/${jokeId}`, `/p/${jokeId}`, {});
@@ -83,7 +84,7 @@ export default function PostingBlock({ user }) {
               type="text"
               className={styles.input}
               placeholder="風格,類型,關鍵字之類的"
-              maxLength={15}
+              maxLength={12}
               {...getInputProps()}
               required
             />

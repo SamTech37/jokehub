@@ -169,7 +169,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
                 <HiLink size={32} />
               </button>
 
-              <TwitterShareButton url={shareUrl} tags={["JokeHub"]}>
+              <TwitterShareButton url={shareUrl} related={["j0kehub"]}>
                 <TwitterIcon size={32} round={true} />
               </TwitterShareButton>
 

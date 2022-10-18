@@ -116,10 +116,12 @@
 }
 
 .menu {
-  display: none;
+  display: none; /*set to flex on hover*/
+  flex-direction: column;
   position: absolute;
   background-color: #f1f1f1;
-  width: 160px;
+  height: auto;
+  width: 50px;
   border-radius: 5px;
   padding: 10px;
   z-index: 1;
@@ -187,7 +189,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: auto;
-  padding-right: 20px;
+  padding-right: 40px;
 }
 .tag {
   font-size: 24px;
@@ -315,13 +317,10 @@
       "rate rate rate";
   }
   .share {
+    grid-area: share;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .dropup:hover .menu {
-    flex-direction: column;
-    width: 80px;
   }
   .closebtn {
     margin: 0;
@@ -339,6 +338,9 @@
     border-radius: 10px;
     padding: 10px;
     resize: none;
+  }
+  .menu {
+    bottom: 50px;
   }
 }
 @media screen and (min-width: 1000px) {

@@ -10,7 +10,8 @@ export default function NoMore({ children }) {
       ) : (
         <Link href="/">
           <a className={styles.click}>
-            <h1>看起來這裡什麼都沒有了</h1>
+            <h1>看起來這裡</h1>
+            <h1>什麼都沒有了</h1>
             <h1>回主頁吧</h1>
           </a>
         </Link>

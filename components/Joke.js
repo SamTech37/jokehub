@@ -187,7 +187,7 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
           {user ? (
             rated || joke.ratedUsers?.includes(user?.uid) ? (
               <button disabled className={styles.ratebtn}>
-                給過了
+                給過
               </button>
             ) : (
               <button className={styles.ratebtn} onClick={handleRate}>

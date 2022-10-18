@@ -19,8 +19,9 @@ export default function Home({ user }) {
   useEffect(() => {
     async function initialLoad() {
       document.body.style.overflow = "hidden";
-      const newJokes = [await getRandomJoke()]; //first fetch a random one
-      newJokes.push(...(await getJokesChrono()));
+      const newJokes = await getJokesChrono();
+
+      newJokes.unshift(await getRandomJoke());
       setJokes(
         (prevJokes) => [...prevJokes, ...newJokes],
         (document.body.style.overflow = "visible")

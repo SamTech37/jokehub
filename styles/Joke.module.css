@@ -136,6 +136,9 @@
 
 .share {
   grid-area: share;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .ratebtn {
   font-weight: bold;
@@ -183,12 +186,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 70%;
+  width: auto;
+  padding-right: 20px;
 }
 .tag {
   font-size: 24px;
   grid-area: tag;
-  margin: 10px 0;
+  margin: 10px 0 0 0; /*top right bottom left*/
   color: hsl(0, 100%, 72%);
   cursor: pointer;
 }
@@ -211,11 +215,11 @@
     "score joke joke"
     "score slide rate";
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 30px auto 80px;
+  grid-template-rows: 50px auto 80px;
   border: 3px solid black;
   border-radius: 60px;
   width: 70%;
-  min-height: 400px;
+  min-height: 450px;
   white-space: pre-wrap;
   margin: 5px 15%;
   background-color: #fff;
@@ -240,7 +244,7 @@
   border: 3px solid black;
   border-radius: 60px;
   width: 70%;
-  height: 80vh;
+  height: 90vh;
   white-space: pre-wrap;
   background-color: #fff;
   z-index: 4;
@@ -284,7 +288,7 @@
     border-radius: 40px;
     width: 100vw;
     margin: 5px 0;
-    padding: 10px 0;
+    padding: 15px 0;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 40px auto 60px 60px;
 
@@ -302,6 +306,7 @@
   }
   .modal {
     padding: 10px;
+    padding-bottom: 15px;
     width: 100vw;
     grid-template-areas:
       "close tag tag"
@@ -309,7 +314,11 @@
       "score slide share"
       "rate rate rate";
   }
-
+  .share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .dropup:hover .menu {
     flex-direction: column;
     width: 80px;
@@ -317,7 +326,10 @@
   .closebtn {
     margin: 0;
   }
-  .content,
+  .content {
+    font-size: 20px;
+    width: auto;
+  }
   .clamp {
     font-size: 20px;
   }

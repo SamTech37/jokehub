@@ -10,6 +10,10 @@ import styles from "../../styles/Home.module.css";
 export default function JokePage({ jokeJSON, user }) {
   const joke = JSON.parse(jokeJSON);
   const postDate = new Date(joke.time.seconds * 1000);
+  const jokeEncoded = encodeURIComponent(
+    joke.content.slice(0, 30).replaceAll("？", "?").replaceAll("！", "!")
+  );
+  const tagEncoded = encodeURIComponent(joke.keyword);
   return joke == "none" ? (
     <NoMore>
       <Link href="/">
@@ -39,14 +43,7 @@ export default function JokePage({ jokeJSON, user }) {
           images: [
             {
               //dynamic og-image, encode chinese chars to avoid bug
-              url: `https://jokehub.vercel.app/api/og?tag=${encodeURIComponent(
-                joke.keyword
-              )}&content=${encodeURIComponent(
-                joke.content
-                  .slice(0, 30)
-                  .replaceAll("！", "!")
-                  .replaceAll("？", "?")
-              )}`,
+              url: `http://localhost:3000/api/og?tag=${tagEncoded}&content=${jokeEncoded}`,
 
               width: 1200,
               height: 630,

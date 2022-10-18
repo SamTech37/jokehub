@@ -6,8 +6,13 @@ export const config = {
 
 export default function (req) {
   const { searchParams } = new URL(req.url);
-  const content = searchParams.get("content") ?? "Default content";
-  const tag = searchParams.get("tag") ?? "tag";
+  const encodedContent =
+    searchParams.get("content") ?? "Come check out this joke on JokeHub!";
+  const encodedTag = searchParams.get("tag") ?? "funny";
+  let content = decodeURIComponent(encodedContent);
+  if (content.length >= 30)
+    content += "..."; /*don't put dots after a one-liner */
+  const tag = decodeURIComponent(encodedTag);
 
   return new ImageResponse(
     (
@@ -37,11 +42,7 @@ export default function (req) {
             color: "transparent",
           }}
         >
-          {
-            content.length <= 15
-              ? content
-              : content + "..." /*don't put dots after a one-liner */
-          }
+          {content}
         </div>
         <div
           style={{

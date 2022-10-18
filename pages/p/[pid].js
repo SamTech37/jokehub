@@ -38,7 +38,9 @@ export default function JokePage({ jokeJSON, user }) {
           site_name: "JokeHub | 笑話都在這",
           images: [
             {
-              url: "https://jokehub.vercel.app/og-image.png",
+              url: `https://jokehub.vercel.app/api/og?tag=${
+                joke.keyword
+              }&content=${joke.content.slice(0, 20)}`, //dynamic og-image
               width: 1200,
               height: 630,
               alt: "JokeHub opengraph image",

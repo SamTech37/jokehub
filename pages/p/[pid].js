@@ -38,7 +38,8 @@ export default function JokePage({ jokeJSON, user }) {
           site_name: "JokeHub | 笑話都在這",
           images: [
             {
-              url: `http://localhost:3000/api/og?tag=${encodeURIComponent(
+              //dynamic og-image, encode chinese chars to avoid bug
+              url: `https://jokehub.vercel.app/api/og?tag=${encodeURIComponent(
                 joke.keyword
               )}&content=${encodeURIComponent(
                 joke.content
@@ -46,7 +47,7 @@ export default function JokePage({ jokeJSON, user }) {
                   .replaceAll("！", "!")
                   .replaceAll("？", "?")
               )}`,
-              //dynamic og-image, encode chinese chars to avoid bug
+
               width: 1200,
               height: 630,
               alt: "JokeHub opengraph image",

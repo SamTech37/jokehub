@@ -4,7 +4,7 @@ export const config = {
   runtime: "experimental-edge",
 };
 
-export default function (req) {
+export default function handler(req) {
   const { searchParams } = new URL(req.url);
   const encodedContent =
     searchParams.get("content") ?? "Come check out this joke on JokeHub!";

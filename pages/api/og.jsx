@@ -24,10 +24,10 @@ export default function handler(req) {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          backgroundImage: "linear-gradient(to bottom, #dbf4ff, #fff1f1)",
+          backgroundColor: "black",
           fontSize: 60,
           letterSpacing: -2,
-          fontWeight: 700,
+          fontWeight: 800,
         }}
       >
         <div
@@ -35,11 +35,7 @@ export default function handler(req) {
             padding: "5px 40px",
             width: "1000px",
             textAlign: "left",
-            backgroundImage:
-              "linear-gradient(90deg, rgb(121, 40, 202), rgb(255, 0, 128))",
-            backgroundClip: "text",
-            "-webkit-background-clip": "text",
-            color: "transparent",
+            color: "white",
           }}
         >
           {content}
@@ -49,11 +45,7 @@ export default function handler(req) {
             padding: "5px 40px",
             width: "1000px",
             textAlign: "center",
-            backgroundImage:
-              "linear-gradient(90deg, rgb(255, 77, 77), rgb(249, 203, 40))",
-            backgroundClip: "text",
-            "-webkit-background-clip": "text",
-            color: "transparent",
+            color: "#FFAB10",
           }}
         >
           {`#${tag}`}

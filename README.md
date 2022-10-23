@@ -7,8 +7,7 @@ JokeHub is a website/PWA where you can share jokes and rate other's.
 It's built with Next.js and Firebase and hosted on Vercel.  
 
 ## Why?
-It's made by a Taiwanese high school student just for fun.
-Powered by React js.
+It's made and designed by two Taiwanese high school students just for fun.
 
 ## How it works?
 You can browse jokes without logging in.

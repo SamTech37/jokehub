@@ -4,6 +4,7 @@ import { postJoke } from "../firebase/client";
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useCombobox } from "downshift";
+import Link from "next/link";
 export default function PostingBlock({ user }) {
   let router = useRouter();
   const [newContent, setNewContent] = useState("");
@@ -117,9 +118,17 @@ export default function PostingBlock({ user }) {
               ))}
           </ul>
         </div>
-        <button className={styles.tell} disabled={!user} onClick={handleSubmit}>
-          {user ? "Tell" : "請先登入"}
-        </button>
+        {user ? (
+          <button className={styles.tell} onClick={handleSubmit}>
+            Tell
+          </button>
+        ) : (
+          <Link href="/me">
+            <a className={styles.tell} disabled>
+              請先登入
+            </a>
+          </Link>
+        )}
       </form>
     </div>
   );

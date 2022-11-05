@@ -195,9 +195,9 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
               </button>
             )
           ) : (
-            <button className={styles.ratebtn} onClick={backToTop}>
-              請登入
-            </button>
+            <Link href="/me" passHref>
+              <button className={styles.ratebtn}>請登入</button>
+            </Link>
           )}
         </div>
       </div>

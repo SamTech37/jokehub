@@ -113,6 +113,9 @@
 .loginMobile {
   display: none;
 }
+.caveat a {
+  color: blue;
+}
 
 @media screen and (max-width: 800px) {
   .profile h2 {
@@ -143,5 +146,8 @@
   }
   .loginMobile {
     display: unset;
+  }
+  .caveat {
+    padding: 0 10%;
   }
 }

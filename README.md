@@ -10,8 +10,8 @@ It's built with Next.js and Firebase and hosted on Vercel.
 It's made and designed by two Taiwanese high school students just for fun.
 
 ## How it works?
-You can browse jokes without logging in.
-Once you've logged in with Google , you can post and rate jokes.
+You can browse jokes without signing in.
+Once you've signed in with Google or Facebook, you can post and rate jokes.
   
   
 Have Fun!

@@ -6,8 +6,10 @@ export default function PrivacyZh({ user }) {
   const handleDelete = async () => {
     if (user) {
       let userInput = confirm("確定要刪除您的帳戶？這個過程並不可逆");
-      if (userInput) await deleteProfile(user.uid);
-      alert("刪除成功");
+      if (userInput) {
+        await deleteProfile(user.uid);
+        alert("刪除成功");
+      } else alert("已取消");
     } else {
       alert("請先登入");
       window.scrollTo({ top: 0, behavior: "smooth" });

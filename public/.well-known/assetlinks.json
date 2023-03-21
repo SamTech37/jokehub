@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.vercel.jokehub.twa",
+                     "sha256_cert_fingerprints": ["75:40:95:0E:FE:19:9B:97:EF:5F:E3:61:5F:7B:99:1A:0F:C4:7F:19:B5:79:65:B4:61:B0:36:98:AE:0F:9D:E7"] }
+      }
+]

@@ -74,7 +74,8 @@ export default function Joke({ user, joke, blobPattern, displayMode }) {
           <Link href={`/u/${joke.posterUid}`} passHref>
             <img
               className={styles.u}
-              src={`https://avatars.dicebear.com/api/croodles-neutral/${joke.posterUid}.svg`}
+              //update api
+              src={`https://api.dicebear.com/7.x/croodles-neutral/svg?seed=${joke.posterUid}`}
               alt="poster"
               width={80}
               height={80}

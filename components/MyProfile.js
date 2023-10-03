@@ -45,7 +45,9 @@ export default function MyProfile({ user, profile, setProfile }) {
       </Link>
 
       <img
-        src={`https://avatars.dicebear.com/api/croodles-neutral/${user?.uid}.svg`}
+        //update api
+
+        src={`https://api.dicebear.com/7.x/croodles-neutral/svg?seed=${user?.uid}`}
         alt="your avatar"
         className={styles.doodle}
       />

@@ -17,7 +17,8 @@ export default function User({ userProfile, uid }) {
           <BiArrowBack />
         </button>
         <img
-          src={`https://avatars.dicebear.com/api/croodles-neutral/${uid}.svg`}
+          //update api
+          src={`https://api.dicebear.com/7.x/croodles-neutral/svg?seed=${uid}`}
           alt="your avatar"
           className={styles.doodle}
         />

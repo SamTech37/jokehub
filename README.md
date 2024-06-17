@@ -3,7 +3,7 @@
 你受夠 IG,FB 上那些無聊梗圖了嗎?
 快來 https://jokehub.vercel.app/ 分享你自己的笑話，並幫其他人的笑話評分
 
-## This project will not be maintained after Oct. 2023
+## This project will not be frequently maintained after Oct. 2023
 
 ## What is it?
 

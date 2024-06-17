@@ -20,10 +20,7 @@ export default function PrivacyZh({ user }) {
       <h1>JokeHub的隱私政策</h1>
 
       <p>
-        在JokeHub,可從{" "}
-        <Link href="/">
-          <a>https://jokehub.vercel.app/</a>
-        </Link>{" "}
+        在JokeHub,可從 <Link href="/">https://jokehub.vercel.app/</Link>{" "}
         訪問,我們的主要優先事項之一是用戶的隱私權。本隱私政策文件包含JokeHub收集和記錄的資訊類型以及我們如何使用這些資訊。
       </p>
 

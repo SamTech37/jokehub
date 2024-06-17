@@ -17,6 +17,6 @@ It's made and designed by two Taiwanese high school students just for fun.
 ## How it works?
 
 You can browse jokes without signing in.
-Once you've signed in with Google or Facebook, you can post and rate jokes.
+Once you've signed in with Google ~~or Facebook~~, you can post and rate jokes.
 
 Have Fun!

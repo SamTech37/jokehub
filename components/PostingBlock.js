@@ -123,10 +123,8 @@ export default function PostingBlock({ user }) {
             Tell
           </button>
         ) : (
-          <Link href="/me">
-            <a className={styles.tell} disabled>
-              請先登入
-            </a>
+          <Link href="/me" className={styles.tell} disabled>
+            請先登入
           </Link>
         )}
       </form>

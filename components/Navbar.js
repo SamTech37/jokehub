@@ -8,15 +8,13 @@ export default function Navbar({ user }) {
   return (
     <div className={styles.body}>
       <Link href="/" shallow={true}>
-        <a>
-          <Image
-            priority
-            src={icon}
-            height={80}
-            width={320}
-            alt="Icon of this website, JokeHub."
-          />
-        </a>
+        <Image
+          priority
+          src={icon}
+          height={80}
+          width={320}
+          alt="Icon of this website, JokeHub."
+        />
       </Link>
       <DropdownMenu user={user} />
     </div>
@@ -56,21 +54,13 @@ function DropdownMenu({ user }) {
 
       {open && (
         <div className={styles.menu}>
-          <Link href="/">
-            <a>首頁</a>
-          </Link>
-          <Link href="/me">
-            <a>{user ? "個人" : "登入"}</a>
-          </Link>
-          <Link href="/about">
-            <a>關於</a>
-          </Link>
+          <Link href="/">首頁</Link>
+          <Link href="/me">{user ? "個人" : "登入"}</Link>
+          <Link href="/about">關於</Link>
           {
             /* hide in standalone mode */
             !window.matchMedia("(display-mode: standalone)").matches && (
-              <Link href="/install">
-                <a>安裝</a>
-              </Link>
+              <Link href="/install">安裝</Link>
             )
           }
         </div>

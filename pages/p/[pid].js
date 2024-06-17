@@ -15,11 +15,9 @@ export default function JokePage({ jokeJSON, user }) {
   return joke == "none" ? (
     <NoMore>
       <Link href="/">
-        <a>
-          <h1 className={styles.click}>看起來這裡什麼都沒有</h1>
-          <h1 className={styles.click}>或許是打錯網址之類的</h1>
-          <h1 className={styles.click}>回主頁吧</h1>
-        </a>
+        <h1 className={styles.click}>看起來這裡什麼都沒有</h1>
+        <h1 className={styles.click}>或許是打錯網址之類的</h1>
+        <h1 className={styles.click}>回主頁吧</h1>
       </Link>
     </NoMore>
   ) : (

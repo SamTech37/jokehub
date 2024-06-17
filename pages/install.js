@@ -30,7 +30,7 @@ export default function Install() {
         <Link
           href={`https://support.google.com/chrome/answer/9658361?hl=zh-Hant&co=GENIE.Platform%3DAndroid`}
         >
-          <a>這裡</a>
+          這裡
         </Link>
       </p>
     </div>

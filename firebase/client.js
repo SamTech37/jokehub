@@ -180,15 +180,20 @@ export const signInGooglePop = () => {
   });
 };
 
-export const signInFacebookPop = () => {
-  const provider = new FacebookAuthProvider();
-  signInWithPopup(auth, provider).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  });
-};
+//FB login is disabled due to the outdated token
+// export const signInFacebookPop = () => {
+//   const provider = new FacebookAuthProvider();
+//   signInWithPopup(auth, provider).catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log(errorCode, errorMessage);
+//   });
+// };
 
+//sign in with redirect is deprecated after June 24, 2024
+//please use signInWithPopup instead
+//or configure the OAuth redirect domain in the Firebase console
+/*
 export const signInGoogleRedirect = () => {
   const provider = new GoogleAuthProvider();
   signInWithRedirect(auth, provider).catch((error) => {
@@ -206,6 +211,8 @@ export const signInFacebookRedirect = () => {
     console.log(errorCode, errorMessage);
   });
 };
+*/
+
 export const deleteProfile = async (uid) => {
   deleteDoc(doc(db, "users", uid));
   deleteUser(auth.currentUser).catch((error) => {

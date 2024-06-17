@@ -16,10 +16,8 @@ export default function Error404() {
 
       <NoMore>
         <Link href="/">
-          <a>
-            <h1>您要找的頁面並不存在</h1>
-            <h1>回主頁吧</h1>
-          </a>
+          <h1>您要找的頁面並不存在</h1>
+          <h1>回主頁吧</h1>
         </Link>
       </NoMore>
     </div>

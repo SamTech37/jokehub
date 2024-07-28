@@ -34,5 +34,12 @@
   ],
   "dir": "ltr",
   "lang": "zh",
-  "display_override": ["standalone", "fullscreen", "minimal-ui", "browser"]
+  "display_override": [
+    "standalone",
+    "fullscreen",
+    "minimal-ui",
+    "browser",
+    "window-controls-overlay"
+  ],
+  "id": "jokehub-2024-07"
 }

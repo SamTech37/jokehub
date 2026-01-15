@@ -40,14 +40,30 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASSUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const postsRef = collection(db, "posts");
-const usersRef = collection(db, "users");
+// Initialize Firebase lazily to avoid issues during build
+let app;
+let db;
+let auth;
+let postsRef;
+let usersRef;
+
+function initFirebase() {
+  if (!app && typeof window !== "undefined") {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    auth = getAuth(app);
+    postsRef = collection(db, "posts");
+    usersRef = collection(db, "users");
+  }
+}
+
+// Initialize on module load only in browser
+if (typeof window !== "undefined") {
+  initFirebase();
+}
 //profile&users
 export const updateProfile = async (uid, newName, newBio) => {
+  initFirebase();
   await setDoc(
     doc(db, "users", uid),
     { nickname: newName, bio: newBio },
@@ -55,6 +71,7 @@ export const updateProfile = async (uid, newName, newBio) => {
   );
 };
 export const getProfile = async (uid) => {
+  initFirebase();
   const q = query(usersRef, limit(1), where(documentId(), "==", uid));
   let snapshot = await getDocs(q);
 
@@ -76,6 +93,7 @@ function makeid(length) {
   return result;
 }
 export const getRandomJoke = async () => {
+  initFirebase();
   const key = makeid(20); //make a random id and query the closest docs
   const q = query(postsRef, limit(1), where(documentId(), ">=", key));
   const backupQ = query(postsRef, limit(1), where(documentId(), "<", key));
@@ -88,6 +106,7 @@ export const getRandomJoke = async () => {
 
 let nextBatch = {};
 export const getJokesChrono = async () => {
+  initFirebase();
   const q = query(
     postsRef,
     limit(3),
@@ -105,6 +124,7 @@ export const getJokesChrono = async () => {
 };
 let nextBatchTag = {};
 export const getJokesTag = async (tag) => {
+  initFirebase();
   const q = query(
     postsRef,
     limit(3),
@@ -122,6 +142,7 @@ export const getJokesTag = async (tag) => {
 };
 
 export const getJoke = async (jokeId) => {
+  initFirebase();
   const docRef = doc(db, "posts", jokeId);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
@@ -133,6 +154,7 @@ export const getJoke = async (jokeId) => {
 };
 
 export const postJoke = async (content, keyword, uid) => {
+  initFirebase();
   const newDoc = await addDoc(postsRef, {
     content: content,
     keyword: keyword,
@@ -147,6 +169,7 @@ export const postJoke = async (content, keyword, uid) => {
 };
 
 export const rateJoke = async (pid, uid, userRate) => {
+  initFirebase();
   if (userRate >= 0 && userRate <= 10) {
     await updateDoc(doc(db, "posts", pid), {
       ratedUsers: arrayUnion(uid),
@@ -157,6 +180,7 @@ export const rateJoke = async (pid, uid, userRate) => {
 };
 
 export const getSitemapPaths = async () => {
+  initFirebase();
   const q = query(
     postsRef,
     limit(100),
@@ -172,6 +196,7 @@ export const getSitemapPaths = async () => {
 };
 //auth
 export const signInGooglePop = () => {
+  initFirebase();
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).catch((error) => {
     const errorCode = error.code;
@@ -214,6 +239,7 @@ export const signInFacebookRedirect = () => {
 */
 
 export const deleteProfile = async (uid) => {
+  initFirebase();
   deleteDoc(doc(db, "users", uid));
   deleteUser(auth.currentUser).catch((error) => {
     const errorCode = error.code;
@@ -223,10 +249,15 @@ export const deleteProfile = async (uid) => {
   return;
 };
 export const userSignOut = () => {
+  initFirebase();
   signOut(auth);
 };
 export const useAuth = (setUser) => {
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  if (typeof window !== "undefined") {
+    initFirebase();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return unsubscribe;
+  }
 };

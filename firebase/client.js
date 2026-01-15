@@ -255,8 +255,9 @@ export const userSignOut = () => {
 export const useAuth = (setUser) => {
   if (typeof window !== "undefined") {
     initFirebase();
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
+    return unsubscribe;
   }
 };

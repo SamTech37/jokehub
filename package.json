@@ -14,7 +14,7 @@
     "@vercel/og": "^0.6.8",
     "downshift": "^6.1.12",
     "firebase": "^12.8.0",
-    "next": "^14.2.35",
+    "next": "^16.1.6",
     "next-seo": "^5.15.0",
     "next-sitemap": "^4.2.3",
     "protobufjs": "^7.5.4",

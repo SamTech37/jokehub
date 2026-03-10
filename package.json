@@ -14,7 +14,7 @@
     "@vercel/og": "^0.6.8",
     "downshift": "^6.1.12",
     "firebase": "^12.8.0",
-    "next": "^14.2.35",
+    "next": "^15.5.12",
     "next-seo": "^5.15.0",
     "next-sitemap": "^4.2.3",
     "protobufjs": "^7.5.4",
@@ -29,6 +29,9 @@
   },
   "devDependencies": {
     "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.35"
+    "eslint-config-next": "^15.5.12"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.0.4"
   }
 }

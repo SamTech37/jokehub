@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   audit-fix:
@@ -24,18 +25,21 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Run npm audit fix (may update package-lock.json)
-        # --force chosen to aggressively fix vulnerabilities (may bump major versions)
-        run: npm audit fix --force || true
+      - name: Run npm audit fix (safe upgrades)
+        run: npm audit fix || true
 
-      - name: Commit & push lockfile if changed
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add package-lock.json package.json || true
-            git commit -m "chore(deps): npm audit fix (automated)" || true
-            git push
-          else
-            echo "No changes to commit"
-          fi
+      - name: Create pull request for dependency changes
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(deps): weekly npm audit fix"
+          branch: "chore/weekly-npm-audit-fix"
+          delete-branch: true
+          title: "chore(deps): weekly npm audit fix"
+          body: |
+            Automated weekly npm audit remediation.
+            - Runs `npm audit fix` with non-breaking updates
+            - Updates lockfile and package metadata as needed
+          labels: |
+            dependencies
+            security

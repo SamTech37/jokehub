@@ -3,8 +3,30 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "UTC"
+    target-branch: "main"
+    open-pull-requests-limit: 5
     labels:
       - "dependencies"
       - "dependabot"
+    groups:
+      npm-patch-and-minor:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+      npm-security:
+        applies-to: security-updates
+    ignore:
+      - dependency-name: "next"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "react"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "react-dom"
+        update-types:
+          - "version-update:semver-major"
